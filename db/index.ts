@@ -143,6 +143,21 @@ const PLAYER_PROFILE_DDL = `
     ON failure_patterns(pattern_key);
 `;
 
+const POST_MATCH_REVIEW_DDL = `
+  CREATE TABLE IF NOT EXISTS post_match_reviews (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    draft_session_id INTEGER NOT NULL REFERENCES draft_sessions(id) ON DELETE CASCADE,
+    screenshot_path TEXT NOT NULL,
+    secondary_screenshot_path TEXT,
+    user_reflection TEXT,
+    analysis_markdown TEXT,
+    teammate_driven_loss INTEGER NOT NULL DEFAULT 0,
+    status TEXT NOT NULL DEFAULT 'pending',
+    created_at TEXT NOT NULL,
+    reviewed_at TEXT
+  );
+`;
+
 /**
  * Creates an isolated SQLite + Drizzle database instance, ensures all Patch KB
  * tables exist, and lazily seeds from the committed snapshot by default.
@@ -163,6 +178,7 @@ export function createDatabase(
   sqlite.exec(PATCH_KB_DDL);
   sqlite.exec(DRAFT_SESSION_DDL);
   sqlite.exec(PLAYER_PROFILE_DDL);
+  sqlite.exec(POST_MATCH_REVIEW_DDL);
 
   const db = drizzle(sqlite, { schema });
 
