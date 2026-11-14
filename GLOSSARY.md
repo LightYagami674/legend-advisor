@@ -33,11 +33,11 @@ The structured catalog of current Mobile Legends heroes, roles, counters, synerg
 _Avoid_: Static database, game wiki, meta data
 
 **Post-Match Review**:
-A post-defeat diagnostic submission consisting of the final match scoreboard screenshot and the user's free-text reflection on what went wrong, evaluated strictly from the perspective of My Slot.
+A post-defeat diagnostic submission linked to a Draft Session, consisting of the final match scoreboard screenshot and optional user reflection, evaluated from the perspective of My Slot (acknowledging teammate-driven losses without inventing personal faults).
 _Avoid_: Loss report, match upload, feedback form
 
 **Failure Pattern**:
-A structured personal learning extracted from a Post-Match Review capturing what the user can improve across four dimensions—pick-wise, action-wise, synergy-wise, and build-wise—never tracking or profiling teammates.
+A structured personal learning extracted from a Post-Match Review capturing what the user can improve across four dimensions—pick-wise, action-wise, synergy-wise, and build-wise—maintained as a factual active/resolved history for My Slot without profiling teammates.
 _Avoid_: Loss reason, bug, mistake log
 
 **Player Profile**:
