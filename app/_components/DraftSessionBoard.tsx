@@ -10,6 +10,7 @@ import {
   type DraftSlotDto,
   type HeroCatalogItem,
 } from "@/lib/draft-session/client-types";
+import type { BuildRecommendationPayload } from "@/lib/recommendations/types";
 import { DecisionStageShell } from "./DecisionStageShell";
 
 interface SessionPayload {
@@ -33,6 +34,9 @@ export function DraftSessionBoard() {
     slot_index: 1,
   });
   const [stageTab, setStageTab] = useState<DecisionStageTab>("candidates");
+  const [buildRecs, setBuildRecs] = useState<Record<number, BuildRecommendationPayload>>({});
+  const [buildLoading, setBuildLoading] = useState(false);
+  const [buildError, setBuildError] = useState<string | null>(null);
 
   const omnibarInputRef = useRef<HTMLInputElement>(null);
 
@@ -72,6 +76,23 @@ export function DraftSessionBoard() {
         setActiveTarget(initialTarget);
         if (sessionJson.session.status === "locked") {
           setStageTab("build");
+          const initialSlot = sessionJson.slots.find(
+            (s) =>
+              s.team === "ally" &&
+              s.slot_index === sessionJson.session.active_target_slot_index,
+          );
+          if (initialSlot?.picked_hero_id) {
+            const getRes = await fetch(
+              `/api/draft-sessions/${sessionJson.session.id}/build-recommendation?target_slot_index=${initialSlot.slot_index}`,
+            );
+            if (!cancelled && getRes.ok) {
+              const payload = (await getRes.json()) as BuildRecommendationPayload;
+              setBuildRecs((prev) => ({
+                ...prev,
+                [initialSlot.slot_index]: payload,
+              }));
+            }
+          }
         }
       } catch (err) {
         if (!cancelled) {
@@ -261,16 +282,88 @@ export function DraftSessionBoard() {
     if (session && session.active_target_slot_index !== slotIndex) {
       await patchSession({ active_target_slot_index: slotIndex });
     }
+    if (
+      session &&
+      stageTab === "build" &&
+      (session.status === "locked" || session.phase === "locked") &&
+      !buildRecs[slotIndex]
+    ) {
+      const slot = allySlots.find((s) => s.slot_index === slotIndex);
+      if (slot?.picked_hero_id) {
+        void fetchOrGenerateBuild(session.id, slotIndex, false);
+      }
+    }
   };
 
   const handleSetMySlot = async (slotIndex: number) => {
     await patchSession({ my_slot_index: slotIndex });
   };
 
+  const fetchOrGenerateBuild = useCallback(
+    async (
+      sessionId: number,
+      targetSlotIndex: number,
+      forceGenerate: boolean,
+    ) => {
+      setBuildLoading(true);
+      setBuildError(null);
+      try {
+        if (!forceGenerate) {
+          const getRes = await fetch(
+            `/api/draft-sessions/${sessionId}/build-recommendation?target_slot_index=${targetSlotIndex}`,
+          );
+          if (getRes.ok) {
+            const payload = (await getRes.json()) as BuildRecommendationPayload;
+            setBuildRecs((prev) => ({ ...prev, [targetSlotIndex]: payload }));
+            return;
+          }
+        }
+
+        const postRes = await fetch(
+          `/api/draft-sessions/${sessionId}/build-recommendation`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ target_slot_index: targetSlotIndex }),
+          },
+        );
+        const data = await postRes.json();
+        if (!postRes.ok) {
+          throw new Error(data.error ?? "Failed to generate Build Recommendation");
+        }
+        setBuildRecs((prev) => ({
+          ...prev,
+          [targetSlotIndex]: data as BuildRecommendationPayload,
+        }));
+      } catch (err) {
+        setBuildError(
+          err instanceof Error
+            ? err.message
+            : "Failed to load Build Recommendation",
+        );
+      } finally {
+        setBuildLoading(false);
+      }
+    },
+    [],
+  );
+
   const handleLockDraft = async () => {
     const updated = await patchSession({ lock_all: true });
     if (updated) {
       setStageTab("build");
+      const targetSlot = updated.slots.find(
+        (s) =>
+          s.team === "ally" &&
+          s.slot_index === updated.session.active_target_slot_index,
+      );
+      if (targetSlot?.picked_hero_id) {
+        await fetchOrGenerateBuild(
+          updated.session.id,
+          updated.session.active_target_slot_index,
+          true,
+        );
+      }
     }
   };
 
@@ -625,7 +718,22 @@ export function DraftSessionBoard() {
           targetSlot={activeTargetAllySlot}
           pickedHero={activeTargetPickedHero}
           activeTab={stageTab}
-          onTabChange={setStageTab}
+          onTabChange={(tab) => {
+            setStageTab(tab);
+            if (
+              tab === "build" &&
+              isLocked &&
+              activeTargetAllySlot?.picked_hero_id &&
+              !buildRecs[session.active_target_slot_index] &&
+              !buildLoading
+            ) {
+              void fetchOrGenerateBuild(
+                session.id,
+                session.active_target_slot_index,
+                false,
+              );
+            }
+          }}
           onFocusPickSlot={() => {
             setActiveTarget({
               kind: "pick",
@@ -633,6 +741,18 @@ export function DraftSessionBoard() {
               slot_index: session.active_target_slot_index,
             });
             omnibarInputRef.current?.focus();
+          }}
+          buildRecommendation={
+            buildRecs[session.active_target_slot_index] ?? null
+          }
+          buildLoading={buildLoading}
+          buildError={buildError}
+          onGenerateBuild={() => {
+            void fetchOrGenerateBuild(
+              session.id,
+              session.active_target_slot_index,
+              true,
+            );
           }}
         />
 
