@@ -10,6 +10,7 @@ import {
   type DraftSlotDto,
   type HeroCatalogItem,
 } from "@/lib/draft-session/client-types";
+import type { CandidatePickResponse } from "@/lib/recommendations/types";
 import { DecisionStageShell } from "./DecisionStageShell";
 
 interface SessionPayload {
@@ -33,6 +34,9 @@ export function DraftSessionBoard() {
     slot_index: 1,
   });
   const [stageTab, setStageTab] = useState<DecisionStageTab>("candidates");
+  const [candidateResult, setCandidateResult] = useState<CandidatePickResponse | null>(null);
+  const [candidatesLoading, setCandidatesLoading] = useState(false);
+  const [candidatesError, setCandidatesError] = useState<string | null>(null);
 
   const omnibarInputRef = useRef<HTMLInputElement>(null);
 
@@ -202,6 +206,8 @@ export function DraftSessionBoard() {
       applySessionPayload(created);
       setActiveTarget({ kind: "ban", team: "ally", slot_index: 1 });
       setStageTab("candidates");
+      setCandidateResult(null);
+      setCandidatesError(null);
       setQuery("");
       omnibarInputRef.current?.focus();
     } catch (err) {
@@ -279,6 +285,52 @@ export function DraftSessionBoard() {
     const topMatch = matchingHeroes[0];
     if (!topMatch) return;
     await handleAssignHero(topMatch.id);
+  };
+
+  const handleRequestCandidates = async () => {
+    if (!session) return;
+    setCandidatesLoading(true);
+    setCandidatesError(null);
+    try {
+      const res = await fetch(`/api/draft-sessions/${session.id}/candidate-picks`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          target_slot_index: session.active_target_slot_index,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error ?? "Failed to generate Candidate Picks");
+      }
+      setCandidateResult(data as CandidatePickResponse);
+    } catch (err) {
+      setCandidatesError(
+        err instanceof Error ? err.message : "Failed to generate Candidate Picks",
+      );
+    } finally {
+      setCandidatesLoading(false);
+    }
+  };
+
+  const handlePickCandidateHero = async (heroId: number) => {
+    if (!session) return;
+    const updated = await patchSlots({
+      team: "ally",
+      slot_index: session.active_target_slot_index,
+      picked_hero_id: heroId,
+    });
+    if (!updated) return;
+
+    const nextTarget = findNextOpenTarget(updated.slots, "pick", {
+      kind: "pick",
+      team: "ally",
+      slot_index: session.active_target_slot_index,
+    });
+    setActiveTarget(nextTarget);
+    if (updated.session.phase === "ban") {
+      await patchSession({ phase: "pick" });
+    }
   };
 
   if (loading) {
@@ -634,6 +686,11 @@ export function DraftSessionBoard() {
             });
             omnibarInputRef.current?.focus();
           }}
+          candidateResult={candidateResult}
+          candidatesLoading={candidatesLoading}
+          candidatesError={candidatesError}
+          onRequestCandidates={handleRequestCandidates}
+          onPickCandidateHero={handlePickCandidateHero}
         />
 
         {/* Right: Enemy Draft Slots */}

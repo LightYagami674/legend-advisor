@@ -175,3 +175,16 @@ export const draftSlots = sqliteTable(
     ),
   ],
 );
+
+export type RecommendationKind = "candidate_pick" | "build_recommendation";
+
+export const draftRecommendations = sqliteTable("draft_recommendations", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  session_id: integer("session_id")
+    .notNull()
+    .references(() => draftSessions.id, { onDelete: "cascade" }),
+  target_slot_index: integer("target_slot_index").notNull(),
+  kind: text("kind").$type<RecommendationKind>().notNull(),
+  payload_json: text("payload_json").notNull(),
+  created_at: text("created_at").notNull(),
+});

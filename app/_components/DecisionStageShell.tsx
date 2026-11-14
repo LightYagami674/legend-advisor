@@ -6,6 +6,7 @@ import type {
   DraftSlotDto,
   HeroCatalogItem,
 } from "@/lib/draft-session/client-types";
+import type { CandidatePickResponse } from "@/lib/recommendations/types";
 
 interface DecisionStageShellProps {
   session: DraftSessionDto;
@@ -14,6 +15,11 @@ interface DecisionStageShellProps {
   activeTab: DecisionStageTab;
   onTabChange: (tab: DecisionStageTab) => void;
   onFocusPickSlot: () => void;
+  candidateResult: CandidatePickResponse | null;
+  candidatesLoading: boolean;
+  candidatesError: string | null;
+  onRequestCandidates: () => void;
+  onPickCandidateHero: (heroId: number) => void;
 }
 
 const TABS: { key: DecisionStageTab; label: string }[] = [
@@ -29,9 +35,20 @@ export function DecisionStageShell({
   activeTab,
   onTabChange,
   onFocusPickSlot,
+  candidateResult,
+  candidatesLoading,
+  candidatesError,
+  onRequestCandidates,
+  onPickCandidateHero,
 }: DecisionStageShellProps) {
   const isMySlot = session.active_target_slot_index === session.my_slot_index;
   const isLocked = session.status === "locked" || session.phase === "locked";
+  const matchingCandidates =
+    candidateResult &&
+    candidateResult.session_id === session.id &&
+    candidateResult.target_slot_index === session.active_target_slot_index
+      ? candidateResult.candidates
+      : null;
 
   return (
     <div className="flex flex-col gap-3 rounded-xl border border-zinc-800 bg-zinc-900/80 p-4">
@@ -99,22 +116,126 @@ export function DecisionStageShell({
               </button>
               <button
                 type="button"
-                disabled
-                title="Enabled in Issue #13 (Jev + Gemini 4 Hydrogen Candidate Pick engine)"
-                className="cursor-not-allowed rounded-lg bg-sky-500/30 px-3 py-1.5 text-xs font-bold text-sky-200/70"
+                onClick={onRequestCandidates}
+                disabled={candidatesLoading || isLocked}
+                className="rounded-lg bg-sky-500 px-3 py-1.5 text-xs font-bold text-zinc-950 transition hover:bg-sky-400 disabled:cursor-not-allowed disabled:bg-sky-500/30 disabled:text-sky-200/70"
               >
-                Get Suggested Heroes
+                {candidatesLoading ? "Ranking..." : "Get Suggested Heroes"}
               </button>
             </div>
           </div>
 
-          <div className="rounded-xl border border-dashed border-zinc-700 p-6 text-center text-sm text-zinc-400">
-            Select a <strong className="text-zinc-200">Target Ally Slot</strong>{" "}
-            on the left and log bans/picks via the omnibar. Top 3{" "}
-            <code className="text-sky-300">Candidate Pick</code> rankings for{" "}
-            {isMySlot ? "My Slot (with Player Profile)" : "teammate slot"}{" "}
-            will render here.
-          </div>
+          {candidatesError && (
+            <div className="rounded-lg border border-rose-500/40 bg-rose-500/10 px-3 py-2 text-xs text-rose-300">
+              {candidatesError}
+            </div>
+          )}
+
+          {candidatesLoading ? (
+            <div className="rounded-xl border border-zinc-800 bg-zinc-950/70 p-6 text-center text-sm text-sky-300">
+              Evaluating eligible heroes for Ally {session.active_target_slot_index}...
+            </div>
+          ) : matchingCandidates && matchingCandidates.length > 0 ? (
+            <div className="flex flex-col gap-2.5">
+              {matchingCandidates.map((candidate) => (
+                <div
+                  key={candidate.hero_id}
+                  className="flex flex-col gap-2 rounded-xl border border-zinc-800 bg-zinc-950/80 p-3"
+                >
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <div className="flex items-center gap-2">
+                      <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-sky-500/20 font-mono text-xs font-bold text-sky-300">
+                        #{candidate.rank}
+                      </span>
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm font-bold text-zinc-100">
+                            {candidate.name}
+                          </span>
+                          <span className="rounded bg-zinc-800 px-1.5 py-0.5 text-[10px] font-medium text-zinc-300">
+                            {candidate.roles.join(" / ")}
+                          </span>
+                          <span className="rounded bg-zinc-800 px-1.5 py-0.5 text-[10px] uppercase text-zinc-400">
+                            {candidate.damage_type}
+                          </span>
+                        </div>
+                        <p className="text-[11px] text-zinc-400">
+                          {candidate.lanes.join(" / ")} · Win{" "}
+                          <span className="font-semibold text-emerald-400">
+                            {candidate.win_rate.toFixed(1)}%
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <div className="text-right">
+                        <p className="text-[10px] uppercase tracking-wider text-zinc-400">
+                          Composite
+                        </p>
+                        <p className="font-mono text-sm font-bold text-sky-300">
+                          {(candidate.composite_score * 100).toFixed(1)}%
+                        </p>
+                      </div>
+                      <button
+                        type="button"
+                        disabled={isLocked}
+                        onClick={() => onPickCandidateHero(candidate.hero_id)}
+                        className="rounded-lg bg-emerald-500 px-2.5 py-1.5 text-xs font-bold text-zinc-950 transition hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-40"
+                      >
+                        Pick Hero
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-1.5 border-t border-zinc-800/80 pt-2 text-[11px] sm:grid-cols-4">
+                    <div className="rounded bg-zinc-900/90 px-2 py-1">
+                      <span className="text-zinc-400">Choice Prob</span>
+                      <p className="font-mono font-semibold text-zinc-200">
+                        {(candidate.choice_prob * 100).toFixed(1)}%
+                      </p>
+                    </div>
+                    <div className="rounded bg-zinc-900/90 px-2 py-1">
+                      <span className="text-zinc-400">Synergy</span>
+                      <p className="font-mono font-semibold text-zinc-200">
+                        {(candidate.synergy_score * 100).toFixed(0)}%{" "}
+                        <span className="font-sans text-[10px] text-zinc-400">
+                          ({candidate.synergy_label})
+                        </span>
+                      </p>
+                    </div>
+                    <div className="rounded bg-zinc-900/90 px-2 py-1">
+                      <span className="text-zinc-400">Counter</span>
+                      <p className="font-mono font-semibold text-zinc-200">
+                        {(candidate.counter_score * 100).toFixed(0)}%{" "}
+                        <span className="font-sans text-[10px] text-zinc-400">
+                          ({candidate.counter_label})
+                        </span>
+                      </p>
+                    </div>
+                    <div className="rounded bg-zinc-900/90 px-2 py-1">
+                      <span className="text-zinc-400">Patch</span>
+                      <p className="font-mono font-semibold text-zinc-200">
+                        {(candidate.patch_score * 100).toFixed(0)}%{" "}
+                        <span className="font-sans text-[10px] text-zinc-400">
+                          ({candidate.patch_label})
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="rounded-xl border border-dashed border-zinc-700 p-6 text-center text-sm text-zinc-400">
+              Select a <strong className="text-zinc-200">Target Ally Slot</strong>{" "}
+              on the left and click{" "}
+              <strong className="text-sky-300">Get Suggested Heroes</strong>. Top 3{" "}
+              <code className="text-sky-300">Candidate Pick</code> rankings for{" "}
+              {isMySlot ? "My Slot (with Player Profile)" : "teammate slot"}{" "}
+              will render here.
+            </div>
+          )}
         </div>
       )}
 
