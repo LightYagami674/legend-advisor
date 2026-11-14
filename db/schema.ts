@@ -197,6 +197,8 @@ export type FailurePatternScopeType = "general" | "role" | "hero";
 
 export type FailurePatternStatus = "active" | "resolved";
 
+export type PostMatchReviewStatus = "pending" | "reviewed";
+
 export const playerProfile = sqliteTable("player_profile", {
   id: integer("id").primaryKey(),
   preferred_roles_json: text("preferred_roles_json", { mode: "json" })
@@ -236,3 +238,23 @@ export const failurePatterns = sqliteTable(
     uniqueIndex("failure_patterns_pattern_key_idx").on(table.pattern_key),
   ],
 );
+
+export const postMatchReviews = sqliteTable("post_match_reviews", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  draft_session_id: integer("draft_session_id")
+    .notNull()
+    .references(() => draftSessions.id, { onDelete: "cascade" }),
+  screenshot_path: text("screenshot_path").notNull(),
+  secondary_screenshot_path: text("secondary_screenshot_path"),
+  user_reflection: text("user_reflection"),
+  analysis_markdown: text("analysis_markdown"),
+  teammate_driven_loss: integer("teammate_driven_loss", { mode: "boolean" })
+    .notNull()
+    .default(false),
+  status: text("status")
+    .$type<PostMatchReviewStatus>()
+    .notNull()
+    .default("pending"),
+  created_at: text("created_at").notNull(),
+  reviewed_at: text("reviewed_at"),
+});

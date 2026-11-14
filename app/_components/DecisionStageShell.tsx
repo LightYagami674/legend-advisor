@@ -10,6 +10,7 @@ import type {
   BuildRecommendationPayload,
   CandidatePickResponse,
 } from "@/lib/recommendations/types";
+import { PostMatchReviewTab } from "./PostMatchReviewTab";
 
 interface DecisionStageShellProps {
   session: DraftSessionDto;
@@ -487,22 +488,11 @@ export function DecisionStageShell({
       )}
 
       {activeTab === "post-match" && (
-        <div className="flex flex-col gap-3 rounded-xl border border-rose-500/30 bg-zinc-950/70 p-4">
-          <div className="flex items-center justify-between">
-            <h3 className="text-sm font-bold text-rose-300">
-              Post-Match Review (My Slot: Ally {session.my_slot_index})
-            </h3>
-            <span className="rounded bg-zinc-900 px-2 py-0.5 font-mono text-[11px] text-zinc-400">
-              {isLocked ? "Ready after defeat" : "Lock draft first"}
-            </span>
-          </div>
-          <p className="text-xs text-zinc-400">
-            Upload a defeat scoreboard screenshot and optional reflection after
-            the match to extract{" "}
-            <code className="text-rose-300">Failure Pattern</code> learnings
-            for <strong className="text-zinc-200">My Slot</strong>.
-          </p>
-        </div>
+        <PostMatchReviewTab
+          sessionId={session.id}
+          mySlotIndex={session.my_slot_index}
+          isLocked={isLocked}
+        />
       )}
     </div>
   );
