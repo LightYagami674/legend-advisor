@@ -4,6 +4,7 @@ import {
   real,
   sqliteTable,
   text,
+  uniqueIndex,
 } from "drizzle-orm/sqlite-core";
 
 export type HeroRole =
@@ -126,3 +127,51 @@ export const battleSpells = sqliteTable("battle_spells", {
     .$type<string[]>()
     .notNull(),
 });
+
+export type DraftPhase = "ban" | "pick" | "locked";
+
+export type DraftSessionStatus = "active" | "locked" | "completed";
+
+export type DraftTeam = "ally" | "enemy";
+
+export const draftSessions = sqliteTable("draft_sessions", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  patch_version: text("patch_version").notNull(),
+  phase: text("phase").$type<DraftPhase>().notNull().default("ban"),
+  my_slot_index: integer("my_slot_index").notNull().default(1),
+  active_target_slot_index: integer("active_target_slot_index")
+    .notNull()
+    .default(1),
+  status: text("status").$type<DraftSessionStatus>().notNull().default("active"),
+  created_at: text("created_at").notNull(),
+  updated_at: text("updated_at").notNull(),
+});
+
+export const draftSlots = sqliteTable(
+  "draft_slots",
+  {
+    id: integer("id").primaryKey({ autoIncrement: true }),
+    session_id: integer("session_id")
+      .notNull()
+      .references(() => draftSessions.id, { onDelete: "cascade" }),
+    team: text("team").$type<DraftTeam>().notNull(),
+    slot_index: integer("slot_index").notNull(),
+    role: text("role").$type<Lane>(),
+    banned_hero_id: integer("banned_hero_id").references(() => heroes.id, {
+      onDelete: "set null",
+    }),
+    picked_hero_id: integer("picked_hero_id").references(() => heroes.id, {
+      onDelete: "set null",
+    }),
+    is_locked: integer("is_locked", { mode: "boolean" })
+      .notNull()
+      .default(false),
+  },
+  (table) => [
+    uniqueIndex("draft_slots_session_team_slot_idx").on(
+      table.session_id,
+      table.team,
+      table.slot_index,
+    ),
+  ],
+);

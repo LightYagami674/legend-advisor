@@ -73,6 +73,33 @@ const PATCH_KB_DDL = `
   );
 `;
 
+const DRAFT_SESSION_DDL = `
+  CREATE TABLE IF NOT EXISTS draft_sessions (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    patch_version TEXT NOT NULL,
+    phase TEXT NOT NULL DEFAULT 'ban',
+    my_slot_index INTEGER NOT NULL DEFAULT 1,
+    active_target_slot_index INTEGER NOT NULL DEFAULT 1,
+    status TEXT NOT NULL DEFAULT 'active',
+    created_at TEXT NOT NULL,
+    updated_at TEXT NOT NULL
+  );
+
+  CREATE TABLE IF NOT EXISTS draft_slots (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    session_id INTEGER NOT NULL REFERENCES draft_sessions(id) ON DELETE CASCADE,
+    team TEXT NOT NULL,
+    slot_index INTEGER NOT NULL,
+    role TEXT,
+    banned_hero_id INTEGER REFERENCES heroes(id) ON DELETE SET NULL,
+    picked_hero_id INTEGER REFERENCES heroes(id) ON DELETE SET NULL,
+    is_locked INTEGER NOT NULL DEFAULT 0
+  );
+
+  CREATE UNIQUE INDEX IF NOT EXISTS draft_slots_session_team_slot_idx
+    ON draft_slots(session_id, team, slot_index);
+`;
+
 /**
  * Creates an isolated SQLite + Drizzle database instance, ensures all Patch KB
  * tables exist, and lazily seeds from the committed snapshot by default.
@@ -91,6 +118,7 @@ export function createDatabase(
     sqlite.exec("PRAGMA journal_mode = WAL;");
   }
   sqlite.exec(PATCH_KB_DDL);
+  sqlite.exec(DRAFT_SESSION_DDL);
 
   const db = drizzle(sqlite, { schema });
 
