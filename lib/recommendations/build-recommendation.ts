@@ -20,13 +20,16 @@ import {
   draftSessions,
   draftSlots,
   emblems,
+  heroComfortPool,
   heroRelationships,
   heroes,
   items,
   patchMeta,
   type EmblemTalent,
 } from "@/db/schema";
+import { listFailurePatterns } from "@/lib/player-profile/service";
 import type {
+  ActionReminderItem,
   BuildBlessingDto,
   BuildEmblemTalentDto,
   BuildItemRecommendation,
@@ -225,6 +228,66 @@ export async function generateBuildRecommendation(
     };
   };
 
+  const isMySlot = targetSlotIndex === session.my_slot_index;
+  let mySlotComfortNote: { comfort_tier: string; notes: string } | null = null;
+  let mySlotBuildPatterns: Array<{
+    pattern_key: string;
+    rule: string;
+    scope_type: string;
+    scope_value: string | null;
+    occurrences: number;
+  }> = [];
+  let actionReminders: ActionReminderItem[] | undefined;
+
+  if (isMySlot) {
+    const comfortRow = db
+      .select()
+      .from(heroComfortPool)
+      .where(eq(heroComfortPool.hero_id, targetHero.id))
+      .get();
+
+    if (comfortRow) {
+      mySlotComfortNote = {
+        comfort_tier: comfortRow.comfort_tier,
+        notes: comfortRow.notes,
+      };
+    }
+
+    const activePatterns = listFailurePatterns(db, "active").filter((p) => {
+      if (p.scope_type === "general") return true;
+      if (p.scope_type === "role") {
+        return targetSlot.role !== null && p.scope_value === targetSlot.role;
+      }
+      if (p.scope_type === "hero") {
+        return (
+          p.scope_value === targetHero.slug || p.scope_value === targetHero.name
+        );
+      }
+      return false;
+    });
+
+    mySlotBuildPatterns = activePatterns
+      .filter((p) => p.dimension === "build")
+      .map((p) => ({
+        pattern_key: p.pattern_key,
+        rule: p.rule,
+        scope_type: p.scope_type,
+        scope_value: p.scope_value,
+        occurrences: p.occurrences,
+      }));
+
+    actionReminders = activePatterns
+      .filter((p) => p.dimension === "action")
+      .map((p) => ({
+        id: p.id,
+        pattern_key: p.pattern_key,
+        rule: p.rule,
+        scope_type: p.scope_type,
+        scope_value: p.scope_value,
+        occurrences: p.occurrences,
+      }));
+  }
+
   const state = {
     patch_version: meta?.patch_version ?? session.patch_version,
     rolled_up_meta_summary: meta?.rolled_up_meta_summary ?? "",
@@ -255,6 +318,14 @@ export async function generateBuildRecommendation(
       win_rate_delta: r.win_rate_delta,
       explanation: r.explanation,
     })),
+    ...(isMySlot
+      ? {
+          player_profile: {
+            hero_comfort_note: mySlotComfortNote,
+            build_failure_patterns: mySlotBuildPatterns,
+          },
+        }
+      : {}),
   };
 
   const questions: Questions = {
@@ -473,6 +544,7 @@ export async function generateBuildRecommendation(
       effect: chosenSpell.effect,
     },
     situational_flags,
+    ...(isMySlot ? { actionReminders: actionReminders ?? [] } : {}),
     created_at: now,
   };
 

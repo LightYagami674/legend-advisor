@@ -1,5 +1,10 @@
-import type { ItemCategory, Lane } from "@/db/schema";
+import type { FailurePatternScopeType, ItemCategory, Lane } from "@/db/schema";
 import type { LaneValue } from "@/lib/draft-session/schema";
+
+export interface ProfileSafeInfo {
+  safe: boolean;
+  probability: number;
+}
 
 export interface CandidatePickItem {
   rank: 1 | 2 | 3;
@@ -18,6 +23,7 @@ export interface CandidatePickItem {
   synergy_label: string;
   counter_label: string;
   patch_label: string;
+  profileSafe?: ProfileSafeInfo;
 }
 
 export interface CandidatePickResponse {
@@ -91,6 +97,15 @@ export interface SituationalFlags {
   needsPenetration: SituationalFlagEntry;
 }
 
+export interface ActionReminderItem {
+  id: number;
+  pattern_key: string;
+  rule: string;
+  scope_type: FailurePatternScopeType;
+  scope_value: string | null;
+  occurrences: number;
+}
+
 export interface BuildRecommendationPayload {
   session_id: number;
   target_slot_index: number;
@@ -104,5 +119,6 @@ export interface BuildRecommendationPayload {
   emblem: BuildEmblemRecommendation;
   battle_spell: BuildBattleSpellRecommendation;
   situational_flags: SituationalFlags;
+  actionReminders?: ActionReminderItem[];
   created_at: string;
 }

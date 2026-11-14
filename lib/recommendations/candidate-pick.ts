@@ -1,6 +1,7 @@
 import {
   TypeSafeClient,
   choice,
+  noul,
   score,
   type Questions,
   type SystemOneRequest,
@@ -16,6 +17,12 @@ import {
   patchMeta,
 } from "@/db/schema";
 import { getDraftSessionById } from "@/lib/draft-session/service";
+import type { FailurePatternDto } from "@/lib/player-profile/schema";
+import {
+  ensurePlayerProfile,
+  listFailurePatterns,
+  listHeroComfortPool,
+} from "@/lib/player-profile/service";
 import type {
   CandidatePickItem,
   CandidatePickResponse,
@@ -55,6 +62,19 @@ export const GenerateCandidatePicksInputSchema = z.object({
   target_slot_index: z.number().int().min(1).max(5).optional(),
 });
 
+const SURVIVABILITY_ACTION_RE =
+  /\b(surviv|death|deaths|die|died|dying|overextend|position|positioning|gank|burst|cc|escape|kda|feed|feeding|retreat|bush|ambush|safe|tower|vision)\b/i;
+
+function isSurvivabilityActionPattern(pattern: FailurePatternDto): boolean {
+  return (
+    SURVIVABILITY_ACTION_RE.test(pattern.rule) ||
+    SURVIVABILITY_ACTION_RE.test(pattern.pattern_key)
+  );
+}
+
+interface NoulAnswerShape {
+  noul: number;
+}
 interface ChoiceAnswerShape {
   choice: string;
   probabilities: Record<string, number>;
@@ -147,10 +167,32 @@ export async function generateCandidatePicks(
     };
   }
 
+  const isMySlot = targetSlotIndex === session.my_slot_index;
+
   const roleFiltered = targetSlot.role
     ? availableHeroes.filter((h) => h.lanes.includes(targetSlot.role!))
     : availableHeroes;
-  const eligibleHeroes = roleFiltered.length > 0 ? roleFiltered : availableHeroes;
+  const roleEligible = roleFiltered.length > 0 ? roleFiltered : availableHeroes;
+
+  const profileData = isMySlot
+    ? {
+        profile: ensurePlayerProfile(db),
+        comfortPool: listHeroComfortPool(db),
+        activePatterns: listFailurePatterns(db, "active"),
+      }
+    : null;
+
+  let eligibleHeroes = roleEligible;
+  if (profileData) {
+    const avoidHeroIds = new Set(
+      profileData.comfortPool
+        .filter((c) => c.comfort_tier === "avoid")
+        .map((c) => c.hero_id),
+    );
+    const nonAvoid = roleEligible.filter((h) => !avoidHeroIds.has(h.id));
+    eligibleHeroes = nonAvoid.length > 0 ? nonAvoid : roleEligible;
+  }
+
   const eligibleIds = new Set(eligibleHeroes.map((h) => h.id));
 
   const pickedAllyIds = new Set<number>();
@@ -205,6 +247,15 @@ export async function generateCandidatePicks(
       explanation: rel.explanation,
     }));
 
+  const relevantPatterns = profileData
+    ? profileData.activePatterns.filter(
+        (p) =>
+          p.dimension === "pick" ||
+          p.dimension === "synergy" ||
+          (p.dimension === "action" && isSurvivabilityActionPattern(p)),
+      )
+    : [];
+
   const state = {
     patch_version: meta?.patch_version ?? session.patch_version,
     rolled_up_meta_summary: meta?.rolled_up_meta_summary ?? "",
@@ -226,12 +277,36 @@ export async function generateCandidatePicks(
       win_rate: h.win_rate,
       recent_patch_summary: h.recent_patch_summary,
     })),
+    ...(profileData
+      ? {
+          player_profile: {
+            preferred_roles: profileData.profile.preferred_roles,
+            hero_comfort_pool: profileData.comfortPool.map((c) => ({
+              hero_slug: c.hero_slug,
+              hero_name: c.hero_name,
+              comfort_tier: c.comfort_tier,
+              notes: c.notes,
+              matches_played: c.matches_played,
+              wins: c.wins,
+            })),
+            failure_patterns: relevantPatterns.map((p) => ({
+              dimension: p.dimension,
+              pattern_key: p.pattern_key,
+              rule: p.rule,
+              scope_type: p.scope_type,
+              scope_value: p.scope_value,
+              occurrences: p.occurrences,
+              status: p.status,
+            })),
+          },
+        }
+      : {}),
   };
 
   const heroCriteria: Record<string, string> = {};
   const questions: Record<
     string,
-    ReturnType<typeof choice> | ReturnType<typeof score>
+    ReturnType<typeof choice> | ReturnType<typeof score> | ReturnType<typeof noul>
   > = {};
 
   for (const hero of eligibleHeroes) {
@@ -257,6 +332,19 @@ export async function generateCandidatePicks(
       `Rate ${hero.name}'s current patch strength in ${state.patch_version} based on win rate and patch summary.`,
       [...PATCH_RUBRIC],
     );
+  }
+
+  if (isMySlot) {
+    const profileSafeTargets =
+      eligibleHeroes.length <= 45
+        ? eligibleHeroes
+        : [...eligibleHeroes].sort((a, b) => b.win_rate - a.win_rate).slice(0, 30);
+
+    for (const hero of profileSafeTargets) {
+      questions[`profileSafe_${hero.slug}`] = noul(
+        `Is ${hero.name} safe and well-suited for this player's Player Profile (preferred roles, hero comfort pool, and active pick/synergy/survivability failure patterns) against the current draft?`,
+      );
+    }
   }
 
   let answers: Record<string, unknown>;
@@ -293,11 +381,25 @@ export async function generateCandidatePicks(
       answers[`patch_${hero.slug}`] as ScoreAnswerShape | undefined,
     );
 
+    const profileSafeAnswer = isMySlot
+      ? (answers[`profileSafe_${hero.slug}`] as NoulAnswerShape | undefined)
+      : undefined;
+    const profileSafeProb =
+      profileSafeAnswer && typeof profileSafeAnswer.noul === "number"
+        ? Math.max(0, Math.min(1, profileSafeAnswer.noul))
+        : undefined;
+
     const compositeScore =
-      0.4 * choiceProb +
-      0.25 * synergy.value +
-      0.25 * counter.value +
-      0.1 * patch.value;
+      isMySlot && profileSafeProb !== undefined
+        ? 0.35 * choiceProb +
+          0.2 * synergy.value +
+          0.2 * counter.value +
+          0.1 * patch.value +
+          0.15 * profileSafeProb
+        : 0.4 * choiceProb +
+          0.25 * synergy.value +
+          0.25 * counter.value +
+          0.1 * patch.value;
 
     return {
       hero,
@@ -306,6 +408,7 @@ export async function generateCandidatePicks(
       synergy,
       counter,
       patch,
+      profileSafeProb,
     };
   });
 
@@ -339,6 +442,14 @@ export async function generateCandidatePicks(
     synergy_label: entry.synergy.label,
     counter_label: entry.counter.label,
     patch_label: entry.patch.label,
+    ...(isMySlot && entry.profileSafeProb !== undefined
+      ? {
+          profileSafe: {
+            safe: entry.profileSafeProb >= 0.5,
+            probability: roundScore(entry.profileSafeProb),
+          },
+        }
+      : {}),
   }));
 
   const createdAt = new Date().toISOString();
