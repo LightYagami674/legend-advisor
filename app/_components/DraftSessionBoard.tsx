@@ -918,27 +918,9 @@ export function DraftSessionBoard() {
                 }`}
               >
                 <div className="flex items-center justify-between gap-2">
-                  <div className="flex items-center gap-1.5">
-                    <span className="font-mono text-xs text-zinc-400">
-                      E{slot.slot_index}
-                    </span>
-                    <select
-                      aria-label={`Enemy ${slot.slot_index} Role`}
-                      value={slot.role ?? ""}
-                      onClick={(e) => e.stopPropagation()}
-                      onChange={(e) =>
-                        handleSetRole("enemy", slot.slot_index, e.target.value)
-                      }
-                      className="rounded border border-zinc-700 bg-zinc-900 px-1.5 py-0.5 text-[11px] text-zinc-200"
-                    >
-                      <option value="">Role</option>
-                      {LANES.map((lane) => (
-                        <option key={lane} value={lane}>
-                          {lane}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
+                  <span className="font-mono text-xs text-zinc-400">
+                    E{slot.slot_index}
+                  </span>
                   {hero && (
                     <button
                       type="button"
