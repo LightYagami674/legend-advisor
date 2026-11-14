@@ -1,358 +1,2751 @@
 {
-  "patch_version": "1.9.32",
-  "synced_at": "2026-11-14T12:00:00.000Z",
-  "rolled_up_meta_summary": "Patch 1.9.32 favors high-mobility assassins and sustain fighters in Jungle/EXP, paired with teamfight-controlling Roamers and scaling Gold-lane marksmen. Anti-heal (Sea Halberd, Glowing Wand, Dominance Ice) and anti-dive tools (Winter Crown, Wind of Nature, Khufra/Diggie) are high priority in Mythic+ drafts.",
+  "patch_version": "2.2.16",
+  "synced_at": "2026-11-14T12:24:23.104Z",
+  "rolled_up_meta_summary": "Patch 2.2.16 Mythic+ meta synced across 134 heroes. High-priority ban/pick threats include Hirara, Belerick, Obsidia, Eudora, with strong emphasis on early-objective tempo, anti-heal/anti-shield itemization, and lane-matched counter picks.",
   "heroes": [
     {
       "id": 1,
       "slug": "terizla",
       "name": "Terizla",
-      "roles": ["Fighter", "Tank"],
-      "lanes": ["EXP"],
+      "roles": [
+        "Fighter",
+        "Tank"
+      ],
+      "lanes": [
+        "EXP"
+      ],
       "damage_type": "physical",
-      "specialty": ["Burst", "Crowd Control"],
-      "win_rate": 52.4,
-      "ban_rate": 14.2,
-      "pick_rate": 11.8,
+      "specialty": [
+        "Burst",
+        "Crowd Control"
+      ],
+      "win_rate": 50.51,
+      "ban_rate": 0.18,
+      "pick_rate": 0.34,
       "recent_patch_summary": "Sustain and early lane pressure remain top-tier; slight cooldown adjustment on Penalty Zone keeps him a premier teamfight EXP laner."
     },
     {
       "id": 2,
       "slug": "arlott",
       "name": "Arlott",
-      "roles": ["Fighter", "Assassin"],
-      "lanes": ["EXP", "Roam"],
+      "roles": [
+        "Fighter",
+        "Assassin"
+      ],
+      "lanes": [
+        "EXP"
+      ],
       "damage_type": "physical",
-      "specialty": ["Charge", "Burst"],
-      "win_rate": 51.8,
-      "ban_rate": 22.5,
-      "pick_rate": 9.4,
+      "specialty": [
+        "Charge",
+        "Burst"
+      ],
+      "win_rate": 47.27,
+      "ban_rate": 0.54,
+      "pick_rate": 0.49,
       "recent_patch_summary": "High dash reset threat when paired with ally CC; vulnerable to Purify and anti-dash zones."
     },
     {
       "id": 3,
       "slug": "yu-zhong",
       "name": "Yu Zhong",
-      "roles": ["Fighter"],
-      "lanes": ["EXP"],
+      "roles": [
+        "Fighter"
+      ],
+      "lanes": [
+        "EXP"
+      ],
       "damage_type": "physical",
-      "specialty": ["Regen", "Damage"],
-      "win_rate": 51.1,
-      "ban_rate": 9.8,
-      "pick_rate": 12.1,
+      "specialty": [
+        "Regen",
+        "Damage"
+      ],
+      "win_rate": 48.97,
+      "ban_rate": 0.82,
+      "pick_rate": 0.7,
       "recent_patch_summary": "Backline dive with Black Dragon Form excels against immobile mages and marksmen; slowed by early anti-heal."
     },
     {
       "id": 4,
       "slug": "benedetta",
       "name": "Benedetta",
-      "roles": ["Assassin", "Fighter"],
-      "lanes": ["EXP", "Jungle"],
+      "roles": [
+        "Assassin",
+        "Fighter"
+      ],
+      "lanes": [
+        "EXP"
+      ],
       "damage_type": "physical",
-      "specialty": ["Chase", "Burst"],
-      "win_rate": 52.9,
-      "ban_rate": 18.6,
-      "pick_rate": 8.7,
+      "specialty": [
+        "Chase",
+        "Burst"
+      ],
+      "win_rate": 52.11,
+      "ban_rate": 0.37,
+      "pick_rate": 0.42,
       "recent_patch_summary": "Strong split-push and backline access via Alecto: Final Blow; punished by Phoveus/Khufra anti-dash."
     },
     {
       "id": 5,
       "slug": "edith",
       "name": "Edith",
-      "roles": ["Tank", "Marksman"],
-      "lanes": ["EXP", "Roam"],
+      "roles": [
+        "Tank",
+        "Marksman"
+      ],
+      "lanes": [
+        "EXP",
+        "Roam"
+      ],
       "damage_type": "mixed",
-      "specialty": ["Control", "Burst"],
-      "win_rate": 51.6,
-      "ban_rate": 8.4,
-      "pick_rate": 9.9,
+      "specialty": [
+        "Control",
+        "Burst"
+      ],
+      "win_rate": 52.31,
+      "ban_rate": 0.16,
+      "pick_rate": 0.31,
       "recent_patch_summary": "Flexible frontline-to-ranged magic DPS; thrives into dive compositions that feed her Wrath meter."
     },
     {
       "id": 6,
       "slug": "ling",
       "name": "Ling",
-      "roles": ["Assassin"],
-      "lanes": ["Jungle"],
+      "roles": [
+        "Assassin"
+      ],
+      "lanes": [
+        "Jungle"
+      ],
       "damage_type": "physical",
-      "specialty": ["Chase", "Burst"],
-      "win_rate": 53.7,
-      "ban_rate": 46.2,
-      "pick_rate": 10.4,
+      "specialty": [
+        "Chase",
+        "Burst"
+      ],
+      "win_rate": 52.53,
+      "ban_rate": 0.62,
+      "pick_rate": 0.67,
       "recent_patch_summary": "Top Mythic+ ban/pick; wall mobility and Tempest of Blades invulnerability dominate once 2 core crit/attack items are online."
     },
     {
       "id": 7,
       "slug": "fanny",
       "name": "Fanny",
-      "roles": ["Assassin"],
-      "lanes": ["Jungle"],
+      "roles": [
+        "Assassin"
+      ],
+      "lanes": [
+        "Jungle"
+      ],
       "damage_type": "physical",
-      "specialty": ["Chase", "Burst"],
-      "win_rate": 54.1,
-      "ban_rate": 52.8,
-      "pick_rate": 7.6,
+      "specialty": [
+        "Chase",
+        "Finisher"
+      ],
+      "win_rate": 42.59,
+      "ban_rate": 1.94,
+      "pick_rate": 0.64,
       "recent_patch_summary": "Extreme early snowball and map pressure; heavily reliant on Purple Buff and countered by hard suppress or Khufra."
     },
     {
       "id": 8,
       "slug": "hayabusa",
       "name": "Hayabusa",
-      "roles": ["Assassin"],
-      "lanes": ["Jungle"],
+      "roles": [
+        "Assassin"
+      ],
+      "lanes": [
+        "Jungle"
+      ],
       "damage_type": "physical",
-      "specialty": ["Chase", "Burst"],
-      "win_rate": 52.6,
-      "ban_rate": 38.4,
-      "pick_rate": 11.2,
+      "specialty": [
+        "Chase",
+        "Burst"
+      ],
+      "win_rate": 48.06,
+      "ban_rate": 1.65,
+      "pick_rate": 0.72,
       "recent_patch_summary": "Reliable single-target assassination with Ougi: Shadow Kill; Winter Crown and clustered allies reduce his ult value."
     },
     {
       "id": 9,
       "slug": "suyou",
       "name": "Suyou",
-      "roles": ["Assassin", "Fighter"],
-      "lanes": ["Jungle", "EXP"],
+      "roles": [
+        "Assassin",
+        "Fighter"
+      ],
+      "lanes": [
+        "Jungle"
+      ],
       "damage_type": "physical",
-      "specialty": ["Chase", "Burst"],
-      "win_rate": 53.3,
-      "ban_rate": 41.0,
-      "pick_rate": 12.5,
+      "specialty": [
+        "Chase",
+        "Burst"
+      ],
+      "win_rate": 49.55,
+      "ban_rate": 1.55,
+      "pick_rate": 1.14,
       "recent_patch_summary": "Dual-form tap/hold skills give unmatched early skirmish damage reduction and objective secure."
     },
     {
       "id": 10,
       "slug": "fredrinn",
       "name": "Fredrinn",
-      "roles": ["Fighter", "Tank"],
-      "lanes": ["Jungle", "EXP"],
+      "roles": [
+        "Fighter",
+        "Tank"
+      ],
+      "lanes": [
+        "Jungle"
+      ],
       "damage_type": "physical",
-      "specialty": ["Damage", "Chase"],
-      "win_rate": 50.4,
-      "ban_rate": 6.2,
-      "pick_rate": 8.9,
+      "specialty": [
+        "Damage",
+        "Chase"
+      ],
+      "win_rate": 51.27,
+      "ban_rate": 1.69,
+      "pick_rate": 0.47,
       "recent_patch_summary": "Durable utility jungler who anchors Lord fights and sets up burst mages with taunt chains."
     },
     {
       "id": 11,
       "slug": "julian",
       "name": "Julian",
-      "roles": ["Fighter", "Mage"],
-      "lanes": ["Jungle", "Mid", "EXP"],
+      "roles": [
+        "Assassin",
+        "Fighter"
+      ],
+      "lanes": [
+        "Jungle",
+        "EXP"
+      ],
       "damage_type": "magic",
-      "specialty": ["Chase", "Magic Damage"],
-      "win_rate": 52.1,
-      "ban_rate": 19.5,
-      "pick_rate": 10.6,
+      "specialty": [
+        "Chase",
+        "Magic Damage"
+      ],
+      "win_rate": 49.82,
+      "ban_rate": 0.77,
+      "pick_rate": 0.69,
       "recent_patch_summary": "Level 3 power spike enables aggressive early invades and flexible magic-damage drafting."
     },
     {
       "id": 12,
       "slug": "valentina",
       "name": "Valentina",
-      "roles": ["Mage"],
-      "lanes": ["Mid"],
+      "roles": [
+        "Mage"
+      ],
+      "lanes": [
+        "Mid"
+      ],
       "damage_type": "magic",
-      "specialty": ["Burst", "Finisher"],
-      "win_rate": 51.4,
-      "ban_rate": 16.8,
-      "pick_rate": 11.4,
+      "specialty": [
+        "Burst",
+        "Finisher"
+      ],
+      "win_rate": 44.42,
+      "ban_rate": 0.18,
+      "pick_rate": 0.18,
       "recent_patch_summary": "I Am You scales directly with enemy high-impact ultimates like Tigreal, Minotaur, and Luo Yi."
     },
     {
       "id": 13,
       "slug": "zhuxin",
       "name": "Zhuxin",
-      "roles": ["Mage"],
-      "lanes": ["Mid"],
+      "roles": [
+        "Mage"
+      ],
+      "lanes": [
+        "Mid"
+      ],
       "damage_type": "magic",
-      "specialty": ["Damage", "Crowd Control"],
-      "win_rate": 53.8,
-      "ban_rate": 48.9,
-      "pick_rate": 9.8,
+      "specialty": [
+        "Damage",
+        "Crowd Control"
+      ],
+      "win_rate": 49.95,
+      "ban_rate": 0.41,
+      "pick_rate": 0.22,
       "recent_patch_summary": "Sustained Lantern Flare displacement punishes low-mobility frontliners and controls river chokepoints."
     },
     {
       "id": 14,
       "slug": "luo-yi",
       "name": "Luo Yi",
-      "roles": ["Mage"],
-      "lanes": ["Mid"],
+      "roles": [
+        "Mage"
+      ],
+      "lanes": [
+        "Mid"
+      ],
       "damage_type": "magic",
-      "specialty": ["Support", "Crowd Control"],
-      "win_rate": 52.2,
-      "ban_rate": 15.1,
-      "pick_rate": 8.5,
+      "specialty": [
+        "Support",
+        "Crowd Control"
+      ],
+      "win_rate": 47.84,
+      "ban_rate": 0.07,
+      "pick_rate": 0.17,
       "recent_patch_summary": "Yin-Yang Reaction punishes clumped teams; Diversion enables coordinated 5-man Lord and side-lane flanks."
     },
     {
       "id": 15,
       "slug": "vexana",
       "name": "Vexana",
-      "roles": ["Mage"],
-      "lanes": ["Mid"],
+      "roles": [
+        "Mage"
+      ],
+      "lanes": [
+        "Mid"
+      ],
       "damage_type": "magic",
-      "specialty": ["Poke", "Control"],
-      "win_rate": 51.0,
-      "ban_rate": 7.3,
-      "pick_rate": 10.2,
+      "specialty": [
+        "Poke",
+        "Control"
+      ],
+      "win_rate": 49.05,
+      "ban_rate": 1.13,
+      "pick_rate": 1.44,
       "recent_patch_summary": "Consistent wave clear, anti-dive terrify, and Undead Knight frontline presence."
     },
     {
       "id": 16,
       "slug": "lunox",
       "name": "Lunox",
-      "roles": ["Mage"],
-      "lanes": ["Mid", "Gold"],
+      "roles": [
+        "Mage"
+      ],
+      "lanes": [
+        "Mid"
+      ],
       "damage_type": "magic",
-      "specialty": ["Burst", "Damage"],
-      "win_rate": 51.7,
-      "ban_rate": 11.4,
-      "pick_rate": 8.1,
+      "specialty": [
+        "Burst",
+        "Damage"
+      ],
+      "win_rate": 48.74,
+      "ban_rate": 0.23,
+      "pick_rate": 0.26,
       "recent_patch_summary": "Shreds high-HP tank jungles and fighters with Chaos Assault %HP magic damage."
     },
     {
       "id": 17,
       "slug": "moskov",
       "name": "Moskov",
-      "roles": ["Marksman"],
-      "lanes": ["Gold"],
+      "roles": [
+        "Marksman"
+      ],
+      "lanes": [
+        "Gold"
+      ],
       "damage_type": "physical",
-      "specialty": ["Finisher", "Chase"],
-      "win_rate": 52.5,
-      "ban_rate": 24.3,
-      "pick_rate": 14.6,
+      "specialty": [
+        "Finisher",
+        "Chase"
+      ],
+      "win_rate": 50.19,
+      "ban_rate": 0.29,
+      "pick_rate": 0.89,
       "recent_patch_summary": "Global Spear of Destruction teleport threat plus high attack-speed wall-stun outplay potential."
     },
     {
       "id": 18,
       "slug": "harith",
       "name": "Harith",
-      "roles": ["Mage", "Marksman"],
-      "lanes": ["Gold", "Mid"],
+      "roles": [
+        "Mage"
+      ],
+      "lanes": [
+        "Gold"
+      ],
       "damage_type": "magic",
-      "specialty": ["Chase", "Damage"],
-      "win_rate": 53.1,
-      "ban_rate": 29.7,
-      "pick_rate": 11.0,
+      "specialty": [
+        "Chase",
+        "Damage"
+      ],
+      "win_rate": 46.37,
+      "ban_rate": 0.06,
+      "pick_rate": 0.15,
       "recent_patch_summary": "Premier Gold-lane magic carry; Zaman Force shields and dashes shred teams lacking hard lockdown or Esmeralda/anti-shield."
     },
     {
       "id": 19,
       "slug": "claude",
       "name": "Claude",
-      "roles": ["Marksman"],
-      "lanes": ["Gold"],
+      "roles": [
+        "Marksman"
+      ],
+      "lanes": [
+        "Gold"
+      ],
       "damage_type": "physical",
-      "specialty": ["Burst", "Chase"],
-      "win_rate": 51.3,
-      "ban_rate": 12.6,
-      "pick_rate": 10.8,
+      "specialty": [
+        "Burst",
+        "Chase"
+      ],
+      "win_rate": 48.81,
+      "ban_rate": 0.23,
+      "pick_rate": 0.8,
       "recent_patch_summary": "Safe laning with Battle Mirror Image and high teamfight AoE with Demon Hunter Sword + Golden Staff."
     },
     {
       "id": 20,
       "slug": "beatrix",
       "name": "Beatrix",
-      "roles": ["Marksman"],
-      "lanes": ["Gold"],
+      "roles": [
+        "Marksman"
+      ],
+      "lanes": [
+        "Gold"
+      ],
       "damage_type": "physical",
-      "specialty": ["Finisher", "Damage"],
-      "win_rate": 50.8,
-      "ban_rate": 6.9,
-      "pick_rate": 9.7,
+      "specialty": [
+        "Finisher",
+        "Damage"
+      ],
+      "win_rate": 50.32,
+      "ban_rate": 0.42,
+      "pick_rate": 0.67,
       "recent_patch_summary": "Versatile wave-clear and siege with Renner/Wesker/Bennett; strong lane bully into short-range carries."
     },
     {
       "id": 21,
       "slug": "brody",
       "name": "Brody",
-      "roles": ["Marksman"],
-      "lanes": ["Gold"],
+      "roles": [
+        "Marksman"
+      ],
+      "lanes": [
+        "Gold"
+      ],
       "damage_type": "physical",
-      "specialty": ["Burst", "Finisher"],
-      "win_rate": 50.9,
-      "ban_rate": 5.8,
-      "pick_rate": 9.3,
+      "specialty": [
+        "Burst",
+        "Finisher"
+      ],
+      "win_rate": 49.88,
+      "ban_rate": 1.47,
+      "pick_rate": 0.79,
       "recent_patch_summary": "Dominant early Gold-lane trades and self-peel stun; transitions well into hybrid tank-item builds."
     },
     {
       "id": 22,
       "slug": "tigreal",
       "name": "Tigreal",
-      "roles": ["Tank"],
-      "lanes": ["Roam"],
+      "roles": [
+        "Tank"
+      ],
+      "lanes": [
+        "Roam"
+      ],
       "damage_type": "physical",
-      "specialty": ["Crowd Control"],
-      "win_rate": 51.5,
-      "ban_rate": 21.4,
-      "pick_rate": 13.8,
+      "specialty": [
+        "Crowd Control"
+      ],
+      "win_rate": 44.91,
+      "ban_rate": 7.42,
+      "pick_rate": 2,
       "recent_patch_summary": "Flicker + Implosion remains a premier engage combo; countered by Diggie's Time Journey and Purify."
     },
     {
       "id": 23,
       "slug": "mathilda",
       "name": "Mathilda",
-      "roles": ["Support", "Assassin"],
-      "lanes": ["Roam", "Mid"],
-      "damage_type": "magic",
-      "specialty": ["Initiator", "Guard"],
-      "win_rate": 53.4,
-      "ban_rate": 36.7,
-      "pick_rate": 9.1,
+      "roles": [
+        "Support",
+        "Assassin"
+      ],
+      "lanes": [
+        "Roam"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Initiator",
+        "Guard"
+      ],
+      "win_rate": 44.4,
+      "ban_rate": 0.19,
+      "pick_rate": 0.14,
       "recent_patch_summary": "Guiding Wind free dash enables immobile carries and accelerates early Jungle rotations."
     },
     {
       "id": 24,
       "slug": "angela",
       "name": "Angela",
-      "roles": ["Support"],
-      "lanes": ["Roam"],
+      "roles": [
+        "Support"
+      ],
+      "lanes": [
+        "Roam"
+      ],
       "damage_type": "magic",
-      "specialty": ["Guard", "Support"],
-      "win_rate": 52.0,
-      "ban_rate": 25.1,
-      "pick_rate": 12.3,
+      "specialty": [
+        "Guard",
+        "Support"
+      ],
+      "win_rate": 50.32,
+      "ban_rate": 11.7,
+      "pick_rate": 1.77,
       "recent_patch_summary": "Heartguard global shield + speed amplifies dive assassins (Ling, Suyou, Fanny) in mid-game skirmishes."
     },
     {
       "id": 25,
       "slug": "minotaur",
       "name": "Minotaur",
-      "roles": ["Tank", "Support"],
-      "lanes": ["Roam"],
+      "roles": [
+        "Tank",
+        "Support"
+      ],
+      "lanes": [
+        "Roam"
+      ],
       "damage_type": "physical",
-      "specialty": ["Crowd Control", "Support"],
-      "win_rate": 51.9,
-      "ban_rate": 13.5,
-      "pick_rate": 10.5,
+      "specialty": [
+        "Crowd Control"
+      ],
+      "win_rate": 53.56,
+      "ban_rate": 7.91,
+      "pick_rate": 0.92,
       "recent_patch_summary": "AoE knockup + teamwide heal with Flask of the Oasis; strong frontline anchor for scaling marksmen."
     },
     {
       "id": 26,
       "slug": "khufra",
       "name": "Khufra",
-      "roles": ["Tank"],
-      "lanes": ["Roam"],
-      "damage_type": "physical",
-      "specialty": ["Initiator", "Crowd Control"],
-      "win_rate": 52.3,
-      "ban_rate": 17.9,
-      "pick_rate": 9.6,
+      "roles": [
+        "Tank"
+      ],
+      "lanes": [
+        "Roam"
+      ],
+      "damage_type": "mixed",
+      "specialty": [
+        "Initiator",
+        "Crowd Control"
+      ],
+      "win_rate": 54.61,
+      "ban_rate": 2.01,
+      "pick_rate": 0.33,
       "recent_patch_summary": "Bouncing Ball hard-stops dash-heavy meta threats (Fanny, Ling, Benedetta, Arlott, Harith)."
     },
     {
       "id": 27,
       "slug": "diggie",
       "name": "Diggie",
-      "roles": ["Support"],
-      "lanes": ["Roam"],
+      "roles": [
+        "Support"
+      ],
+      "lanes": [
+        "Roam"
+      ],
       "damage_type": "magic",
-      "specialty": ["Guard", "Poke"],
-      "win_rate": 52.8,
-      "ban_rate": 31.2,
-      "pick_rate": 7.4,
+      "specialty": [
+        "Guard",
+        "Poke"
+      ],
+      "win_rate": 54.43,
+      "ban_rate": 3.69,
+      "pick_rate": 0.2,
       "recent_patch_summary": "Time Journey completely negates hard-engage tank setups like Tigreal and Minotaur."
+    },
+    {
+      "id": 28,
+      "slug": "aamon",
+      "name": "Aamon",
+      "roles": [
+        "Assassin"
+      ],
+      "lanes": [
+        "Jungle"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Chase",
+        "Magic Damage"
+      ],
+      "win_rate": 50.26,
+      "ban_rate": 2.46,
+      "pick_rate": 0.62,
+      "recent_patch_summary": "A-tier (50.26% WR, 2.46% BR) in Jungle with Chase / Magic Damage profile."
+    },
+    {
+      "id": 29,
+      "slug": "akai",
+      "name": "Akai",
+      "roles": [
+        "Tank"
+      ],
+      "lanes": [
+        "Roam"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Guard",
+        "Crowd Control"
+      ],
+      "win_rate": 50.08,
+      "ban_rate": 1.12,
+      "pick_rate": 0.32,
+      "recent_patch_summary": "B-tier (50.08% WR, 1.12% BR) in Roam with Guard / Crowd Control profile."
+    },
+    {
+      "id": 30,
+      "slug": "aldous",
+      "name": "Aldous",
+      "roles": [
+        "Fighter"
+      ],
+      "lanes": [
+        "EXP"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Burst",
+        "Support"
+      ],
+      "win_rate": 50.52,
+      "ban_rate": 0.49,
+      "pick_rate": 0.41,
+      "recent_patch_summary": "A-tier (50.52% WR, 0.49% BR) in EXP with Burst / Support profile."
+    },
+    {
+      "id": 31,
+      "slug": "alice",
+      "name": "Alice",
+      "roles": [
+        "Tank",
+        "Mage"
+      ],
+      "lanes": [
+        "EXP",
+        "Jungle"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Charge",
+        "Regen"
+      ],
+      "win_rate": 50.86,
+      "ban_rate": 13.47,
+      "pick_rate": 0.96,
+      "recent_patch_summary": "S-tier (50.86% WR, 13.47% BR) in EXP/Jungle with Charge / Regen profile."
+    },
+    {
+      "id": 32,
+      "slug": "alpha",
+      "name": "Alpha",
+      "roles": [
+        "Fighter"
+      ],
+      "lanes": [
+        "Jungle",
+        "EXP"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Charge",
+        "Damage"
+      ],
+      "win_rate": 48.74,
+      "ban_rate": 0.7,
+      "pick_rate": 1.31,
+      "recent_patch_summary": "B-tier (48.74% WR, 0.7% BR) in Jungle/EXP with Charge / Damage profile."
+    },
+    {
+      "id": 33,
+      "slug": "alucard",
+      "name": "Alucard",
+      "roles": [
+        "Fighter",
+        "Assassin"
+      ],
+      "lanes": [
+        "Jungle"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Chase",
+        "Damage"
+      ],
+      "win_rate": 48.91,
+      "ban_rate": 0.38,
+      "pick_rate": 0.56,
+      "recent_patch_summary": "B-tier (48.91% WR, 0.38% BR) in Jungle with Chase / Damage profile."
+    },
+    {
+      "id": 34,
+      "slug": "argus",
+      "name": "Argus",
+      "roles": [
+        "Fighter"
+      ],
+      "lanes": [
+        "EXP"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Charge",
+        "Burst"
+      ],
+      "win_rate": 56.48,
+      "ban_rate": 1.03,
+      "pick_rate": 0.57,
+      "recent_patch_summary": "S+-tier (56.48% WR, 1.03% BR) in EXP with Charge / Burst profile."
+    },
+    {
+      "id": 35,
+      "slug": "atlas",
+      "name": "Atlas",
+      "roles": [
+        "Tank"
+      ],
+      "lanes": [
+        "Roam"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Crowd Control",
+        "Initiator"
+      ],
+      "win_rate": 52,
+      "ban_rate": 9.89,
+      "pick_rate": 1,
+      "recent_patch_summary": "S-tier (52% WR, 9.89% BR) in Roam with Crowd Control / Initiator profile."
+    },
+    {
+      "id": 36,
+      "slug": "aulus",
+      "name": "Aulus",
+      "roles": [
+        "Fighter"
+      ],
+      "lanes": [
+        "Jungle",
+        "EXP"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Damage",
+        "Charge"
+      ],
+      "win_rate": 53.72,
+      "ban_rate": 31.69,
+      "pick_rate": 0.83,
+      "recent_patch_summary": "S+-tier (53.72% WR, 31.69% BR) in Jungle/EXP with Damage / Charge profile."
+    },
+    {
+      "id": 37,
+      "slug": "aurora",
+      "name": "Aurora",
+      "roles": [
+        "Mage"
+      ],
+      "lanes": [
+        "Mid"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Crowd Control",
+        "Poke"
+      ],
+      "win_rate": 49.04,
+      "ban_rate": 0.38,
+      "pick_rate": 0.64,
+      "recent_patch_summary": "B-tier (49.04% WR, 0.38% BR) in Mid with Crowd Control / Poke profile."
+    },
+    {
+      "id": 38,
+      "slug": "badang",
+      "name": "Badang",
+      "roles": [
+        "Fighter"
+      ],
+      "lanes": [
+        "Roam",
+        "EXP"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Charge",
+        "Burst"
+      ],
+      "win_rate": 50.05,
+      "ban_rate": 3.39,
+      "pick_rate": 1.28,
+      "recent_patch_summary": "A-tier (50.05% WR, 3.39% BR) in Roam/EXP with Charge / Burst profile."
+    },
+    {
+      "id": 39,
+      "slug": "balmond",
+      "name": "Balmond",
+      "roles": [
+        "Fighter"
+      ],
+      "lanes": [
+        "Jungle",
+        "EXP"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Damage",
+        "Regen"
+      ],
+      "win_rate": 46.81,
+      "ban_rate": 0.41,
+      "pick_rate": 0.63,
+      "recent_patch_summary": "C-tier (46.81% WR, 0.41% BR) in Jungle/EXP with Damage / Regen profile."
+    },
+    {
+      "id": 40,
+      "slug": "bane",
+      "name": "Bane",
+      "roles": [
+        "Fighter",
+        "Mage"
+      ],
+      "lanes": [
+        "Jungle",
+        "EXP"
+      ],
+      "damage_type": "mixed",
+      "specialty": [
+        "Push",
+        "Burst"
+      ],
+      "win_rate": 51.69,
+      "ban_rate": 0.19,
+      "pick_rate": 0.3,
+      "recent_patch_summary": "A-tier (51.69% WR, 0.19% BR) in Jungle/EXP with Push / Burst profile."
+    },
+    {
+      "id": 41,
+      "slug": "barats",
+      "name": "Barats",
+      "roles": [
+        "Tank",
+        "Fighter"
+      ],
+      "lanes": [
+        "EXP",
+        "Jungle"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Damage",
+        "Crowd Control"
+      ],
+      "win_rate": 51.66,
+      "ban_rate": 3.74,
+      "pick_rate": 0.66,
+      "recent_patch_summary": "A-tier (51.66% WR, 3.74% BR) in EXP/Jungle with Damage / Crowd Control profile."
+    },
+    {
+      "id": 42,
+      "slug": "baxia",
+      "name": "Baxia",
+      "roles": [
+        "Tank"
+      ],
+      "lanes": [
+        "Jungle",
+        "Roam"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Support",
+        "Damage"
+      ],
+      "win_rate": 45.72,
+      "ban_rate": 0.11,
+      "pick_rate": 0.05,
+      "recent_patch_summary": "C-tier (45.72% WR, 0.11% BR) in Jungle/Roam with Support / Damage profile."
+    },
+    {
+      "id": 43,
+      "slug": "belerick",
+      "name": "Belerick",
+      "roles": [
+        "Tank"
+      ],
+      "lanes": [
+        "Roam"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Crowd Control",
+        "Regen"
+      ],
+      "win_rate": 51.82,
+      "ban_rate": 57.71,
+      "pick_rate": 1.67,
+      "recent_patch_summary": "S+-tier (51.82% WR, 57.71% BR) in Roam with Crowd Control / Regen profile."
+    },
+    {
+      "id": 44,
+      "slug": "bruno",
+      "name": "Bruno",
+      "roles": [
+        "Marksman"
+      ],
+      "lanes": [
+        "Gold"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Finisher",
+        "Burst"
+      ],
+      "win_rate": 53.46,
+      "ban_rate": 0.32,
+      "pick_rate": 0.65,
+      "recent_patch_summary": "S-tier (53.46% WR, 0.32% BR) in Gold with Finisher / Burst profile."
+    },
+    {
+      "id": 45,
+      "slug": "carmilla",
+      "name": "Carmilla",
+      "roles": [
+        "Support",
+        "Tank"
+      ],
+      "lanes": [
+        "Roam"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Crowd Control",
+        "Damage"
+      ],
+      "win_rate": 53.23,
+      "ban_rate": 21.73,
+      "pick_rate": 1.28,
+      "recent_patch_summary": "S+-tier (53.23% WR, 21.73% BR) in Roam with Crowd Control / Damage profile."
+    },
+    {
+      "id": 46,
+      "slug": "cecilion",
+      "name": "Cecilion",
+      "roles": [
+        "Mage"
+      ],
+      "lanes": [
+        "Mid"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Poke",
+        "Burst"
+      ],
+      "win_rate": 51.06,
+      "ban_rate": 0.17,
+      "pick_rate": 0.68,
+      "recent_patch_summary": "A-tier (51.06% WR, 0.17% BR) in Mid with Poke / Burst profile."
+    },
+    {
+      "id": 47,
+      "slug": "chang-e",
+      "name": "Chang'e",
+      "roles": [
+        "Mage"
+      ],
+      "lanes": [
+        "Mid"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Poke",
+        "Burst"
+      ],
+      "win_rate": 48.24,
+      "ban_rate": 0.33,
+      "pick_rate": 0.64,
+      "recent_patch_summary": "B-tier (48.24% WR, 0.33% BR) in Mid with Poke / Burst profile."
+    },
+    {
+      "id": 48,
+      "slug": "chip",
+      "name": "Chip",
+      "roles": [
+        "Support",
+        "Tank"
+      ],
+      "lanes": [
+        "Roam"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Support",
+        "Crowd Control"
+      ],
+      "win_rate": 47.27,
+      "ban_rate": 0.22,
+      "pick_rate": 0.04,
+      "recent_patch_summary": "C-tier (47.27% WR, 0.22% BR) in Roam with Support / Crowd Control profile."
+    },
+    {
+      "id": 49,
+      "slug": "chou",
+      "name": "Chou",
+      "roles": [
+        "Fighter"
+      ],
+      "lanes": [
+        "EXP",
+        "Roam"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Chase",
+        "Control"
+      ],
+      "win_rate": 45.09,
+      "ban_rate": 3.05,
+      "pick_rate": 1.02,
+      "recent_patch_summary": "C-tier (45.09% WR, 3.05% BR) in EXP/Roam with Chase / Control profile."
+    },
+    {
+      "id": 50,
+      "slug": "cici",
+      "name": "Cici",
+      "roles": [
+        "Fighter"
+      ],
+      "lanes": [
+        "EXP"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Damage",
+        "Regen"
+      ],
+      "win_rate": 49.43,
+      "ban_rate": 1.16,
+      "pick_rate": 0.67,
+      "recent_patch_summary": "B-tier (49.43% WR, 1.16% BR) in EXP with Damage / Regen profile."
+    },
+    {
+      "id": 51,
+      "slug": "clint",
+      "name": "Clint",
+      "roles": [
+        "Marksman"
+      ],
+      "lanes": [
+        "Gold"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Finisher",
+        "Burst"
+      ],
+      "win_rate": 50.5,
+      "ban_rate": 0.62,
+      "pick_rate": 0.73,
+      "recent_patch_summary": "A-tier (50.5% WR, 0.62% BR) in Gold with Finisher / Burst profile."
+    },
+    {
+      "id": 52,
+      "slug": "cyclops",
+      "name": "Cyclops",
+      "roles": [
+        "Mage"
+      ],
+      "lanes": [
+        "Mid"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Poke",
+        "Control"
+      ],
+      "win_rate": 51.56,
+      "ban_rate": 0.31,
+      "pick_rate": 0.65,
+      "recent_patch_summary": "A-tier (51.56% WR, 0.31% BR) in Mid with Poke / Control profile."
+    },
+    {
+      "id": 53,
+      "slug": "dori",
+      "name": "Dori",
+      "roles": [
+        "Mage"
+      ],
+      "lanes": [
+        "Mid"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Poke",
+        "Control"
+      ],
+      "win_rate": 50,
+      "ban_rate": 0,
+      "pick_rate": 0.5,
+      "recent_patch_summary": "Upcoming/new Mage for Mid featuring Poke / Control."
+    },
+    {
+      "id": 54,
+      "slug": "dyrroth",
+      "name": "Dyrroth",
+      "roles": [
+        "Fighter"
+      ],
+      "lanes": [
+        "EXP",
+        "Jungle"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Charge",
+        "Burst"
+      ],
+      "win_rate": 49.37,
+      "ban_rate": 1.72,
+      "pick_rate": 1.7,
+      "recent_patch_summary": "B-tier (49.37% WR, 1.72% BR) in EXP/Jungle with Charge / Burst profile."
+    },
+    {
+      "id": 55,
+      "slug": "esmeralda",
+      "name": "Esmeralda",
+      "roles": [
+        "Tank",
+        "Mage"
+      ],
+      "lanes": [
+        "EXP"
+      ],
+      "damage_type": "mixed",
+      "specialty": [
+        "Regen",
+        "Mixed Damage"
+      ],
+      "win_rate": 46.81,
+      "ban_rate": 2.33,
+      "pick_rate": 0.83,
+      "recent_patch_summary": "C-tier (46.81% WR, 2.33% BR) in EXP with Regen / Mixed Damage profile."
+    },
+    {
+      "id": 56,
+      "slug": "estes",
+      "name": "Estes",
+      "roles": [
+        "Support"
+      ],
+      "lanes": [
+        "Roam"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Regen",
+        "Guard"
+      ],
+      "win_rate": 52.82,
+      "ban_rate": 47.17,
+      "pick_rate": 0.64,
+      "recent_patch_summary": "S+-tier (52.82% WR, 47.17% BR) in Roam with Regen / Guard profile."
+    },
+    {
+      "id": 57,
+      "slug": "eudora",
+      "name": "Eudora",
+      "roles": [
+        "Mage"
+      ],
+      "lanes": [
+        "Mid"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Control",
+        "Burst"
+      ],
+      "win_rate": 50.46,
+      "ban_rate": 47.55,
+      "pick_rate": 1.79,
+      "recent_patch_summary": "S+-tier (50.46% WR, 47.55% BR) in Mid with Control / Burst profile."
+    },
+    {
+      "id": 58,
+      "slug": "faramis",
+      "name": "Faramis",
+      "roles": [
+        "Support",
+        "Mage"
+      ],
+      "lanes": [
+        "Mid",
+        "Roam"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Guard",
+        "Charge"
+      ],
+      "win_rate": 50.43,
+      "ban_rate": 0.42,
+      "pick_rate": 0.12,
+      "recent_patch_summary": "A-tier (50.43% WR, 0.42% BR) in Mid/Roam with Guard / Charge profile."
+    },
+    {
+      "id": 59,
+      "slug": "floryn",
+      "name": "Floryn",
+      "roles": [
+        "Support"
+      ],
+      "lanes": [
+        "Roam"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Poke",
+        "Guard"
+      ],
+      "win_rate": 54.23,
+      "ban_rate": 13.21,
+      "pick_rate": 0.96,
+      "recent_patch_summary": "S+-tier (54.23% WR, 13.21% BR) in Roam with Poke / Guard profile."
+    },
+    {
+      "id": 60,
+      "slug": "franco",
+      "name": "Franco",
+      "roles": [
+        "Tank"
+      ],
+      "lanes": [
+        "Roam"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Initiator",
+        "Control"
+      ],
+      "win_rate": 41.33,
+      "ban_rate": 3.11,
+      "pick_rate": 0.91,
+      "recent_patch_summary": "C-tier (41.33% WR, 3.11% BR) in Roam with Initiator / Control profile."
+    },
+    {
+      "id": 61,
+      "slug": "freya",
+      "name": "Freya",
+      "roles": [
+        "Fighter"
+      ],
+      "lanes": [
+        "EXP",
+        "Jungle"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Chase",
+        "Damage"
+      ],
+      "win_rate": 48.64,
+      "ban_rate": 2.52,
+      "pick_rate": 0.77,
+      "recent_patch_summary": "B-tier (48.64% WR, 2.52% BR) in EXP/Jungle with Chase / Damage profile."
+    },
+    {
+      "id": 62,
+      "slug": "gatotkaca",
+      "name": "Gatotkaca",
+      "roles": [
+        "Tank",
+        "Fighter"
+      ],
+      "lanes": [
+        "Roam",
+        "EXP"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Crowd Control",
+        "Burst"
+      ],
+      "win_rate": 45.17,
+      "ban_rate": 0.31,
+      "pick_rate": 0.55,
+      "recent_patch_summary": "C-tier (45.17% WR, 0.31% BR) in Roam/EXP with Crowd Control / Burst profile."
+    },
+    {
+      "id": 63,
+      "slug": "gloo",
+      "name": "Gloo",
+      "roles": [
+        "Tank"
+      ],
+      "lanes": [
+        "Roam",
+        "EXP"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Regen",
+        "Control"
+      ],
+      "win_rate": 54.41,
+      "ban_rate": 43.42,
+      "pick_rate": 0.82,
+      "recent_patch_summary": "S+-tier (54.41% WR, 43.42% BR) in Roam/EXP with Regen / Control profile."
+    },
+    {
+      "id": 64,
+      "slug": "gord",
+      "name": "Gord",
+      "roles": [
+        "Mage"
+      ],
+      "lanes": [
+        "Mid"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Poke",
+        "Burst"
+      ],
+      "win_rate": 52.69,
+      "ban_rate": 0.53,
+      "pick_rate": 0.57,
+      "recent_patch_summary": "A-tier (52.69% WR, 0.53% BR) in Mid with Poke / Burst profile."
+    },
+    {
+      "id": 65,
+      "slug": "granger",
+      "name": "Granger",
+      "roles": [
+        "Marksman"
+      ],
+      "lanes": [
+        "Gold"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Burst",
+        "Finisher"
+      ],
+      "win_rate": 43.38,
+      "ban_rate": 1.66,
+      "pick_rate": 1.34,
+      "recent_patch_summary": "C-tier (43.38% WR, 1.66% BR) in Gold with Burst / Finisher profile."
+    },
+    {
+      "id": 66,
+      "slug": "grock",
+      "name": "Grock",
+      "roles": [
+        "Tank",
+        "Fighter"
+      ],
+      "lanes": [
+        "Roam"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Crowd Control",
+        "Initiator"
+      ],
+      "win_rate": 46.4,
+      "ban_rate": 0.7,
+      "pick_rate": 0.34,
+      "recent_patch_summary": "C-tier (46.4% WR, 0.7% BR) in Roam with Crowd Control / Initiator profile."
+    },
+    {
+      "id": 67,
+      "slug": "guinevere",
+      "name": "Guinevere",
+      "roles": [
+        "Fighter"
+      ],
+      "lanes": [
+        "EXP"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Burst",
+        "Magic Damage"
+      ],
+      "win_rate": 51.19,
+      "ban_rate": 1.9,
+      "pick_rate": 0.84,
+      "recent_patch_summary": "A-tier (51.19% WR, 1.9% BR) in EXP with Burst / Magic Damage profile."
+    },
+    {
+      "id": 68,
+      "slug": "gusion",
+      "name": "Gusion",
+      "roles": [
+        "Assassin"
+      ],
+      "lanes": [
+        "Jungle",
+        "Mid"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Burst",
+        "Magic Damage"
+      ],
+      "win_rate": 48.65,
+      "ban_rate": 3.19,
+      "pick_rate": 1.25,
+      "recent_patch_summary": "B-tier (48.65% WR, 3.19% BR) in Jungle/Mid with Burst / Magic Damage profile."
+    },
+    {
+      "id": 69,
+      "slug": "hanabi",
+      "name": "Hanabi",
+      "roles": [
+        "Marksman"
+      ],
+      "lanes": [
+        "Gold"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Finisher",
+        "Damage"
+      ],
+      "win_rate": 52.68,
+      "ban_rate": 4.21,
+      "pick_rate": 2.38,
+      "recent_patch_summary": "S-tier (52.68% WR, 4.21% BR) in Gold with Finisher / Damage profile."
+    },
+    {
+      "id": 70,
+      "slug": "hanzo",
+      "name": "Hanzo",
+      "roles": [
+        "Assassin"
+      ],
+      "lanes": [
+        "Jungle"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Burst",
+        "Poke"
+      ],
+      "win_rate": 49.84,
+      "ban_rate": 5.62,
+      "pick_rate": 0.36,
+      "recent_patch_summary": "A-tier (49.84% WR, 5.62% BR) in Jungle with Burst / Poke profile."
+    },
+    {
+      "id": 71,
+      "slug": "harley",
+      "name": "Harley",
+      "roles": [
+        "Assassin",
+        "Mage"
+      ],
+      "lanes": [
+        "Jungle",
+        "Mid"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Burst",
+        "Poke"
+      ],
+      "win_rate": 48.1,
+      "ban_rate": 3.18,
+      "pick_rate": 0.86,
+      "recent_patch_summary": "B-tier (48.1% WR, 3.18% BR) in Jungle/Mid with Burst / Poke profile."
+    },
+    {
+      "id": 72,
+      "slug": "helcurt",
+      "name": "Helcurt",
+      "roles": [
+        "Assassin"
+      ],
+      "lanes": [
+        "Jungle",
+        "Roam"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Push",
+        "Burst"
+      ],
+      "win_rate": 47.42,
+      "ban_rate": 4.73,
+      "pick_rate": 0.62,
+      "recent_patch_summary": "B-tier (47.42% WR, 4.73% BR) in Jungle/Roam with Push / Burst profile."
+    },
+    {
+      "id": 73,
+      "slug": "hilda",
+      "name": "Hilda",
+      "roles": [
+        "Fighter",
+        "Tank"
+      ],
+      "lanes": [
+        "Roam",
+        "EXP"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Damage",
+        "Regen"
+      ],
+      "win_rate": 50.82,
+      "ban_rate": 13.02,
+      "pick_rate": 0.56,
+      "recent_patch_summary": "S-tier (50.82% WR, 13.02% BR) in Roam/EXP with Damage / Regen profile."
+    },
+    {
+      "id": 74,
+      "slug": "hirara",
+      "name": "Hirara",
+      "roles": [
+        "Assassin"
+      ],
+      "lanes": [
+        "Jungle"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Chase",
+        "Finisher"
+      ],
+      "win_rate": 50,
+      "ban_rate": 67.51,
+      "pick_rate": 0.63,
+      "recent_patch_summary": "S+-tier (50% WR, 67.51% BR) in Jungle with Chase / Finisher profile."
+    },
+    {
+      "id": 75,
+      "slug": "hylos",
+      "name": "Hylos",
+      "roles": [
+        "Tank"
+      ],
+      "lanes": [
+        "Roam"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Guard",
+        "Initiator"
+      ],
+      "win_rate": 48.52,
+      "ban_rate": 0.28,
+      "pick_rate": 0.29,
+      "recent_patch_summary": "B-tier (48.52% WR, 0.28% BR) in Roam with Guard / Initiator profile."
+    },
+    {
+      "id": 76,
+      "slug": "irithel",
+      "name": "Irithel",
+      "roles": [
+        "Marksman"
+      ],
+      "lanes": [
+        "Gold"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Finisher",
+        "Burst"
+      ],
+      "win_rate": 52.24,
+      "ban_rate": 0.27,
+      "pick_rate": 0.4,
+      "recent_patch_summary": "A-tier (52.24% WR, 0.27% BR) in Gold with Finisher / Burst profile."
+    },
+    {
+      "id": 77,
+      "slug": "ixia",
+      "name": "Ixia",
+      "roles": [
+        "Marksman"
+      ],
+      "lanes": [
+        "Gold"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Finisher",
+        "Damage"
+      ],
+      "win_rate": 49.92,
+      "ban_rate": 0.77,
+      "pick_rate": 0.72,
+      "recent_patch_summary": "B-tier (49.92% WR, 0.77% BR) in Gold with Finisher / Damage profile."
+    },
+    {
+      "id": 78,
+      "slug": "jawhead",
+      "name": "Jawhead",
+      "roles": [
+        "Fighter"
+      ],
+      "lanes": [
+        "Roam",
+        "EXP"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Charge",
+        "Burst"
+      ],
+      "win_rate": 47.7,
+      "ban_rate": 0.34,
+      "pick_rate": 0.33,
+      "recent_patch_summary": "C-tier (47.7% WR, 0.34% BR) in Roam/EXP with Charge / Burst profile."
+    },
+    {
+      "id": 79,
+      "slug": "johnson",
+      "name": "Johnson",
+      "roles": [
+        "Tank",
+        "Support"
+      ],
+      "lanes": [
+        "Roam"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Support",
+        "Crowd Control"
+      ],
+      "win_rate": 48.67,
+      "ban_rate": 1.87,
+      "pick_rate": 0.69,
+      "recent_patch_summary": "B-tier (48.67% WR, 1.87% BR) in Roam with Support / Crowd Control profile."
+    },
+    {
+      "id": 80,
+      "slug": "joy",
+      "name": "Joy",
+      "roles": [
+        "Assassin"
+      ],
+      "lanes": [
+        "Jungle"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Chase",
+        "Damage"
+      ],
+      "win_rate": 48.4,
+      "ban_rate": 0.21,
+      "pick_rate": 0.16,
+      "recent_patch_summary": "B-tier (48.4% WR, 0.21% BR) in Jungle with Chase / Damage profile."
+    },
+    {
+      "id": 81,
+      "slug": "kadita",
+      "name": "Kadita",
+      "roles": [
+        "Mage",
+        "Assassin"
+      ],
+      "lanes": [
+        "Mid"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Burst",
+        "Charge"
+      ],
+      "win_rate": 51.35,
+      "ban_rate": 2.87,
+      "pick_rate": 0.77,
+      "recent_patch_summary": "A-tier (51.35% WR, 2.87% BR) in Mid with Burst / Charge profile."
+    },
+    {
+      "id": 82,
+      "slug": "kagura",
+      "name": "Kagura",
+      "roles": [
+        "Mage"
+      ],
+      "lanes": [
+        "Mid"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Poke",
+        "Finisher"
+      ],
+      "win_rate": 51.29,
+      "ban_rate": 1.38,
+      "pick_rate": 0.89,
+      "recent_patch_summary": "A-tier (51.29% WR, 1.38% BR) in Mid with Poke / Finisher profile."
+    },
+    {
+      "id": 83,
+      "slug": "kaja",
+      "name": "Kaja",
+      "roles": [
+        "Support"
+      ],
+      "lanes": [
+        "Roam"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Initiator",
+        "Charge"
+      ],
+      "win_rate": 49.62,
+      "ban_rate": 13.73,
+      "pick_rate": 0.59,
+      "recent_patch_summary": "S-tier (49.62% WR, 13.73% BR) in Roam with Initiator / Charge profile."
+    },
+    {
+      "id": 84,
+      "slug": "kalea",
+      "name": "Kalea",
+      "roles": [
+        "Support",
+        "Fighter"
+      ],
+      "lanes": [
+        "Roam"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Control",
+        "Regen"
+      ],
+      "win_rate": 50.41,
+      "ban_rate": 7.13,
+      "pick_rate": 0.77,
+      "recent_patch_summary": "A-tier (50.41% WR, 7.13% BR) in Roam with Control / Regen profile."
+    },
+    {
+      "id": 85,
+      "slug": "karina",
+      "name": "Karina",
+      "roles": [
+        "Assassin"
+      ],
+      "lanes": [
+        "Jungle"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Finisher",
+        "Magic Damage"
+      ],
+      "win_rate": 48.42,
+      "ban_rate": 4.65,
+      "pick_rate": 0.96,
+      "recent_patch_summary": "B-tier (48.42% WR, 4.65% BR) in Jungle with Finisher / Magic Damage profile."
+    },
+    {
+      "id": 86,
+      "slug": "karrie",
+      "name": "Karrie",
+      "roles": [
+        "Marksman"
+      ],
+      "lanes": [
+        "Gold"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Finisher",
+        "Damage"
+      ],
+      "win_rate": 48.72,
+      "ban_rate": 0.95,
+      "pick_rate": 0.54,
+      "recent_patch_summary": "B-tier (48.72% WR, 0.95% BR) in Gold with Finisher / Damage profile."
+    },
+    {
+      "id": 87,
+      "slug": "khaleed",
+      "name": "Khaleed",
+      "roles": [
+        "Fighter"
+      ],
+      "lanes": [
+        "Roam",
+        "EXP"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Damage",
+        "Regen"
+      ],
+      "win_rate": 50.41,
+      "ban_rate": 0.09,
+      "pick_rate": 0.13,
+      "recent_patch_summary": "B-tier (50.41% WR, 0.09% BR) in Roam/EXP with Damage / Regen profile."
+    },
+    {
+      "id": 88,
+      "slug": "kimmy",
+      "name": "Kimmy",
+      "roles": [
+        "Marksman",
+        "Mage"
+      ],
+      "lanes": [
+        "Mid",
+        "Gold"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Damage",
+        "Magic Damage"
+      ],
+      "win_rate": 48.82,
+      "ban_rate": 0.79,
+      "pick_rate": 1,
+      "recent_patch_summary": "B-tier (48.82% WR, 0.79% BR) in Mid/Gold with Damage / Magic Damage profile."
+    },
+    {
+      "id": 89,
+      "slug": "lancelot",
+      "name": "Lancelot",
+      "roles": [
+        "Assassin"
+      ],
+      "lanes": [
+        "Jungle"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Chase",
+        "Burst"
+      ],
+      "win_rate": 42.99,
+      "ban_rate": 0.5,
+      "pick_rate": 0.52,
+      "recent_patch_summary": "C-tier (42.99% WR, 0.5% BR) in Jungle with Chase / Burst profile."
+    },
+    {
+      "id": 90,
+      "slug": "lapu-lapu",
+      "name": "Lapu-Lapu",
+      "roles": [
+        "Fighter"
+      ],
+      "lanes": [
+        "EXP"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Chase",
+        "Burst"
+      ],
+      "win_rate": 47.86,
+      "ban_rate": 0.29,
+      "pick_rate": 0.36,
+      "recent_patch_summary": "C-tier (47.86% WR, 0.29% BR) in EXP with Chase / Burst profile."
+    },
+    {
+      "id": 91,
+      "slug": "layla",
+      "name": "Layla",
+      "roles": [
+        "Marksman"
+      ],
+      "lanes": [
+        "Gold"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Finisher",
+        "Damage"
+      ],
+      "win_rate": 49.54,
+      "ban_rate": 1.96,
+      "pick_rate": 2,
+      "recent_patch_summary": "B-tier (49.54% WR, 1.96% BR) in Gold with Finisher / Damage profile."
+    },
+    {
+      "id": 92,
+      "slug": "leomord",
+      "name": "Leomord",
+      "roles": [
+        "Fighter"
+      ],
+      "lanes": [
+        "Jungle"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Chase",
+        "Burst"
+      ],
+      "win_rate": 50.19,
+      "ban_rate": 0.64,
+      "pick_rate": 0.28,
+      "recent_patch_summary": "B-tier (50.19% WR, 0.64% BR) in Jungle with Chase / Burst profile."
+    },
+    {
+      "id": 93,
+      "slug": "lesley",
+      "name": "Lesley",
+      "roles": [
+        "Marksman",
+        "Assassin"
+      ],
+      "lanes": [
+        "Gold"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Finisher",
+        "Burst"
+      ],
+      "win_rate": 48.32,
+      "ban_rate": 8.41,
+      "pick_rate": 1.85,
+      "recent_patch_summary": "B-tier (48.32% WR, 8.41% BR) in Gold with Finisher / Burst profile."
+    },
+    {
+      "id": 94,
+      "slug": "lolita",
+      "name": "Lolita",
+      "roles": [
+        "Support",
+        "Tank"
+      ],
+      "lanes": [
+        "Roam"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Guard",
+        "Crowd Control"
+      ],
+      "win_rate": 53.21,
+      "ban_rate": 0.2,
+      "pick_rate": 0.07,
+      "recent_patch_summary": "S-tier (53.21% WR, 0.2% BR) in Roam with Guard / Crowd Control profile."
+    },
+    {
+      "id": 95,
+      "slug": "lukas",
+      "name": "Lukas",
+      "roles": [
+        "Fighter"
+      ],
+      "lanes": [
+        "EXP",
+        "Jungle"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Regen",
+        "Damage"
+      ],
+      "win_rate": 52.33,
+      "ban_rate": 33.26,
+      "pick_rate": 0.85,
+      "recent_patch_summary": "S+-tier (52.33% WR, 33.26% BR) in EXP/Jungle with Regen / Damage profile."
+    },
+    {
+      "id": 96,
+      "slug": "lylia",
+      "name": "Lylia",
+      "roles": [
+        "Mage"
+      ],
+      "lanes": [
+        "Mid"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Push",
+        "Damage"
+      ],
+      "win_rate": 49.65,
+      "ban_rate": 0.43,
+      "pick_rate": 0.55,
+      "recent_patch_summary": "B-tier (49.65% WR, 0.43% BR) in Mid with Push / Damage profile."
+    },
+    {
+      "id": 97,
+      "slug": "marcel",
+      "name": "Marcel",
+      "roles": [
+        "Support"
+      ],
+      "lanes": [
+        "Roam"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Crowd Control",
+        "Support"
+      ],
+      "win_rate": 57.3,
+      "ban_rate": 41.1,
+      "pick_rate": 0.29,
+      "recent_patch_summary": "S+-tier (57.3% WR, 41.1% BR) in Roam with Crowd Control / Support profile."
+    },
+    {
+      "id": 98,
+      "slug": "martis",
+      "name": "Martis",
+      "roles": [
+        "Fighter"
+      ],
+      "lanes": [
+        "Jungle",
+        "EXP"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Finisher",
+        "Charge"
+      ],
+      "win_rate": 47.16,
+      "ban_rate": 0.42,
+      "pick_rate": 0.6,
+      "recent_patch_summary": "C-tier (47.16% WR, 0.42% BR) in Jungle/EXP with Finisher / Charge profile."
+    },
+    {
+      "id": 99,
+      "slug": "masha",
+      "name": "Masha",
+      "roles": [
+        "Fighter",
+        "Tank"
+      ],
+      "lanes": [
+        "EXP"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Push",
+        "Damage"
+      ],
+      "win_rate": 61.48,
+      "ban_rate": 42.82,
+      "pick_rate": 0.55,
+      "recent_patch_summary": "S+-tier (61.48% WR, 42.82% BR) in EXP with Push / Damage profile."
+    },
+    {
+      "id": 100,
+      "slug": "melissa",
+      "name": "Melissa",
+      "roles": [
+        "Marksman"
+      ],
+      "lanes": [
+        "Gold"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Finisher",
+        "Damage"
+      ],
+      "win_rate": 48.77,
+      "ban_rate": 0.69,
+      "pick_rate": 0.31,
+      "recent_patch_summary": "B-tier (48.77% WR, 0.69% BR) in Gold with Finisher / Damage profile."
+    },
+    {
+      "id": 101,
+      "slug": "minsitthar",
+      "name": "Minsitthar",
+      "roles": [
+        "Fighter"
+      ],
+      "lanes": [
+        "EXP",
+        "Roam"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Initiator",
+        "Crowd Control"
+      ],
+      "win_rate": 51.85,
+      "ban_rate": 4.58,
+      "pick_rate": 0.63,
+      "recent_patch_summary": "A-tier (51.85% WR, 4.58% BR) in EXP/Roam with Initiator / Crowd Control profile."
+    },
+    {
+      "id": 102,
+      "slug": "miya",
+      "name": "Miya",
+      "roles": [
+        "Marksman"
+      ],
+      "lanes": [
+        "Gold"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Finisher",
+        "Damage"
+      ],
+      "win_rate": 49.71,
+      "ban_rate": 4.48,
+      "pick_rate": 2.17,
+      "recent_patch_summary": "A-tier (49.71% WR, 4.48% BR) in Gold with Finisher / Damage profile."
+    },
+    {
+      "id": 103,
+      "slug": "nana",
+      "name": "Nana",
+      "roles": [
+        "Mage"
+      ],
+      "lanes": [
+        "Mid"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Poke",
+        "Burst"
+      ],
+      "win_rate": 47.48,
+      "ban_rate": 3.72,
+      "pick_rate": 1.73,
+      "recent_patch_summary": "B-tier (47.48% WR, 3.72% BR) in Mid with Poke / Burst profile."
+    },
+    {
+      "id": 104,
+      "slug": "natalia",
+      "name": "Natalia",
+      "roles": [
+        "Assassin"
+      ],
+      "lanes": [
+        "Jungle",
+        "Roam"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Chase",
+        "Finisher"
+      ],
+      "win_rate": 50.7,
+      "ban_rate": 1.9,
+      "pick_rate": 0.28,
+      "recent_patch_summary": "A-tier (50.7% WR, 1.9% BR) in Jungle/Roam with Chase / Finisher profile."
+    },
+    {
+      "id": 105,
+      "slug": "natan",
+      "name": "Natan",
+      "roles": [
+        "Marksman"
+      ],
+      "lanes": [
+        "Gold"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Burst",
+        "Magic Damage"
+      ],
+      "win_rate": 51.37,
+      "ban_rate": 0.16,
+      "pick_rate": 0.31,
+      "recent_patch_summary": "A-tier (51.37% WR, 0.16% BR) in Gold with Burst / Magic Damage profile."
+    },
+    {
+      "id": 106,
+      "slug": "nolan",
+      "name": "Nolan",
+      "roles": [
+        "Assassin"
+      ],
+      "lanes": [
+        "Jungle"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Chase",
+        "Burst"
+      ],
+      "win_rate": 49.82,
+      "ban_rate": 13.47,
+      "pick_rate": 1.76,
+      "recent_patch_summary": "S-tier (49.82% WR, 13.47% BR) in Jungle with Chase / Burst profile."
+    },
+    {
+      "id": 107,
+      "slug": "novaria",
+      "name": "Novaria",
+      "roles": [
+        "Mage"
+      ],
+      "lanes": [
+        "Mid"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Burst",
+        "Poke"
+      ],
+      "win_rate": 49.72,
+      "ban_rate": 3.91,
+      "pick_rate": 1.24,
+      "recent_patch_summary": "A-tier (49.72% WR, 3.91% BR) in Mid with Burst / Poke profile."
+    },
+    {
+      "id": 108,
+      "slug": "obsidia",
+      "name": "Obsidia",
+      "roles": [
+        "Marksman"
+      ],
+      "lanes": [
+        "Gold"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Finisher",
+        "Damage"
+      ],
+      "win_rate": 53.24,
+      "ban_rate": 50.45,
+      "pick_rate": 2.14,
+      "recent_patch_summary": "S+-tier (53.24% WR, 50.45% BR) in Gold with Finisher / Damage profile."
+    },
+    {
+      "id": 109,
+      "slug": "odette",
+      "name": "Odette",
+      "roles": [
+        "Mage"
+      ],
+      "lanes": [
+        "Mid"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Burst",
+        "Poke"
+      ],
+      "win_rate": 49.54,
+      "ban_rate": 0.28,
+      "pick_rate": 0.57,
+      "recent_patch_summary": "B-tier (49.54% WR, 0.28% BR) in Mid with Burst / Poke profile."
+    },
+    {
+      "id": 110,
+      "slug": "paquito",
+      "name": "Paquito",
+      "roles": [
+        "Fighter",
+        "Assassin"
+      ],
+      "lanes": [
+        "EXP"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Chase",
+        "Damage"
+      ],
+      "win_rate": 49.88,
+      "ban_rate": 17.39,
+      "pick_rate": 1.26,
+      "recent_patch_summary": "S-tier (49.88% WR, 17.39% BR) in EXP with Chase / Damage profile."
+    },
+    {
+      "id": 111,
+      "slug": "pharsa",
+      "name": "Pharsa",
+      "roles": [
+        "Mage"
+      ],
+      "lanes": [
+        "Mid"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Burst",
+        "Poke"
+      ],
+      "win_rate": 47.29,
+      "ban_rate": 0.19,
+      "pick_rate": 0.33,
+      "recent_patch_summary": "C-tier (47.29% WR, 0.19% BR) in Mid with Burst / Poke profile."
+    },
+    {
+      "id": 112,
+      "slug": "phoveus",
+      "name": "Phoveus",
+      "roles": [
+        "Fighter"
+      ],
+      "lanes": [
+        "EXP"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Regen",
+        "Damage"
+      ],
+      "win_rate": 48.07,
+      "ban_rate": 0.8,
+      "pick_rate": 0.28,
+      "recent_patch_summary": "B-tier (48.07% WR, 0.8% BR) in EXP with Regen / Damage profile."
+    },
+    {
+      "id": 113,
+      "slug": "popol-and-kupa",
+      "name": "Popol and Kupa",
+      "roles": [
+        "Marksman"
+      ],
+      "lanes": [
+        "Jungle",
+        "Gold"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Push",
+        "Burst"
+      ],
+      "win_rate": 54.21,
+      "ban_rate": 0.36,
+      "pick_rate": 0.43,
+      "recent_patch_summary": "S-tier (54.21% WR, 0.36% BR) in Jungle/Gold with Push / Burst profile."
+    },
+    {
+      "id": 114,
+      "slug": "rafaela",
+      "name": "Rafaela",
+      "roles": [
+        "Support"
+      ],
+      "lanes": [
+        "Roam"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Regen",
+        "Guard"
+      ],
+      "win_rate": 54.58,
+      "ban_rate": 12.13,
+      "pick_rate": 0.84,
+      "recent_patch_summary": "S+-tier (54.58% WR, 12.13% BR) in Roam with Regen / Guard profile."
+    },
+    {
+      "id": 115,
+      "slug": "roger",
+      "name": "Roger",
+      "roles": [
+        "Fighter",
+        "Marksman"
+      ],
+      "lanes": [
+        "Jungle"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Finisher",
+        "Burst"
+      ],
+      "win_rate": 48.37,
+      "ban_rate": 0.1,
+      "pick_rate": 0.27,
+      "recent_patch_summary": "B-tier (48.37% WR, 0.1% BR) in Jungle with Finisher / Burst profile."
+    },
+    {
+      "id": 116,
+      "slug": "ruby",
+      "name": "Ruby",
+      "roles": [
+        "Fighter"
+      ],
+      "lanes": [
+        "EXP"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Crowd Control",
+        "Regen"
+      ],
+      "win_rate": 49.13,
+      "ban_rate": 0.32,
+      "pick_rate": 0.33,
+      "recent_patch_summary": "B-tier (49.13% WR, 0.32% BR) in EXP with Crowd Control / Regen profile."
+    },
+    {
+      "id": 117,
+      "slug": "saber",
+      "name": "Saber",
+      "roles": [
+        "Assassin"
+      ],
+      "lanes": [
+        "Jungle",
+        "Roam"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Charge",
+        "Finisher"
+      ],
+      "win_rate": 51.07,
+      "ban_rate": 24.97,
+      "pick_rate": 1,
+      "recent_patch_summary": "S+-tier (51.07% WR, 24.97% BR) in Jungle/Roam with Charge / Finisher profile."
+    },
+    {
+      "id": 118,
+      "slug": "selena",
+      "name": "Selena",
+      "roles": [
+        "Assassin",
+        "Mage"
+      ],
+      "lanes": [
+        "Mid",
+        "Roam"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Initiator",
+        "Finisher"
+      ],
+      "win_rate": 48.21,
+      "ban_rate": 6.89,
+      "pick_rate": 1.61,
+      "recent_patch_summary": "B-tier (48.21% WR, 6.89% BR) in Mid/Roam with Initiator / Finisher profile."
+    },
+    {
+      "id": 119,
+      "slug": "silvanna",
+      "name": "Silvanna",
+      "roles": [
+        "Fighter"
+      ],
+      "lanes": [
+        "EXP"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Initiator",
+        "Magic Damage"
+      ],
+      "win_rate": 51.31,
+      "ban_rate": 2.04,
+      "pick_rate": 0.96,
+      "recent_patch_summary": "A-tier (51.31% WR, 2.04% BR) in EXP with Initiator / Magic Damage profile."
+    },
+    {
+      "id": 120,
+      "slug": "sora",
+      "name": "Sora",
+      "roles": [
+        "Fighter",
+        "Assassin"
+      ],
+      "lanes": [
+        "EXP"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Charge",
+        "Burst"
+      ],
+      "win_rate": 49.87,
+      "ban_rate": 4.28,
+      "pick_rate": 0.67,
+      "recent_patch_summary": "A-tier (49.87% WR, 4.28% BR) in EXP with Charge / Burst profile."
+    },
+    {
+      "id": 121,
+      "slug": "sun",
+      "name": "Sun",
+      "roles": [
+        "Fighter"
+      ],
+      "lanes": [
+        "EXP",
+        "Jungle"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Push",
+        "Damage"
+      ],
+      "win_rate": 53.74,
+      "ban_rate": 36.42,
+      "pick_rate": 1.8,
+      "recent_patch_summary": "S+-tier (53.74% WR, 36.42% BR) in EXP/Jungle with Push / Damage profile."
+    },
+    {
+      "id": 122,
+      "slug": "thamuz",
+      "name": "Thamuz",
+      "roles": [
+        "Fighter"
+      ],
+      "lanes": [
+        "EXP"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Chase",
+        "Damage"
+      ],
+      "win_rate": 49.2,
+      "ban_rate": 1.65,
+      "pick_rate": 0.83,
+      "recent_patch_summary": "B-tier (49.2% WR, 1.65% BR) in EXP with Chase / Damage profile."
+    },
+    {
+      "id": 123,
+      "slug": "uranus",
+      "name": "Uranus",
+      "roles": [
+        "Tank"
+      ],
+      "lanes": [
+        "EXP"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Regen"
+      ],
+      "win_rate": 49.41,
+      "ban_rate": 0.35,
+      "pick_rate": 0.3,
+      "recent_patch_summary": "B-tier (49.41% WR, 0.35% BR) in EXP with Regen profile."
+    },
+    {
+      "id": 124,
+      "slug": "vale",
+      "name": "Vale",
+      "roles": [
+        "Mage"
+      ],
+      "lanes": [
+        "Mid"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Burst",
+        "Crowd Control"
+      ],
+      "win_rate": 49.91,
+      "ban_rate": 0.2,
+      "pick_rate": 0.51,
+      "recent_patch_summary": "B-tier (49.91% WR, 0.2% BR) in Mid with Burst / Crowd Control profile."
+    },
+    {
+      "id": 125,
+      "slug": "valir",
+      "name": "Valir",
+      "roles": [
+        "Mage"
+      ],
+      "lanes": [
+        "Mid"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Damage",
+        "Guard"
+      ],
+      "win_rate": 54.44,
+      "ban_rate": 3.98,
+      "pick_rate": 1.26,
+      "recent_patch_summary": "S-tier (54.44% WR, 3.98% BR) in Mid with Damage / Guard profile."
+    },
+    {
+      "id": 126,
+      "slug": "wanwan",
+      "name": "Wanwan",
+      "roles": [
+        "Marksman"
+      ],
+      "lanes": [
+        "Gold"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Finisher",
+        "Burst"
+      ],
+      "win_rate": 47.99,
+      "ban_rate": 0.14,
+      "pick_rate": 0.14,
+      "recent_patch_summary": "B-tier (47.99% WR, 0.14% BR) in Gold with Finisher / Burst profile."
+    },
+    {
+      "id": 127,
+      "slug": "x-borg",
+      "name": "X.Borg",
+      "roles": [
+        "Fighter"
+      ],
+      "lanes": [
+        "EXP"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Regen",
+        "Burst"
+      ],
+      "win_rate": 49.65,
+      "ban_rate": 1.94,
+      "pick_rate": 0.59,
+      "recent_patch_summary": "B-tier (49.65% WR, 1.94% BR) in EXP with Regen / Burst profile."
+    },
+    {
+      "id": 128,
+      "slug": "xavier",
+      "name": "Xavier",
+      "roles": [
+        "Mage"
+      ],
+      "lanes": [
+        "Mid"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Damage",
+        "Guard"
+      ],
+      "win_rate": 49.72,
+      "ban_rate": 0.11,
+      "pick_rate": 0.48,
+      "recent_patch_summary": "B-tier (49.72% WR, 0.11% BR) in Mid with Damage / Guard profile."
+    },
+    {
+      "id": 129,
+      "slug": "yi-sun-shin",
+      "name": "Yi Sun-shin",
+      "roles": [
+        "Assassin",
+        "Marksman"
+      ],
+      "lanes": [
+        "Jungle"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Finisher",
+        "Chase"
+      ],
+      "win_rate": 48.95,
+      "ban_rate": 2.52,
+      "pick_rate": 0.95,
+      "recent_patch_summary": "B-tier (48.95% WR, 2.52% BR) in Jungle with Finisher / Chase profile."
+    },
+    {
+      "id": 130,
+      "slug": "yin",
+      "name": "Yin",
+      "roles": [
+        "Fighter",
+        "Assassin"
+      ],
+      "lanes": [
+        "Jungle",
+        "EXP"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Burst",
+        "Control"
+      ],
+      "win_rate": 49.55,
+      "ban_rate": 1.71,
+      "pick_rate": 0.53,
+      "recent_patch_summary": "B-tier (49.55% WR, 1.71% BR) in Jungle/EXP with Burst / Control profile."
+    },
+    {
+      "id": 131,
+      "slug": "yve",
+      "name": "Yve",
+      "roles": [
+        "Mage"
+      ],
+      "lanes": [
+        "Mid"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Burst",
+        "Poke"
+      ],
+      "win_rate": 52.62,
+      "ban_rate": 0.05,
+      "pick_rate": 0.07,
+      "recent_patch_summary": "A-tier (52.62% WR, 0.05% BR) in Mid with Burst / Poke profile."
+    },
+    {
+      "id": 132,
+      "slug": "zetian",
+      "name": "Zetian",
+      "roles": [
+        "Mage"
+      ],
+      "lanes": [
+        "Mid"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Damage",
+        "Crowd Control"
+      ],
+      "win_rate": 51.16,
+      "ban_rate": 4.73,
+      "pick_rate": 1.67,
+      "recent_patch_summary": "A-tier (51.16% WR, 4.73% BR) in Mid with Damage / Crowd Control profile."
+    },
+    {
+      "id": 133,
+      "slug": "zhask",
+      "name": "Zhask",
+      "roles": [
+        "Mage"
+      ],
+      "lanes": [
+        "Mid"
+      ],
+      "damage_type": "magic",
+      "specialty": [
+        "Chase",
+        "Damage"
+      ],
+      "win_rate": 52.65,
+      "ban_rate": 0.42,
+      "pick_rate": 0.34,
+      "recent_patch_summary": "A-tier (52.65% WR, 0.42% BR) in Mid with Chase / Damage profile."
+    },
+    {
+      "id": 134,
+      "slug": "zilong",
+      "name": "Zilong",
+      "roles": [
+        "Fighter",
+        "Assassin"
+      ],
+      "lanes": [
+        "EXP"
+      ],
+      "damage_type": "physical",
+      "specialty": [
+        "Chase",
+        "Damage"
+      ],
+      "win_rate": 46.14,
+      "ban_rate": 0.5,
+      "pick_rate": 0.68,
+      "recent_patch_summary": "C-tier (46.14% WR, 0.5% BR) in EXP with Chase / Damage profile."
     }
   ],
   "hero_relationships": [
@@ -456,7 +2849,7 @@
       "source_hero_id": 6,
       "target_hero_id": 20,
       "relation_type": "counter",
-      "win_rate_delta": 3.0,
+      "win_rate_delta": 3,
       "rank_tier": "mythic_plus",
       "explanation": "Ling bypasses frontline walls to burst immobile Beatrix in backline."
     },
@@ -572,9 +2965,16 @@
       "name": "Tough Boots",
       "category": "Movement",
       "gold_cost": 700,
-      "stats_json": { "movement_speed": 40, "magic_defense": 18 },
+      "stats_json": {
+        "movement_speed": 40,
+        "magic_defense": 18
+      },
       "unique_passive": "Fortitude: Reduces the duration of crowd control and slow effects by 30%.",
-      "semantic_tags_json": ["cc-reduction", "magic-defense", "boots"]
+      "semantic_tags_json": [
+        "cc-reduction",
+        "magic-defense",
+        "boots"
+      ]
     },
     {
       "id": 102,
@@ -582,9 +2982,16 @@
       "name": "Warrior Boots",
       "category": "Movement",
       "gold_cost": 720,
-      "stats_json": { "movement_speed": 40, "physical_defense": 18 },
+      "stats_json": {
+        "movement_speed": 40,
+        "physical_defense": 18
+      },
       "unique_passive": "Valor: Gains 4 Physical Defense for 3s when taking Basic Attack damage (up to 20).",
-      "semantic_tags_json": ["physical-defense", "anti-basic-attack", "boots"]
+      "semantic_tags_json": [
+        "physical-defense",
+        "anti-basic-attack",
+        "boots"
+      ]
     },
     {
       "id": 103,
@@ -592,9 +2999,15 @@
       "name": "Magic Shoes",
       "category": "Movement",
       "gold_cost": 710,
-      "stats_json": { "movement_speed": 40, "cooldown_reduction": 10 },
+      "stats_json": {
+        "movement_speed": 40,
+        "cooldown_reduction": 10
+      },
       "unique_passive": "None (10% Cooldown Reduction).",
-      "semantic_tags_json": ["cdr", "boots"]
+      "semantic_tags_json": [
+        "cdr",
+        "boots"
+      ]
     },
     {
       "id": 104,
@@ -602,9 +3015,15 @@
       "name": "Arcane Boots",
       "category": "Movement",
       "gold_cost": 690,
-      "stats_json": { "movement_speed": 40, "magic_penetration": 10 },
+      "stats_json": {
+        "movement_speed": 40,
+        "magic_penetration": 10
+      },
       "unique_passive": "None (+10 Magic Penetration).",
-      "semantic_tags_json": ["magic-pen", "boots"]
+      "semantic_tags_json": [
+        "magic-pen",
+        "boots"
+      ]
     },
     {
       "id": 105,
@@ -612,9 +3031,15 @@
       "name": "Swift Boots",
       "category": "Movement",
       "gold_cost": 710,
-      "stats_json": { "movement_speed": 40, "attack_speed": 15 },
+      "stats_json": {
+        "movement_speed": 40,
+        "attack_speed": 15
+      },
       "unique_passive": "None (+15% Attack Speed).",
-      "semantic_tags_json": ["attack-speed", "boots"]
+      "semantic_tags_json": [
+        "attack-speed",
+        "boots"
+      ]
     },
     {
       "id": 106,
@@ -622,9 +3047,16 @@
       "name": "Rapid Boots",
       "category": "Movement",
       "gold_cost": 750,
-      "stats_json": { "movement_speed": 65, "slow_reduction": 35 },
+      "stats_json": {
+        "movement_speed": 65,
+        "slow_reduction": 35
+      },
       "unique_passive": "Side Effect: Loses 25 Movement Speed for 5s upon dealing or taking damage.",
-      "semantic_tags_json": ["roam-tempo", "slow-reduction", "boots"]
+      "semantic_tags_json": [
+        "roam-tempo",
+        "slow-reduction",
+        "boots"
+      ]
     },
     {
       "id": 201,
@@ -632,9 +3064,16 @@
       "name": "Blade of Despair",
       "category": "Attack",
       "gold_cost": 3010,
-      "stats_json": { "physical_attack": 160, "movement_speed_pct": 5 },
+      "stats_json": {
+        "physical_attack": 160,
+        "movement_speed_pct": 5
+      },
       "unique_passive": "Despair: Attacking enemies below 50% HP grants +25% Physical Attack for 2s.",
-      "semantic_tags_json": ["burst", "physical-damage", "finisher"]
+      "semantic_tags_json": [
+        "burst",
+        "physical-damage",
+        "finisher"
+      ]
     },
     {
       "id": 202,
@@ -642,9 +3081,15 @@
       "name": "Malefic Roar",
       "category": "Attack",
       "gold_cost": 2060,
-      "stats_json": { "physical_attack": 60, "physical_penetration_pct": 20 },
+      "stats_json": {
+        "physical_attack": 60,
+        "physical_penetration_pct": 20
+      },
       "unique_passive": "Armor Buster: Gains 0.125% extra Physical Penetration per point of enemy Physical Defense (capped at 40%).",
-      "semantic_tags_json": ["armor-pen", "anti-tank"]
+      "semantic_tags_json": [
+        "armor-pen",
+        "anti-tank"
+      ]
     },
     {
       "id": 203,
@@ -652,9 +3097,16 @@
       "name": "Sea Halberd",
       "category": "Attack",
       "gold_cost": 2050,
-      "stats_json": { "physical_attack": 80, "attack_speed": 20 },
+      "stats_json": {
+        "physical_attack": 80,
+        "attack_speed": 20
+      },
       "unique_passive": "Lifebane & Punish: Reduces target's Shield and HP Regen by 50% for 3s; deals 8% extra damage to higher-HP enemies.",
-      "semantic_tags_json": ["anti-heal", "anti-shield", "anti-tank"]
+      "semantic_tags_json": [
+        "anti-heal",
+        "anti-shield",
+        "anti-tank"
+      ]
     },
     {
       "id": 204,
@@ -662,9 +3114,17 @@
       "name": "Hunter Strike",
       "category": "Attack",
       "gold_cost": 2010,
-      "stats_json": { "physical_attack": 80, "cooldown_reduction": 10, "physical_penetration": 15 },
+      "stats_json": {
+        "physical_attack": 80,
+        "cooldown_reduction": 10,
+        "physical_penetration": 15
+      },
       "unique_passive": "Retribution: Dealing damage 5 times to an enemy hero grants +50% decaying Movement Speed for 3s.",
-      "semantic_tags_json": ["mobility", "armor-pen", "cdr"]
+      "semantic_tags_json": [
+        "mobility",
+        "armor-pen",
+        "cdr"
+      ]
     },
     {
       "id": 205,
@@ -672,9 +3132,18 @@
       "name": "Endless Battle",
       "category": "Attack",
       "gold_cost": 2470,
-      "stats_json": { "physical_attack": 60, "hp": 250, "cooldown_reduction": 10, "hybrid_lifesteal": 8 },
+      "stats_json": {
+        "physical_attack": 60,
+        "hp": 250,
+        "cooldown_reduction": 10,
+        "hybrid_lifesteal": 8
+      },
       "unique_passive": "Divine Justice: Next Basic Attack within 3s after using a skill deals 60% Physical Attack as True Damage.",
-      "semantic_tags_json": ["true-damage", "sustain", "cdr"]
+      "semantic_tags_json": [
+        "true-damage",
+        "sustain",
+        "cdr"
+      ]
     },
     {
       "id": 206,
@@ -682,9 +3151,16 @@
       "name": "Demon Hunter Sword",
       "category": "Attack",
       "gold_cost": 2180,
-      "stats_json": { "physical_attack": 35, "attack_speed": 20 },
+      "stats_json": {
+        "physical_attack": 35,
+        "attack_speed": 20
+      },
       "unique_passive": "Devour: Basic Attacks deal 8% of target's current HP as extra Physical Damage.",
-      "semantic_tags_json": ["hp-shred", "anti-tank", "attack-speed"]
+      "semantic_tags_json": [
+        "hp-shred",
+        "anti-tank",
+        "attack-speed"
+      ]
     },
     {
       "id": 207,
@@ -692,9 +3168,15 @@
       "name": "Golden Staff",
       "category": "Attack",
       "gold_cost": 2000,
-      "stats_json": { "physical_attack": 55, "attack_speed": 15 },
+      "stats_json": {
+        "physical_attack": 55,
+        "attack_speed": 15
+      },
       "unique_passive": "Swift & Endless Strike: Converts Crit Chance to Attack Speed and triggers Basic Attack effects twice every 3rd hit.",
-      "semantic_tags_json": ["attack-speed", "on-hit"]
+      "semantic_tags_json": [
+        "attack-speed",
+        "on-hit"
+      ]
     },
     {
       "id": 208,
@@ -702,9 +3184,17 @@
       "name": "Corrosion Scythe",
       "category": "Attack",
       "gold_cost": 2050,
-      "stats_json": { "physical_attack": 30, "attack_speed": 30, "movement_speed_pct": 5 },
+      "stats_json": {
+        "physical_attack": 30,
+        "attack_speed": 30,
+        "movement_speed_pct": 5
+      },
       "unique_passive": "Corrosive: Basic Attacks deal extra damage and slow enemies by 8% (stacking up to 5 times).",
-      "semantic_tags_json": ["slow", "attack-speed", "kiting"]
+      "semantic_tags_json": [
+        "slow",
+        "attack-speed",
+        "kiting"
+      ]
     },
     {
       "id": 209,
@@ -712,9 +3202,17 @@
       "name": "Wind of Nature",
       "category": "Attack",
       "gold_cost": 1910,
-      "stats_json": { "physical_attack": 30, "attack_speed": 20, "lifesteal": 10 },
+      "stats_json": {
+        "physical_attack": 30,
+        "attack_speed": 20,
+        "lifesteal": 10
+      },
       "unique_passive": "Wind Chant (Active): Grants 2s immunity to all Physical Damage (1s for non-Marksmen).",
-      "semantic_tags_json": ["anti-physical-burst", "survivability", "active"]
+      "semantic_tags_json": [
+        "anti-physical-burst",
+        "survivability",
+        "active"
+      ]
     },
     {
       "id": 210,
@@ -722,9 +3220,18 @@
       "name": "War Axe",
       "category": "Attack",
       "gold_cost": 2100,
-      "stats_json": { "physical_attack": 35, "hp": 400, "cooldown_reduction": 10, "spell_vamp": 12 },
+      "stats_json": {
+        "physical_attack": 35,
+        "hp": 400,
+        "cooldown_reduction": 10,
+        "spell_vamp": 12
+      },
       "unique_passive": "Fighting Spirit: Stacks Physical Attack up to 6 times and grants 10% True Damage at max stacks.",
-      "semantic_tags_json": ["sustain", "true-damage", "fighter-core"]
+      "semantic_tags_json": [
+        "sustain",
+        "true-damage",
+        "fighter-core"
+      ]
     },
     {
       "id": 301,
@@ -732,9 +3239,18 @@
       "name": "Glowing Wand",
       "category": "Magic",
       "gold_cost": 2150,
-      "stats_json": { "magic_power": 75, "hp": 400, "movement_speed_pct": 5 },
+      "stats_json": {
+        "magic_power": 75,
+        "hp": 400,
+        "movement_speed_pct": 5
+      },
       "unique_passive": "Scorch & Lifebane: Burns targets for %Max HP Magic Damage and reduces Shield and HP Regen by 50% for 3s.",
-      "semantic_tags_json": ["anti-heal", "anti-shield", "burn", "anti-tank"]
+      "semantic_tags_json": [
+        "anti-heal",
+        "anti-shield",
+        "burn",
+        "anti-tank"
+      ]
     },
     {
       "id": 302,
@@ -742,9 +3258,14 @@
       "name": "Holy Crystal",
       "category": "Magic",
       "gold_cost": 3000,
-      "stats_json": { "magic_power": 185 },
+      "stats_json": {
+        "magic_power": 185
+      },
       "unique_passive": "Mystery: Increases Magic Power by 21%-35% scaling with level.",
-      "semantic_tags_json": ["burst", "magic-scaling"]
+      "semantic_tags_json": [
+        "burst",
+        "magic-scaling"
+      ]
     },
     {
       "id": 303,
@@ -752,9 +3273,15 @@
       "name": "Divine Glaive",
       "category": "Magic",
       "gold_cost": 1970,
-      "stats_json": { "magic_power": 60, "magic_penetration_pct": 40 },
+      "stats_json": {
+        "magic_power": 60,
+        "magic_penetration_pct": 40
+      },
       "unique_passive": "Spellbreaker: Gains extra Magic Penetration per point of enemy Magic Defense (capped at +20%).",
-      "semantic_tags_json": ["magic-pen", "anti-tank"]
+      "semantic_tags_json": [
+        "magic-pen",
+        "anti-tank"
+      ]
     },
     {
       "id": 304,
@@ -762,9 +3289,18 @@
       "name": "Winter Crown",
       "category": "Magic",
       "gold_cost": 1910,
-      "stats_json": { "adaptive_attack": 45, "hp": 400, "cooldown_reduction": 5 },
+      "stats_json": {
+        "adaptive_attack": 45,
+        "hp": 400,
+        "cooldown_reduction": 5
+      },
       "unique_passive": "Frozen (Active): Becomes untargetable and invulnerable for 2s while unable to move or cast (ongoing skills continue).",
-      "semantic_tags_json": ["stasis", "anti-burst", "anti-assassin", "active"]
+      "semantic_tags_json": [
+        "stasis",
+        "anti-burst",
+        "anti-assassin",
+        "active"
+      ]
     },
     {
       "id": 305,
@@ -772,9 +3308,16 @@
       "name": "Genius Wand",
       "category": "Magic",
       "gold_cost": 2000,
-      "stats_json": { "magic_power": 75, "movement_speed_pct": 5, "magic_penetration": 10 },
+      "stats_json": {
+        "magic_power": 75,
+        "movement_speed_pct": 5,
+        "magic_penetration": 10
+      },
       "unique_passive": "Magic: Dealing damage reduces enemy Magic Defense by 3-7 (stacks 3 times).",
-      "semantic_tags_json": ["magic-pen", "shred"]
+      "semantic_tags_json": [
+        "magic-pen",
+        "shred"
+      ]
     },
     {
       "id": 306,
@@ -782,9 +3325,18 @@
       "name": "Flask of the Oasis",
       "category": "Magic",
       "gold_cost": 1850,
-      "stats_json": { "magic_power": 60, "hp": 300, "cooldown_reduction": 10, "healing_effect": 12 },
+      "stats_json": {
+        "magic_power": 60,
+        "hp": 300,
+        "cooldown_reduction": 10,
+        "healing_effect": 12
+      },
       "unique_passive": "Blessing: Healing or shielding an ally below 35% HP grants them a massive extra shield and reduces skill cooldowns.",
-      "semantic_tags_json": ["support-core", "shield", "healing"]
+      "semantic_tags_json": [
+        "support-core",
+        "shield",
+        "healing"
+      ]
     },
     {
       "id": 401,
@@ -792,9 +3344,18 @@
       "name": "Dominance Ice",
       "category": "Defense",
       "gold_cost": 2010,
-      "stats_json": { "mana": 500, "physical_defense": 55, "movement_speed_pct": 5 },
+      "stats_json": {
+        "mana": 500,
+        "physical_defense": 55,
+        "movement_speed_pct": 5
+      },
       "unique_passive": "Arctic Cold & Lifebane: Reduces nearby enemies' Attack Speed by 20% and Shield/HP Regen by 50%.",
-      "semantic_tags_json": ["anti-heal", "anti-shield", "anti-attack-speed", "physical-defense"]
+      "semantic_tags_json": [
+        "anti-heal",
+        "anti-shield",
+        "anti-attack-speed",
+        "physical-defense"
+      ]
     },
     {
       "id": 402,
@@ -802,9 +3363,16 @@
       "name": "Athena's Shield",
       "category": "Defense",
       "gold_cost": 2150,
-      "stats_json": { "hp": 900, "magic_defense": 48, "hp_regen": 2 },
+      "stats_json": {
+        "hp": 900,
+        "magic_defense": 48,
+        "hp_regen": 2
+      },
       "unique_passive": "Shield: Reduces Magic Damage taken by 25% for 3s upon taking Magic Damage.",
-      "semantic_tags_json": ["anti-magic-burst", "magic-defense"]
+      "semantic_tags_json": [
+        "anti-magic-burst",
+        "magic-defense"
+      ]
     },
     {
       "id": 403,
@@ -812,9 +3380,16 @@
       "name": "Radiant Armor",
       "category": "Defense",
       "gold_cost": 1880,
-      "stats_json": { "hp": 950, "magic_defense": 40, "hp_regen": 12 },
+      "stats_json": {
+        "hp": 950,
+        "magic_defense": 40,
+        "hp_regen": 12
+      },
       "unique_passive": "Holy Blessing: Taking Magic Damage grants stacking Magic Defense (up to 6 stacks).",
-      "semantic_tags_json": ["anti-magic-dps", "magic-defense"]
+      "semantic_tags_json": [
+        "anti-magic-dps",
+        "magic-defense"
+      ]
     },
     {
       "id": 404,
@@ -822,9 +3397,17 @@
       "name": "Antique Cuirass",
       "category": "Defense",
       "gold_cost": 2170,
-      "stats_json": { "hp": 920, "physical_defense": 40, "hp_regen": 4 },
+      "stats_json": {
+        "hp": 920,
+        "physical_defense": 40,
+        "hp_regen": 4
+      },
       "unique_passive": "Deter: When hit by a skill, reduces the attacker's Physical Attack by 6% for 2s (up to 3 stacks).",
-      "semantic_tags_json": ["anti-physical-skill", "anti-assassin", "physical-defense"]
+      "semantic_tags_json": [
+        "anti-physical-skill",
+        "anti-assassin",
+        "physical-defense"
+      ]
     },
     {
       "id": 405,
@@ -832,9 +3415,16 @@
       "name": "Immortality",
       "category": "Defense",
       "gold_cost": 2120,
-      "stats_json": { "hp": 800, "physical_defense": 15 },
+      "stats_json": {
+        "hp": 800,
+        "physical_defense": 15
+      },
       "unique_passive": "Immortal: Resurrects 2.5s after death with 16% Max HP and a temporary shield (210s CD).",
-      "semantic_tags_json": ["revive", "late-game", "survivability"]
+      "semantic_tags_json": [
+        "revive",
+        "late-game",
+        "survivability"
+      ]
     },
     {
       "id": 406,
@@ -842,9 +3432,18 @@
       "name": "Oracle",
       "category": "Defense",
       "gold_cost": 1850,
-      "stats_json": { "hp": 850, "physical_defense": 25, "magic_defense": 25, "cooldown_reduction": 10 },
+      "stats_json": {
+        "hp": 850,
+        "physical_defense": 25,
+        "magic_defense": 25,
+        "cooldown_reduction": 10
+      },
       "unique_passive": "Bless: Increases shield absorption and HP regeneration effects received by 30%.",
-      "semantic_tags_json": ["regen-amp", "shield-amp", "hybrid-defense"]
+      "semantic_tags_json": [
+        "regen-amp",
+        "shield-amp",
+        "hybrid-defense"
+      ]
     },
     {
       "id": 501,
@@ -852,9 +3451,15 @@
       "name": "Ice Retribution",
       "category": "Jungling",
       "gold_cost": 0,
-      "stats_json": { "movement_speed_steal": 42 },
+      "stats_json": {
+        "movement_speed_steal": 42
+      },
       "unique_passive": "Hunter Blessing: Retribution can be cast on enemy heroes to steal Movement Speed for 4s.",
-      "semantic_tags_json": ["jungle-blessing", "slow", "chase"]
+      "semantic_tags_json": [
+        "jungle-blessing",
+        "slow",
+        "chase"
+      ]
     },
     {
       "id": 502,
@@ -862,9 +3467,15 @@
       "name": "Flame Retribution",
       "category": "Jungling",
       "gold_cost": 0,
-      "stats_json": { "adaptive_attack_steal": 35 },
+      "stats_json": {
+        "adaptive_attack_steal": 35
+      },
       "unique_passive": "Hunter Blessing: Retribution can be cast on enemy heroes to steal Adaptive Attack for 4s.",
-      "semantic_tags_json": ["jungle-blessing", "duel", "burst"]
+      "semantic_tags_json": [
+        "jungle-blessing",
+        "duel",
+        "burst"
+      ]
     },
     {
       "id": 503,
@@ -872,9 +3483,15 @@
       "name": "Bloody Retribution",
       "category": "Jungling",
       "gold_cost": 0,
-      "stats_json": { "hp_drain": 12 },
+      "stats_json": {
+        "hp_drain": 12
+      },
       "unique_passive": "Hunter Blessing: Retribution drains HP from enemy heroes based on Max HP.",
-      "semantic_tags_json": ["jungle-blessing", "sustain", "tank-jungle"]
+      "semantic_tags_json": [
+        "jungle-blessing",
+        "sustain",
+        "tank-jungle"
+      ]
     },
     {
       "id": 601,
@@ -882,9 +3499,16 @@
       "name": "Conceal",
       "category": "Roaming",
       "gold_cost": 0,
-      "stats_json": { "movement_speed_boost": 30 },
+      "stats_json": {
+        "movement_speed_boost": 30
+      },
       "unique_passive": "Roam Blessing (Active): Grants nearby allies Concealment and Movement Speed for 5s to initiate flanks.",
-      "semantic_tags_json": ["roam-blessing", "engage", "stealth", "active"]
+      "semantic_tags_json": [
+        "roam-blessing",
+        "engage",
+        "stealth",
+        "active"
+      ]
     },
     {
       "id": 602,
@@ -892,9 +3516,15 @@
       "name": "Favor",
       "category": "Roaming",
       "gold_cost": 0,
-      "stats_json": { "extra_heal": 360 },
+      "stats_json": {
+        "extra_heal": 360
+      },
       "unique_passive": "Roam Blessing: Healing or shielding skills also restore extra HP to the lowest-HP nearby ally.",
-      "semantic_tags_json": ["roam-blessing", "healing", "support"]
+      "semantic_tags_json": [
+        "roam-blessing",
+        "healing",
+        "support"
+      ]
     },
     {
       "id": 603,
@@ -902,9 +3532,15 @@
       "name": "Encourage",
       "category": "Roaming",
       "gold_cost": 0,
-      "stats_json": { "adaptive_attack_aura": 18, "attack_speed_aura": 15 },
+      "stats_json": {
+        "adaptive_attack_aura": 18,
+        "attack_speed_aura": 15
+      },
       "unique_passive": "Roam Blessing: Passively boosts nearby allies' Adaptive Attack and Attack Speed.",
-      "semantic_tags_json": ["roam-blessing", "team-aura"]
+      "semantic_tags_json": [
+        "roam-blessing",
+        "team-aura"
+      ]
     },
     {
       "id": 604,
@@ -912,9 +3548,15 @@
       "name": "Dire Hit",
       "category": "Roaming",
       "gold_cost": 0,
-      "stats_json": { "execute_magic_damage_pct": 14 },
+      "stats_json": {
+        "execute_magic_damage_pct": 14
+      },
       "unique_passive": "Roam Blessing: Damaging an enemy hero below 35% HP deals extra Hybrid Damage.",
-      "semantic_tags_json": ["roam-blessing", "pickoff", "burst"]
+      "semantic_tags_json": [
+        "roam-blessing",
+        "pickoff",
+        "burst"
+      ]
     }
   ],
   "emblems": [
@@ -922,20 +3564,47 @@
       "id": 1,
       "slug": "common",
       "name": "Common Emblem",
-      "role_fit": ["Fighter", "Mage", "Marksman", "Support"],
-      "attributes_json": { "hybrid_regen": 12, "hp": 275, "adaptive_attack": 22 },
+      "role_fit": [
+        "Fighter",
+        "Mage",
+        "Marksman",
+        "Support"
+      ],
+      "attributes_json": {
+        "hybrid_regen": 12,
+        "hp": 275,
+        "adaptive_attack": 22
+      },
       "talents_json": {
         "tier1": [
-          { "name": "Thrill", "effect": "Gain 16 Adaptive Attack." },
-          { "name": "Agility", "effect": "Gain 4% Movement Speed." }
+          {
+            "name": "Thrill",
+            "effect": "Gain 16 Adaptive Attack."
+          },
+          {
+            "name": "Agility",
+            "effect": "Gain 4% Movement Speed."
+          }
         ],
         "tier2": [
-          { "name": "Wilderness Blessing", "effect": "Gain 10% extra Movement Speed in Jungle and River." },
-          { "name": "Tenacity", "effect": "When HP is below 50%, gain 15 Physical & Magic Defense." }
+          {
+            "name": "Wilderness Blessing",
+            "effect": "Gain 10% extra Movement Speed in Jungle and River."
+          },
+          {
+            "name": "Tenacity",
+            "effect": "When HP is below 50%, gain 15 Physical & Magic Defense."
+          }
         ],
         "tier3": [
-          { "name": "Impure Rage", "effect": "Skills deal 4% target current HP extra Adaptive Damage and restore 2% Mana." },
-          { "name": "Quantum Charge", "effect": "Basic Attacks periodically grant Movement Speed and HP restore." }
+          {
+            "name": "Impure Rage",
+            "effect": "Skills deal 4% target current HP extra Adaptive Damage and restore 2% Mana."
+          },
+          {
+            "name": "Quantum Charge",
+            "effect": "Basic Attacks periodically grant Movement Speed and HP restore."
+          }
         ]
       }
     },
@@ -943,20 +3612,45 @@
       "id": 2,
       "slug": "tank",
       "name": "Tank Emblem",
-      "role_fit": ["Tank", "Fighter"],
-      "attributes_json": { "hp": 500, "hybrid_defense": 10, "hp_regen": 4 },
+      "role_fit": [
+        "Tank",
+        "Fighter"
+      ],
+      "attributes_json": {
+        "hp": 500,
+        "hybrid_defense": 10,
+        "hp_regen": 4
+      },
       "talents_json": {
         "tier1": [
-          { "name": "Vitality", "effect": "Gain 225 Max HP." },
-          { "name": "Firmness", "effect": "Gain 6 Physical & Magic Defense." }
+          {
+            "name": "Vitality",
+            "effect": "Gain 225 Max HP."
+          },
+          {
+            "name": "Firmness",
+            "effect": "Gain 6 Physical & Magic Defense."
+          }
         ],
         "tier2": [
-          { "name": "Tenacity", "effect": "Below 50% HP, gain 15 Physical & Magic Defense." },
-          { "name": "Pull Yourself Together", "effect": "Reduce Battle Spell and active equipment cooldowns by 15%." }
+          {
+            "name": "Tenacity",
+            "effect": "Below 50% HP, gain 15 Physical & Magic Defense."
+          },
+          {
+            "name": "Pull Yourself Together",
+            "effect": "Reduce Battle Spell and active equipment cooldowns by 15%."
+          }
         ],
         "tier3": [
-          { "name": "Concussive Blast", "effect": "After a Basic Attack, deal AoE Magic Damage scaling with Max HP." },
-          { "name": "Brave Smite", "effect": "Dealing skill damage restores 4% Max HP (6s CD)." }
+          {
+            "name": "Concussive Blast",
+            "effect": "After a Basic Attack, deal AoE Magic Damage scaling with Max HP."
+          },
+          {
+            "name": "Brave Smite",
+            "effect": "Dealing skill damage restores 4% Max HP (6s CD)."
+          }
         ]
       }
     },
@@ -964,20 +3658,46 @@
       "id": 3,
       "slug": "assassin",
       "name": "Assassin Emblem",
-      "role_fit": ["Assassin", "Fighter", "Marksman"],
-      "attributes_json": { "adaptive_penetration": 14, "adaptive_attack": 10, "movement_speed_pct": 3 },
+      "role_fit": [
+        "Assassin",
+        "Fighter",
+        "Marksman"
+      ],
+      "attributes_json": {
+        "adaptive_penetration": 14,
+        "adaptive_attack": 10,
+        "movement_speed_pct": 3
+      },
       "talents_json": {
         "tier1": [
-          { "name": "Rupture", "effect": "Gain 5 Adaptive Penetration." },
-          { "name": "Agility", "effect": "Gain 4% Movement Speed." }
+          {
+            "name": "Rupture",
+            "effect": "Gain 5 Adaptive Penetration."
+          },
+          {
+            "name": "Agility",
+            "effect": "Gain 4% Movement Speed."
+          }
         ],
         "tier2": [
-          { "name": "Seasoned Hunter", "effect": "Increase damage against Lord and Turtle by 15%." },
-          { "name": "Master Assassin", "effect": "Deal 7% extra damage to isolated enemy heroes." }
+          {
+            "name": "Seasoned Hunter",
+            "effect": "Increase damage against Lord and Turtle by 15%."
+          },
+          {
+            "name": "Master Assassin",
+            "effect": "Deal 7% extra damage to isolated enemy heroes."
+          }
         ],
         "tier3": [
-          { "name": "Killing Spree", "effect": "Eliminating an enemy hero restores 15% Lost HP and grants 20% Movement Speed." },
-          { "name": "Lethal Ignition", "effect": "Dealing high burst damage within 5s scorches the target for Adaptive Damage." }
+          {
+            "name": "Killing Spree",
+            "effect": "Eliminating an enemy hero restores 15% Lost HP and grants 20% Movement Speed."
+          },
+          {
+            "name": "Lethal Ignition",
+            "effect": "Dealing high burst damage within 5s scorches the target for Adaptive Damage."
+          }
         ]
       }
     },
@@ -985,20 +3705,44 @@
       "id": 4,
       "slug": "mage",
       "name": "Mage Emblem",
-      "role_fit": ["Mage"],
-      "attributes_json": { "magic_power": 30, "cooldown_reduction": 5, "magic_penetration": 8 },
+      "role_fit": [
+        "Mage"
+      ],
+      "attributes_json": {
+        "magic_power": 30,
+        "cooldown_reduction": 5,
+        "magic_penetration": 8
+      },
       "talents_json": {
         "tier1": [
-          { "name": "Inspire", "effect": "Gain 5% Cooldown Reduction." },
-          { "name": "Rupture", "effect": "Gain 5 Adaptive Penetration." }
+          {
+            "name": "Inspire",
+            "effect": "Gain 5% Cooldown Reduction."
+          },
+          {
+            "name": "Rupture",
+            "effect": "Gain 5 Adaptive Penetration."
+          }
         ],
         "tier2": [
-          { "name": "Bargain Hunter", "effect": "Equipment costs 5% less Gold." },
-          { "name": "Weapons Master", "effect": "Gain 5% extra Attack/Magic Power from equipment and emblems." }
+          {
+            "name": "Bargain Hunter",
+            "effect": "Equipment costs 5% less Gold."
+          },
+          {
+            "name": "Weapons Master",
+            "effect": "Gain 5% extra Attack/Magic Power from equipment and emblems."
+          }
         ],
         "tier3": [
-          { "name": "Lethal Ignition", "effect": "Multi-hit burst within 5s triggers bonus Adaptive Damage." },
-          { "name": "Impure Rage", "effect": "Skills deal % current HP bonus damage and restore Mana." }
+          {
+            "name": "Lethal Ignition",
+            "effect": "Multi-hit burst within 5s triggers bonus Adaptive Damage."
+          },
+          {
+            "name": "Impure Rage",
+            "effect": "Skills deal % current HP bonus damage and restore Mana."
+          }
         ]
       }
     },
@@ -1006,20 +3750,44 @@
       "id": 5,
       "slug": "fighter",
       "name": "Fighter Emblem",
-      "role_fit": ["Fighter"],
-      "attributes_json": { "spell_vamp": 10, "adaptive_attack": 22, "hybrid_defense": 6 },
+      "role_fit": [
+        "Fighter"
+      ],
+      "attributes_json": {
+        "spell_vamp": 10,
+        "adaptive_attack": 22,
+        "hybrid_defense": 6
+      },
       "talents_json": {
         "tier1": [
-          { "name": "Firmness", "effect": "Gain 6 Physical & Magic Defense." },
-          { "name": "Thrill", "effect": "Gain 16 Adaptive Attack." }
+          {
+            "name": "Firmness",
+            "effect": "Gain 6 Physical & Magic Defense."
+          },
+          {
+            "name": "Thrill",
+            "effect": "Gain 16 Adaptive Attack."
+          }
         ],
         "tier2": [
-          { "name": "Festival of Blood", "effect": "Gain 6% Spell Vamp plus 0.5% per kill/assist (up to 8 stacks)." },
-          { "name": "Wilderness Blessing", "effect": "Gain 10% Movement Speed in Jungle and River." }
+          {
+            "name": "Festival of Blood",
+            "effect": "Gain 6% Spell Vamp plus 0.5% per kill/assist (up to 8 stacks)."
+          },
+          {
+            "name": "Wilderness Blessing",
+            "effect": "Gain 10% Movement Speed in Jungle and River."
+          }
         ],
         "tier3": [
-          { "name": "Brave Smite", "effect": "Skill damage restores 4% Max HP." },
-          { "name": "Temporal Reign", "effect": "Casting Ultimate increases non-Ultimate skill cooldown recovery by 1.5x for 4s." }
+          {
+            "name": "Brave Smite",
+            "effect": "Skill damage restores 4% Max HP."
+          },
+          {
+            "name": "Temporal Reign",
+            "effect": "Casting Ultimate increases non-Ultimate skill cooldown recovery by 1.5x for 4s."
+          }
         ]
       }
     },
@@ -1027,20 +3795,45 @@
       "id": 6,
       "slug": "support",
       "name": "Support Emblem",
-      "role_fit": ["Support", "Tank"],
-      "attributes_json": { "healing_effect": 12, "cooldown_reduction": 10, "movement_speed_pct": 6 },
+      "role_fit": [
+        "Support",
+        "Tank"
+      ],
+      "attributes_json": {
+        "healing_effect": 12,
+        "cooldown_reduction": 10,
+        "movement_speed_pct": 6
+      },
       "talents_json": {
         "tier1": [
-          { "name": "Agility", "effect": "Gain 4% Movement Speed." },
-          { "name": "Inspire", "effect": "Gain 5% Cooldown Reduction." }
+          {
+            "name": "Agility",
+            "effect": "Gain 4% Movement Speed."
+          },
+          {
+            "name": "Inspire",
+            "effect": "Gain 5% Cooldown Reduction."
+          }
         ],
         "tier2": [
-          { "name": "Pull Yourself Together", "effect": "Reduce Battle Spell and active item cooldowns by 15%." },
-          { "name": "Tenacity", "effect": "Gain 15 Physical & Magic Defense below 50% HP." }
+          {
+            "name": "Pull Yourself Together",
+            "effect": "Reduce Battle Spell and active item cooldowns by 15%."
+          },
+          {
+            "name": "Tenacity",
+            "effect": "Gain 15 Physical & Magic Defense below 50% HP."
+          }
         ],
         "tier3": [
-          { "name": "Focusing Mark", "effect": "Damaging an enemy hero increases allies' damage against them by 6% for 3s." },
-          { "name": "Concussive Blast", "effect": "Periodic AoE Magic Damage scaling with Max HP." }
+          {
+            "name": "Focusing Mark",
+            "effect": "Damaging an enemy hero increases allies' damage against them by 6% for 3s."
+          },
+          {
+            "name": "Concussive Blast",
+            "effect": "Periodic AoE Magic Damage scaling with Max HP."
+          }
         ]
       }
     },
@@ -1048,20 +3841,44 @@
       "id": 7,
       "slug": "marksman",
       "name": "Marksman Emblem",
-      "role_fit": ["Marksman"],
-      "attributes_json": { "attack_speed": 15, "adaptive_attack": 16, "lifesteal": 5 },
+      "role_fit": [
+        "Marksman"
+      ],
+      "attributes_json": {
+        "attack_speed": 15,
+        "adaptive_attack": 16,
+        "lifesteal": 5
+      },
       "talents_json": {
         "tier1": [
-          { "name": "Fatal", "effect": "Gain 5% Crit Chance and 10% Crit Damage." },
-          { "name": "Swift", "effect": "Gain 10% Attack Speed." }
+          {
+            "name": "Fatal",
+            "effect": "Gain 5% Crit Chance and 10% Crit Damage."
+          },
+          {
+            "name": "Swift",
+            "effect": "Gain 10% Attack Speed."
+          }
         ],
         "tier2": [
-          { "name": "Weapons Master", "effect": "Gain 5% extra Physical Attack & Magic Power from items." },
-          { "name": "Tenacity", "effect": "Gain 15 Hybrid Defense below 50% HP." }
+          {
+            "name": "Weapons Master",
+            "effect": "Gain 5% extra Physical Attack & Magic Power from items."
+          },
+          {
+            "name": "Tenacity",
+            "effect": "Gain 15 Hybrid Defense below 50% HP."
+          }
         ],
         "tier3": [
-          { "name": "Quantum Charge", "effect": "Basic Attacks periodically grant Movement Speed and heal." },
-          { "name": "Weakness Finder", "effect": "Basic Attacks have a chance to slow enemy Movement and Attack Speed." }
+          {
+            "name": "Quantum Charge",
+            "effect": "Basic Attacks periodically grant Movement Speed and heal."
+          },
+          {
+            "name": "Weakness Finder",
+            "effect": "Basic Attacks have a chance to slow enemy Movement and Attack Speed."
+          }
         ]
       }
     }
@@ -1073,7 +3890,11 @@
       "name": "Flicker",
       "cooldown_sec": 120,
       "effect": "Teleports a short distance in a specified direction and grants 5 (+1*level) Hybrid Defense for 1s.",
-      "semantic_tags_json": ["mobility", "engage", "escape"]
+      "semantic_tags_json": [
+        "mobility",
+        "engage",
+        "escape"
+      ]
     },
     {
       "id": 2,
@@ -1081,7 +3902,10 @@
       "name": "Retribution",
       "cooldown_sec": 35,
       "effect": "Deals True Damage to creeps or minions and unlocks Jungle Blessings for objective secure.",
-      "semantic_tags_json": ["jungle", "objective-secure"]
+      "semantic_tags_json": [
+        "jungle",
+        "objective-secure"
+      ]
     },
     {
       "id": 3,
@@ -1089,7 +3913,11 @@
       "name": "Purify",
       "cooldown_sec": 90,
       "effect": "Removes all crowd control debuffs (except Suppress) and grants CC immunity + 15% Movement Speed for 1.2s.",
-      "semantic_tags_json": ["cleanse", "anti-cc", "survivability"]
+      "semantic_tags_json": [
+        "cleanse",
+        "anti-cc",
+        "survivability"
+      ]
     },
     {
       "id": 4,
@@ -1097,7 +3925,11 @@
       "name": "Vengeance",
       "cooldown_sec": 75,
       "effect": "For 3s, reduces all damage taken by 35% and reflects 35% Magic Damage back to attackers.",
-      "semantic_tags_json": ["damage-reduction", "anti-burst", "frontline"]
+      "semantic_tags_json": [
+        "damage-reduction",
+        "anti-burst",
+        "frontline"
+      ]
     },
     {
       "id": 5,
@@ -1105,7 +3937,11 @@
       "name": "Sprint",
       "cooldown_sec": 100,
       "effect": "Removes slow effects, grants 50% Movement Speed, and grants slow immunity for 6s.",
-      "semantic_tags_json": ["mobility", "anti-slow", "kiting"]
+      "semantic_tags_json": [
+        "mobility",
+        "anti-slow",
+        "kiting"
+      ]
     },
     {
       "id": 6,
@@ -1113,7 +3949,11 @@
       "name": "Execute",
       "cooldown_sec": 90,
       "effect": "Deals True Damage scaling with missing target HP, ignoring shields; cooldown reduced on kill.",
-      "semantic_tags_json": ["finisher", "true-damage", "early-kill"]
+      "semantic_tags_json": [
+        "finisher",
+        "true-damage",
+        "early-kill"
+      ]
     },
     {
       "id": 7,
@@ -1121,7 +3961,11 @@
       "name": "Inspire",
       "cooldown_sec": 75,
       "effect": "Boosts Attack Speed up to 500% cap, ignores a portion of Physical Defense, and heals on Basic Attacks.",
-      "semantic_tags_json": ["attack-speed", "dps-steroid", "armor-pen"]
+      "semantic_tags_json": [
+        "attack-speed",
+        "dps-steroid",
+        "armor-pen"
+      ]
     },
     {
       "id": 8,
@@ -1129,7 +3973,11 @@
       "name": "Flameshot",
       "cooldown_sec": 50,
       "effect": "Fires a long-range Magic projectile that knocks back close enemies and snipes low-HP targets.",
-      "semantic_tags_json": ["knockback", "poke", "anti-dive"]
+      "semantic_tags_json": [
+        "knockback",
+        "poke",
+        "anti-dive"
+      ]
     },
     {
       "id": 9,
@@ -1137,7 +3985,11 @@
       "name": "Aegis",
       "cooldown_sec": 75,
       "effect": "Grants a large shield to self and a smaller shield to the lowest-HP nearby ally for 5s.",
-      "semantic_tags_json": ["shield", "anti-burst", "survivability"]
+      "semantic_tags_json": [
+        "shield",
+        "anti-burst",
+        "survivability"
+      ]
     },
     {
       "id": 10,
@@ -1145,7 +3997,10 @@
       "name": "Petrify",
       "cooldown_sec": 90,
       "effect": "Petrifies nearby enemies for 0.8s, dealing Magic Damage and applying a subsequent slow.",
-      "semantic_tags_json": ["crowd-control", "combo-setup"]
+      "semantic_tags_json": [
+        "crowd-control",
+        "combo-setup"
+      ]
     },
     {
       "id": 11,
@@ -1153,7 +4008,10 @@
       "name": "Revitalize",
       "cooldown_sec": 75,
       "effect": "Summons a Healing Spring that restores HP to allies and boosts shield/regen effects received.",
-      "semantic_tags_json": ["healing", "teamfight-sustain"]
+      "semantic_tags_json": [
+        "healing",
+        "teamfight-sustain"
+      ]
     },
     {
       "id": 12,
@@ -1161,7 +4019,11 @@
       "name": "Arrival",
       "cooldown_sec": 75,
       "effect": "Teleports to an allied turret or minion after channeling, granting a Movement Speed burst on arrival.",
-      "semantic_tags_json": ["macro", "split-push", "teleport"]
+      "semantic_tags_json": [
+        "macro",
+        "split-push",
+        "teleport"
+      ]
     }
   ]
 }
