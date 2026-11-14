@@ -1,4 +1,5 @@
 import type { AppDatabase } from "@/db";
+import { jsonResponse, parsePositiveIntId } from "@/lib/http/responses";
 import {
   CreateDraftSessionInputSchema,
   LaneSchema,
@@ -13,16 +14,6 @@ import {
   updateDraftSession,
   updateDraftSlots,
 } from "./service";
-
-function jsonResponse(data: unknown, status: number = 200): Response {
-  return Response.json(data, { status });
-}
-
-function parseSessionId(rawId: string): number | null {
-  const id = Number(rawId);
-  if (!Number.isInteger(id) || id <= 0) return null;
-  return id;
-}
 
 /**
  * Handles GET /api/draft-sessions — returns the latest Draft Session (creating one if ?ensure=true).
@@ -83,7 +74,7 @@ export async function handleGetDraftSession(
   rawId: string,
   db: AppDatabase,
 ): Promise<Response> {
-  const sessionId = parseSessionId(rawId);
+  const sessionId = parsePositiveIntId(rawId);
   if (sessionId === null) {
     return jsonResponse({ error: "Invalid session id" }, 400);
   }
@@ -104,7 +95,7 @@ export async function handlePatchDraftSlots(
   rawId: string,
   db: AppDatabase,
 ): Promise<Response> {
-  const sessionId = parseSessionId(rawId);
+  const sessionId = parsePositiveIntId(rawId);
   if (sessionId === null) {
     return jsonResponse({ error: "Invalid session id" }, 400);
   }
@@ -148,7 +139,7 @@ export async function handlePatchDraftSession(
   rawId: string,
   db: AppDatabase,
 ): Promise<Response> {
-  const sessionId = parseSessionId(rawId);
+  const sessionId = parsePositiveIntId(rawId);
   if (sessionId === null) {
     return jsonResponse({ error: "Invalid session id" }, 400);
   }

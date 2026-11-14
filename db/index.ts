@@ -109,6 +109,21 @@ const DRAFT_SESSION_DDL = `
   );
 `;
 
+const POST_MATCH_REVIEW_DDL = `
+  CREATE TABLE IF NOT EXISTS post_match_reviews (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    draft_session_id INTEGER NOT NULL REFERENCES draft_sessions(id) ON DELETE CASCADE,
+    screenshot_path TEXT NOT NULL,
+    secondary_screenshot_path TEXT,
+    user_reflection TEXT,
+    analysis_markdown TEXT,
+    teammate_driven_loss INTEGER NOT NULL DEFAULT 0,
+    status TEXT NOT NULL DEFAULT 'pending',
+    created_at TEXT NOT NULL,
+    reviewed_at TEXT
+  );
+`;
+
 const PLAYER_PROFILE_DDL = `
   CREATE TABLE IF NOT EXISTS player_profile (
     id INTEGER PRIMARY KEY,
@@ -134,28 +149,13 @@ const PLAYER_PROFILE_DDL = `
     scope_value TEXT,
     occurrences INTEGER NOT NULL DEFAULT 1,
     status TEXT NOT NULL DEFAULT 'active',
-    last_seen_review_id TEXT,
+    last_seen_review_id INTEGER REFERENCES post_match_reviews(id) ON DELETE SET NULL,
     created_at TEXT NOT NULL,
     updated_at TEXT NOT NULL
   );
 
   CREATE UNIQUE INDEX IF NOT EXISTS failure_patterns_pattern_key_idx
     ON failure_patterns(pattern_key);
-`;
-
-const POST_MATCH_REVIEW_DDL = `
-  CREATE TABLE IF NOT EXISTS post_match_reviews (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    draft_session_id INTEGER NOT NULL REFERENCES draft_sessions(id) ON DELETE CASCADE,
-    screenshot_path TEXT NOT NULL,
-    secondary_screenshot_path TEXT,
-    user_reflection TEXT,
-    analysis_markdown TEXT,
-    teammate_driven_loss INTEGER NOT NULL DEFAULT 0,
-    status TEXT NOT NULL DEFAULT 'pending',
-    created_at TEXT NOT NULL,
-    reviewed_at TEXT
-  );
 `;
 
 /**
@@ -177,8 +177,8 @@ export function createDatabase(
   }
   sqlite.exec(PATCH_KB_DDL);
   sqlite.exec(DRAFT_SESSION_DDL);
-  sqlite.exec(PLAYER_PROFILE_DDL);
   sqlite.exec(POST_MATCH_REVIEW_DDL);
+  sqlite.exec(PLAYER_PROFILE_DDL);
 
   const db = drizzle(sqlite, { schema });
 

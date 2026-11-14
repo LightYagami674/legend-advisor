@@ -1,12 +1,4 @@
-import {
-  TypeSafeClient,
-  choice,
-  noul,
-  score,
-  type Questions,
-  type SystemOneRequest,
-  type SystemOneResult,
-} from "@typesafe-ai/sdk";
+import { choice, noul, score } from "@typesafe-ai/sdk";
 import { desc, eq } from "drizzle-orm";
 import { z } from "zod";
 import type { AppDatabase } from "@/db";
@@ -17,22 +9,20 @@ import {
   patchMeta,
 } from "@/db/schema";
 import { getDraftSessionById } from "@/lib/draft-session/service";
+import { jsonResponse, parsePositiveIntId } from "@/lib/http/responses";
 import type { FailurePatternDto } from "@/lib/player-profile/schema";
 import {
   ensurePlayerProfile,
   listFailurePatterns,
   listHeroComfortPool,
 } from "@/lib/player-profile/service";
+import { getDefaultJevClient, type JevClient } from "./jev-client";
 import type {
   CandidatePickItem,
   CandidatePickResponse,
 } from "./types";
 
-export interface JevClient {
-  systemOne<const Q extends Questions>(
-    request: SystemOneRequest<Q>,
-  ): Promise<SystemOneResult<Q>>;
-}
+export { getDefaultJevClient, type JevClient };
 
 const SYNERGY_RUBRIC = [
   "anti-synergy",
@@ -105,15 +95,6 @@ function normalizeScore(answer: ScoreAnswerShape | undefined): {
 
 function roundScore(value: number): number {
   return Math.round(value * 10000) / 10000;
-}
-
-let defaultJevClient: TypeSafeClient | null = null;
-
-export function getDefaultJevClient(): JevClient {
-  if (!defaultJevClient) {
-    defaultJevClient = new TypeSafeClient();
-  }
-  return defaultJevClient;
 }
 
 export type CandidatePickServiceResult =
@@ -390,16 +371,10 @@ export async function generateCandidatePicks(
         : undefined;
 
     const compositeScore =
-      isMySlot && profileSafeProb !== undefined
-        ? 0.35 * choiceProb +
-          0.2 * synergy.value +
-          0.2 * counter.value +
-          0.1 * patch.value +
-          0.15 * profileSafeProb
-        : 0.4 * choiceProb +
-          0.25 * synergy.value +
-          0.25 * counter.value +
-          0.1 * patch.value;
+      0.4 * choiceProb +
+      0.25 * synergy.value +
+      0.25 * counter.value +
+      0.1 * patch.value;
 
     return {
       hero,
@@ -483,12 +458,6 @@ export async function generateCandidatePicks(
   };
 }
 
-function parseSessionId(rawId: string): number | null {
-  const id = Number(rawId);
-  if (!Number.isInteger(id) || id <= 0) return null;
-  return id;
-}
-
 /**
  * Handles POST /api/draft-sessions/[id]/candidate-picks.
  */
@@ -498,9 +467,9 @@ export async function handleGenerateCandidatePicks(
   db: AppDatabase,
   jevClient: JevClient = getDefaultJevClient(),
 ): Promise<Response> {
-  const sessionId = parseSessionId(rawId);
+  const sessionId = parsePositiveIntId(rawId);
   if (sessionId === null) {
-    return Response.json({ error: "Invalid session id" }, { status: 400 });
+    return jsonResponse({ error: "Invalid session id" }, 400);
   }
 
   let rawBody: unknown = {};
@@ -509,15 +478,15 @@ export async function handleGenerateCandidatePicks(
     try {
       rawBody = JSON.parse(text);
     } catch {
-      return Response.json({ error: "Invalid JSON body" }, { status: 400 });
+      return jsonResponse({ error: "Invalid JSON body" }, 400);
     }
   }
 
   const parsed = GenerateCandidatePicksInputSchema.safeParse(rawBody);
   if (!parsed.success) {
-    return Response.json(
+    return jsonResponse(
       { error: "Invalid request payload", details: parsed.error.flatten() },
-      { status: 400 },
+      400,
     );
   }
 
@@ -534,8 +503,8 @@ export async function handleGenerateCandidatePicks(
       bad_request: 400,
       upstream_error: 502,
     } as const;
-    return Response.json({ error: result.message }, { status: statusMap[result.code] });
+    return jsonResponse({ error: result.message }, statusMap[result.code]);
   }
 
-  return Response.json(result.data, { status: 200 });
+  return jsonResponse(result.data, 200);
 }

@@ -7,6 +7,7 @@ import type {
   HeroCatalogItem,
 } from "@/lib/draft-session/client-types";
 import type {
+  ActionReminderItem,
   BuildRecommendationPayload,
   CandidatePickResponse,
 } from "@/lib/recommendations/types";
@@ -16,6 +17,7 @@ interface DecisionStageShellProps {
   session: DraftSessionDto;
   targetSlot: DraftSlotDto | undefined;
   pickedHero: HeroCatalogItem | undefined;
+  actionReminders: ActionReminderItem[];
   activeTab: DecisionStageTab;
   onTabChange: (tab: DecisionStageTab) => void;
   onFocusPickSlot: () => void;
@@ -40,6 +42,7 @@ export function DecisionStageShell({
   session,
   targetSlot,
   pickedHero,
+  actionReminders,
   activeTab,
   onTabChange,
   onFocusPickSlot,
@@ -61,6 +64,13 @@ export function DecisionStageShell({
     candidateResult.target_slot_index === session.active_target_slot_index
       ? candidateResult.candidates
       : null;
+
+  const visibleActionReminders =
+    isMySlot && (activeTab === "candidates" || activeTab === "build")
+      ? activeTab === "build" && buildRecommendation?.actionReminders
+        ? buildRecommendation.actionReminders
+        : actionReminders
+      : [];
 
   return (
     <div className="flex flex-col gap-3 rounded-xl border border-zinc-800 bg-zinc-900/80 p-4">
@@ -98,6 +108,28 @@ export function DecisionStageShell({
         </div>
       </div>
 
+      {/* Static Action Reminders (My Slot Only, Candidate Pick & Build Recommendation stages) */}
+      {visibleActionReminders.length > 0 && (
+        <div className="flex flex-col gap-1.5 rounded-lg border border-amber-400/30 bg-amber-400/10 px-3 py-2.5">
+          <span className="text-[10px] font-bold uppercase tracking-wider text-amber-300">
+            My Slot Action Reminders (Active Failure Patterns)
+          </span>
+          <ul className="flex flex-col gap-1 text-xs text-amber-100">
+            {visibleActionReminders.map((reminder) => (
+              <li
+                key={reminder.id}
+                className="flex items-center justify-between gap-2"
+              >
+                <span>• {reminder.rule}</span>
+                <span className="shrink-0 rounded bg-amber-500/20 px-1.5 py-0.5 font-mono text-[10px] text-amber-200">
+                  ×{reminder.occurrences}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
       {activeTab === "candidates" && (
         <div className="flex flex-col gap-3">
           <div className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-zinc-800 bg-zinc-950/70 px-3 py-2.5">
@@ -132,7 +164,7 @@ export function DecisionStageShell({
                 disabled={candidatesLoading || isLocked}
                 className="rounded-lg bg-sky-500 px-3 py-1.5 text-xs font-bold text-zinc-950 transition hover:bg-sky-400 disabled:cursor-not-allowed disabled:bg-sky-500/30 disabled:text-sky-200/70"
               >
-                {candidatesLoading ? "Ranking..." : "Get Suggested Heroes"}
+                {candidatesLoading ? "Ranking..." : "Get Candidate Picks"}
               </button>
             </div>
           </div>
@@ -255,7 +287,7 @@ export function DecisionStageShell({
             <div className="rounded-xl border border-dashed border-zinc-700 p-6 text-center text-sm text-zinc-400">
               Select a <strong className="text-zinc-200">Target Ally Slot</strong>{" "}
               on the left and click{" "}
-              <strong className="text-sky-300">Get Suggested Heroes</strong>. Top 3{" "}
+              <strong className="text-sky-300">Get Candidate Picks</strong>. Top 3{" "}
               <code className="text-sky-300">Candidate Pick</code> rankings for{" "}
               {isMySlot ? "My Slot (with Player Profile)" : "teammate slot"}{" "}
               will render here.
@@ -430,30 +462,6 @@ export function DecisionStageShell({
                   ),
                 )}
               </div>
-
-              {/* Static Action Reminders (My Slot Only) */}
-              {isMySlot &&
-                buildRecommendation.actionReminders &&
-                buildRecommendation.actionReminders.length > 0 && (
-                  <div className="flex flex-col gap-1.5 rounded-lg border border-amber-400/30 bg-amber-400/10 px-3 py-2.5">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-amber-300">
-                      My Slot Action Reminders (Active Failure Patterns)
-                    </span>
-                    <ul className="flex flex-col gap-1 text-xs text-amber-100">
-                      {buildRecommendation.actionReminders.map((reminder) => (
-                        <li
-                          key={reminder.id}
-                          className="flex items-center justify-between gap-2"
-                        >
-                          <span>• {reminder.rule}</span>
-                          <span className="shrink-0 rounded bg-amber-500/20 px-1.5 py-0.5 font-mono text-[10px] text-amber-200">
-                            ×{reminder.occurrences}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
             </div>
           ) : (
             !buildLoading && (

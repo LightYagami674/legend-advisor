@@ -10,7 +10,9 @@ import {
   type DraftSlotDto,
   type HeroCatalogItem,
 } from "@/lib/draft-session/client-types";
+import type { FailurePatternDto } from "@/lib/player-profile/schema";
 import type {
+  ActionReminderItem,
   BuildRecommendationPayload,
   CandidatePickResponse,
 } from "@/lib/recommendations/types";
@@ -45,8 +47,24 @@ export function DraftSessionBoard() {
   const [buildLoading, setBuildLoading] = useState(false);
   const [buildError, setBuildError] = useState<string | null>(null);
   const [profileDrawerOpen, setProfileDrawerOpen] = useState(false);
+  const [actionPatterns, setActionPatterns] = useState<FailurePatternDto[]>([]);
 
   const omnibarInputRef = useRef<HTMLInputElement>(null);
+
+  const refreshActionReminders = useCallback(async () => {
+    try {
+      const res = await fetch("/api/player-profile/failure-patterns?status=active");
+      if (!res.ok) return;
+      const json = (await res.json()) as { failure_patterns?: FailurePatternDto[] };
+      if (Array.isArray(json.failure_patterns)) {
+        setActionPatterns(
+          json.failure_patterns.filter((p) => p.dimension === "action"),
+        );
+      }
+    } catch {
+      // Non-blocking: action reminders remain as last loaded
+    }
+  }, []);
 
   const applySessionPayload = useCallback((data: SessionPayload) => {
     setSession(data.session);
@@ -58,9 +76,10 @@ export function DraftSessionBoard() {
 
     async function bootstrap() {
       try {
-        const [heroesRes, sessionRes] = await Promise.all([
+        const [heroesRes, sessionRes, patternsRes] = await Promise.all([
           fetch("/api/heroes"),
           fetch("/api/draft-sessions?ensure=true"),
+          fetch("/api/player-profile/failure-patterns?status=active"),
         ]);
 
         if (!heroesRes.ok || !sessionRes.ok) {
@@ -69,10 +88,19 @@ export function DraftSessionBoard() {
 
         const heroesJson = (await heroesRes.json()) as { heroes: HeroCatalogItem[] };
         const sessionJson = (await sessionRes.json()) as SessionPayload;
+        const patternsJson = patternsRes.ok
+          ? ((await patternsRes.json()) as { failure_patterns?: FailurePatternDto[] })
+          : { failure_patterns: [] };
 
         if (cancelled) return;
 
         setHeroes(heroesJson.heroes);
+        applySessionPayload(sessionJson);
+        if (Array.isArray(patternsJson.failure_patterns)) {
+          setActionPatterns(
+            patternsJson.failure_patterns.filter((p) => p.dimension === "action"),
+          );
+        }
         applySessionPayload(sessionJson);
 
         const initialKind = sessionJson.session.phase === "ban" ? "ban" : "pick";
@@ -784,6 +812,38 @@ export function DraftSessionBoard() {
           session={session}
           targetSlot={activeTargetAllySlot}
           pickedHero={activeTargetPickedHero}
+          actionReminders={actionPatterns
+            .filter((p) => {
+              if (session.active_target_slot_index !== session.my_slot_index) {
+                return false;
+              }
+              if (p.scope_type === "general") return true;
+              if (p.scope_type === "role") {
+                return (
+                  activeTargetAllySlot?.role !== null &&
+                  activeTargetAllySlot?.role !== undefined &&
+                  p.scope_value === activeTargetAllySlot.role
+                );
+              }
+              if (p.scope_type === "hero") {
+                return (
+                  activeTargetPickedHero !== undefined &&
+                  (p.scope_value === activeTargetPickedHero.slug ||
+                    p.scope_value === activeTargetPickedHero.name)
+                );
+              }
+              return false;
+            })
+            .map(
+              (p): ActionReminderItem => ({
+                id: p.id,
+                pattern_key: p.pattern_key,
+                rule: p.rule,
+                scope_type: p.scope_type,
+                scope_value: p.scope_value,
+                occurrences: p.occurrences,
+              }),
+            )}
           activeTab={stageTab}
           onTabChange={(tab) => {
             setStageTab(tab);
@@ -903,7 +963,10 @@ export function DraftSessionBoard() {
 
       <PlayerProfileDrawer
         open={profileDrawerOpen}
-        onClose={() => setProfileDrawerOpen(false)}
+        onClose={() => {
+          setProfileDrawerOpen(false);
+          void refreshActionReminders();
+        }}
         heroes={heroes}
       />
     </div>

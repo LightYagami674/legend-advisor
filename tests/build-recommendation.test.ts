@@ -177,6 +177,17 @@ describe("Build Recommendation API & Jev single-pass engine", () => {
     expect(capturedRequests).toHaveLength(1);
     expect(capturedRequests[0]!.model).toBe("jev-latest");
     expect(capturedRequests[0]!.questions.bootBlessing).toBeUndefined();
+    const capturedState = capturedRequests[0]!.state as {
+      items?: unknown[];
+      emblems?: unknown[];
+      battle_spells?: unknown[];
+    };
+    expect(Array.isArray(capturedState.items)).toBe(true);
+    expect(capturedState.items!.length).toBeGreaterThan(0);
+    expect(Array.isArray(capturedState.emblems)).toBe(true);
+    expect(capturedState.emblems!.length).toBeGreaterThan(0);
+    expect(Array.isArray(capturedState.battle_spells)).toBe(true);
+    expect(capturedState.battle_spells!.length).toBeGreaterThan(0);
 
     // 6-item build: 1 Boots + 5 distinct non-boot tier-3 items
     expect(body.items).toHaveLength(6);

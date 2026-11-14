@@ -1,15 +1,11 @@
 import {
-  TypeSafeClient,
   choice,
   noul,
   score,
   type ChoiceResponse,
   type NoulResponse,
   type Questions,
-  type RequestOptions,
   type ScoreResponse,
-  type SystemOneRequest,
-  type SystemOneResult,
 } from "@typesafe-ai/sdk";
 import { and, asc, desc, eq, inArray } from "drizzle-orm";
 import { z } from "zod";
@@ -27,7 +23,13 @@ import {
   patchMeta,
   type EmblemTalent,
 } from "@/db/schema";
+import { jsonResponse, parsePositiveIntId } from "@/lib/http/responses";
 import { listFailurePatterns } from "@/lib/player-profile/service";
+import {
+  getDefaultJevClient,
+  type JevClient,
+  type JevClientLike,
+} from "./jev-client";
 import type {
   ActionReminderItem,
   BuildBlessingDto,
@@ -38,12 +40,7 @@ import type {
   SituationalFlags,
 } from "./types";
 
-export interface JevClientLike {
-  systemOne<const Q extends Questions>(
-    request: SystemOneRequest<Q>,
-    options?: RequestOptions,
-  ): Promise<SystemOneResult<Q>>;
-}
+export type { JevClient, JevClientLike };
 
 const ITEM_SCORE_RUBRIC = [
   "Not needed",
@@ -57,25 +54,6 @@ const NOUL_THRESHOLD = 0.5;
 const PostBuildRequestSchema = z.object({
   target_slot_index: z.number().int().min(1).max(5).optional(),
 });
-
-let defaultJevClient: TypeSafeClient | null = null;
-
-function getDefaultJevClient(): JevClientLike {
-  if (!defaultJevClient) {
-    defaultJevClient = new TypeSafeClient();
-  }
-  return defaultJevClient;
-}
-
-function parseSessionId(rawId: string): number | null {
-  const id = Number(rawId);
-  if (!Number.isInteger(id) || id <= 0) return null;
-  return id;
-}
-
-function jsonResponse(data: unknown, status: number = 200): Response {
-  return Response.json(data, { status });
-}
 
 function collectTalentCatalog(
   allEmblems: (typeof emblems.$inferSelect)[],
@@ -317,6 +295,33 @@ export async function generateBuildRecommendation(
       type: r.relation_type,
       win_rate_delta: r.win_rate_delta,
       explanation: r.explanation,
+    })),
+    items: allItems.map((i) => ({
+      slug: i.slug,
+      name: i.name,
+      category: i.category,
+      gold_cost: i.gold_cost,
+      stats: i.stats_json,
+      unique_passive: i.unique_passive,
+      semantic_tags: i.semantic_tags_json,
+    })),
+    emblems: allEmblems.map((e) => ({
+      slug: e.slug,
+      name: e.name,
+      role_fit: e.role_fit,
+      attributes: e.attributes_json,
+      talents: {
+        tier1: e.talents_json.tier1.map((t) => ({ name: t.name, effect: t.effect })),
+        tier2: e.talents_json.tier2.map((t) => ({ name: t.name, effect: t.effect })),
+        tier3: e.talents_json.tier3.map((t) => ({ name: t.name, effect: t.effect })),
+      },
+    })),
+    battle_spells: allSpells.map((s) => ({
+      slug: s.slug,
+      name: s.name,
+      cooldown_sec: s.cooldown_sec,
+      effect: s.effect,
+      semantic_tags: s.semantic_tags_json,
     })),
     ...(isMySlot
       ? {
@@ -607,7 +612,7 @@ export async function handlePostBuildRecommendation(
   db: AppDatabase,
   jevClient: JevClientLike = getDefaultJevClient(),
 ): Promise<Response> {
-  const sessionId = parseSessionId(rawId);
+  const sessionId = parsePositiveIntId(rawId);
   if (sessionId === null) {
     return jsonResponse({ error: "Invalid session id" }, 400);
   }
@@ -653,7 +658,7 @@ export async function handleGetBuildRecommendation(
   rawId: string,
   db: AppDatabase,
 ): Promise<Response> {
-  const sessionId = parseSessionId(rawId);
+  const sessionId = parsePositiveIntId(rawId);
   if (sessionId === null) {
     return jsonResponse({ error: "Invalid session id" }, 400);
   }

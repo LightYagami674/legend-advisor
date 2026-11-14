@@ -238,7 +238,7 @@ describe("Post-Match Review API & persistence", () => {
     for (const pattern of profileBody.failure_patterns) {
       expect(pattern.occurrences).toBe(1);
       expect(pattern.status).toBe("active");
-      expect(pattern.last_seen_review_id).toBe(String(createdReview.id));
+      expect(pattern.last_seen_review_id).toBe(createdReview.id);
     }
   });
 

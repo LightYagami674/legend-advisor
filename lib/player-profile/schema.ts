@@ -63,7 +63,7 @@ export const CreateFailurePatternSchema = z.object({
   rule: z.string().trim().min(3).max(500),
   scope_type: z.enum(FAILURE_PATTERN_SCOPE_TYPES),
   scope_value: z.string().trim().min(1).max(80).nullable().optional(),
-  last_seen_review_id: z.string().trim().min(1).max(120).nullable().optional(),
+  last_seen_review_id: z.number().int().positive().nullable().optional(),
 });
 
 export const PatchFailurePatternSchema = z.object({
@@ -73,7 +73,7 @@ export const PatchFailurePatternSchema = z.object({
   scope_value: z.string().trim().min(1).max(80).nullable().optional(),
   status: z.enum(FAILURE_PATTERN_STATUSES).optional(),
   reinforce: z.boolean().optional(),
-  last_seen_review_id: z.string().trim().min(1).max(120).nullable().optional(),
+  last_seen_review_id: z.number().int().positive().nullable().optional(),
 });
 
 export interface PlayerProfileDto {
@@ -104,7 +104,7 @@ export interface FailurePatternDto {
   scope_value: string | null;
   occurrences: number;
   status: FailurePatternStatus;
-  last_seen_review_id: string | null;
+  last_seen_review_id: number | null;
   created_at: string;
   updated_at: string;
 }

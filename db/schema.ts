@@ -219,26 +219,6 @@ export const heroComfortPool = sqliteTable("hero_comfort_pool", {
   updated_at: text("updated_at").notNull(),
 });
 
-export const failurePatterns = sqliteTable(
-  "failure_patterns",
-  {
-    id: integer("id").primaryKey({ autoIncrement: true }),
-    dimension: text("dimension").$type<FailurePatternDimension>().notNull(),
-    pattern_key: text("pattern_key").notNull(),
-    rule: text("rule").notNull(),
-    scope_type: text("scope_type").$type<FailurePatternScopeType>().notNull(),
-    scope_value: text("scope_value"),
-    occurrences: integer("occurrences").notNull().default(1),
-    status: text("status").$type<FailurePatternStatus>().notNull().default("active"),
-    last_seen_review_id: text("last_seen_review_id"),
-    created_at: text("created_at").notNull(),
-    updated_at: text("updated_at").notNull(),
-  },
-  (table) => [
-    uniqueIndex("failure_patterns_pattern_key_idx").on(table.pattern_key),
-  ],
-);
-
 export const postMatchReviews = sqliteTable("post_match_reviews", {
   id: integer("id").primaryKey({ autoIncrement: true }),
   draft_session_id: integer("draft_session_id")
@@ -258,3 +238,26 @@ export const postMatchReviews = sqliteTable("post_match_reviews", {
   created_at: text("created_at").notNull(),
   reviewed_at: text("reviewed_at"),
 });
+
+export const failurePatterns = sqliteTable(
+  "failure_patterns",
+  {
+    id: integer("id").primaryKey({ autoIncrement: true }),
+    dimension: text("dimension").$type<FailurePatternDimension>().notNull(),
+    pattern_key: text("pattern_key").notNull(),
+    rule: text("rule").notNull(),
+    scope_type: text("scope_type").$type<FailurePatternScopeType>().notNull(),
+    scope_value: text("scope_value"),
+    occurrences: integer("occurrences").notNull().default(1),
+    status: text("status").$type<FailurePatternStatus>().notNull().default("active"),
+    last_seen_review_id: integer("last_seen_review_id").references(
+      () => postMatchReviews.id,
+      { onDelete: "set null" },
+    ),
+    created_at: text("created_at").notNull(),
+    updated_at: text("updated_at").notNull(),
+  },
+  (table) => [
+    uniqueIndex("failure_patterns_pattern_key_idx").on(table.pattern_key),
+  ],
+);

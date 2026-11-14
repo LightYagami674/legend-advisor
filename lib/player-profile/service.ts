@@ -8,6 +8,7 @@ import {
   type FailurePatternStatus,
   type Lane,
 } from "@/db/schema";
+import { parsePositiveIntId } from "@/lib/http/responses";
 import {
   CreateFailurePatternSchema,
   PatchFailurePatternSchema,
@@ -21,12 +22,6 @@ import {
 } from "./schema";
 
 const SINGLETON_PROFILE_ID = 1;
-
-function parsePositiveInt(raw: string): number | null {
-  const num = Number(raw);
-  if (!Number.isInteger(num) || num <= 0) return null;
-  return num;
-}
 
 async function parseJsonBody(request: Request): Promise<{ ok: true; data: unknown } | { ok: false; response: Response }> {
   try {
@@ -268,7 +263,7 @@ export function upsertOrReinforceFailurePattern(
     rule: string;
     scope_type: FailurePatternDto["scope_type"];
     scope_value?: string | null;
-    last_seen_review_id?: string | null;
+    last_seen_review_id?: number | null;
   },
 ): { created: boolean; pattern: FailurePatternDto } {
   const now = new Date().toISOString();
@@ -337,7 +332,7 @@ export function updateFailurePattern(
     scope_value?: string | null;
     status?: FailurePatternStatus;
     reinforce?: boolean;
-    last_seen_review_id?: string | null;
+    last_seen_review_id?: number | null;
   },
 ): FailurePatternDto | null {
   const existing = db
@@ -463,7 +458,7 @@ export async function handlePatchHeroComfort(
   rawHeroId: string,
   db: AppDatabase,
 ): Promise<Response> {
-  const heroId = parsePositiveInt(rawHeroId);
+  const heroId = parsePositiveIntId(rawHeroId);
   if (heroId === null) {
     return Response.json({ error: "Invalid hero_id" }, { status: 400 });
   }
@@ -514,7 +509,7 @@ export async function handleDeleteHeroComfort(
   rawHeroId: string,
   db: AppDatabase,
 ): Promise<Response> {
-  const heroId = parsePositiveInt(rawHeroId);
+  const heroId = parsePositiveIntId(rawHeroId);
   if (heroId === null) {
     return Response.json({ error: "Invalid hero_id" }, { status: 400 });
   }
@@ -579,7 +574,7 @@ export async function handlePatchFailurePattern(
   rawId: string,
   db: AppDatabase,
 ): Promise<Response> {
-  const id = parsePositiveInt(rawId);
+  const id = parsePositiveIntId(rawId);
   if (id === null) {
     return Response.json({ error: "Invalid failure pattern id" }, { status: 400 });
   }
@@ -610,7 +605,7 @@ export async function handleDeleteFailurePattern(
   rawId: string,
   db: AppDatabase,
 ): Promise<Response> {
-  const id = parsePositiveInt(rawId);
+  const id = parsePositiveIntId(rawId);
   if (id === null) {
     return Response.json({ error: "Invalid failure pattern id" }, { status: 400 });
   }

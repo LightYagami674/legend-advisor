@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import type { Questions, SystemOneRequest, SystemOneResult } from "@typesafe-ai/sdk";
 import { createDatabase } from "@/db";
-import { heroes } from "@/db/schema";
+import { heroes, postMatchReviews } from "@/db/schema";
 import { createDraftSession, updateDraftSession, updateDraftSlots } from "@/lib/draft-session/service";
 import {
   handleDeleteFailurePattern,
@@ -86,7 +86,32 @@ describe("Player Profile, Hero Comfort Pool, and Failure Patterns", () => {
     );
     expect(avoidRes.status).toBe(200);
 
-    // 4. Create & reinforce failure_patterns by pattern_key
+    // 4. Create & reinforce failure_patterns by pattern_key (with integer FK to post_match_reviews)
+    const { session: reviewSession } = createDraftSession(db, {});
+    const nowIso = new Date().toISOString();
+    const review1 = db
+      .insert(postMatchReviews)
+      .values({
+        draft_session_id: reviewSession.id,
+        screenshot_path: "/tmp/review-1.png",
+        status: "reviewed",
+        created_at: nowIso,
+        reviewed_at: nowIso,
+      })
+      .returning()
+      .get();
+    const review2 = db
+      .insert(postMatchReviews)
+      .values({
+        draft_session_id: reviewSession.id,
+        screenshot_path: "/tmp/review-2.png",
+        status: "reviewed",
+        created_at: nowIso,
+        reviewed_at: nowIso,
+      })
+      .returning()
+      .get();
+
     const createPatternRes = await handlePostFailurePattern(
       new Request("http://localhost/api/player-profile/failure-patterns", {
         method: "POST",
@@ -97,7 +122,7 @@ describe("Player Profile, Hero Comfort Pool, and Failure Patterns", () => {
           rule: "Do not push past river without enemy jungler visible on minimap",
           scope_type: "role",
           scope_value: "Gold",
-          last_seen_review_id: "review-101",
+          last_seen_review_id: review1.id,
         }),
       }),
       db,
@@ -108,12 +133,12 @@ describe("Player Profile, Hero Comfort Pool, and Failure Patterns", () => {
         id: number;
         occurrences: number;
         status: string;
-        last_seen_review_id: string | null;
+        last_seen_review_id: number | null;
       };
     };
     expect(createdPattern.pattern.occurrences).toBe(1);
     expect(createdPattern.pattern.status).toBe("active");
-    expect(createdPattern.pattern.last_seen_review_id).toBe("review-101");
+    expect(createdPattern.pattern.last_seen_review_id).toBe(review1.id);
 
     // Reinforce same pattern_key -> occurrences increments to 2
     const reinforceRes = await handlePostFailurePattern(
@@ -126,7 +151,7 @@ describe("Player Profile, Hero Comfort Pool, and Failure Patterns", () => {
           rule: "Do not push past river without enemy jungler visible on minimap",
           scope_type: "role",
           scope_value: "Gold",
-          last_seen_review_id: "review-102",
+          last_seen_review_id: review2.id,
         }),
       }),
       db,
@@ -136,12 +161,12 @@ describe("Player Profile, Hero Comfort Pool, and Failure Patterns", () => {
       pattern: {
         id: number;
         occurrences: number;
-        last_seen_review_id: string | null;
+        last_seen_review_id: number | null;
       };
     };
     expect(reinforced.pattern.id).toBe(createdPattern.pattern.id);
     expect(reinforced.pattern.occurrences).toBe(2);
-    expect(reinforced.pattern.last_seen_review_id).toBe("review-102");
+    expect(reinforced.pattern.last_seen_review_id).toBe(review2.id);
 
     // 5. Mark pattern resolved, verify preserved in history, then reopen
     const resolveRes = await handlePatchFailurePattern(
@@ -336,6 +361,16 @@ describe("Player Profile, Hero Comfort Pool, and Failure Patterns", () => {
       safe: true,
       probability: 0.92,
     });
+    const topMyCandidate = mySlotRes.data.candidates[0]!;
+    expect(topMyCandidate.composite_score).toBe(
+      Math.round(
+        (0.4 * topMyCandidate.choice_prob +
+          0.25 * topMyCandidate.synergy_score +
+          0.25 * topMyCandidate.counter_score +
+          0.1 * topMyCandidate.patch_score) *
+          10000,
+      ) / 10000,
+    );
 
     // B) Teammate Slot (Ally 2 !== My Slot 1) -> strict isolation
     const mateRes = await generateCandidatePicks(db, stubJev, session.id, 2);

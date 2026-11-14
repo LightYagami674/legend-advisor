@@ -4,6 +4,7 @@ import { extname, join } from "node:path";
 import { desc, eq } from "drizzle-orm";
 import type { AppDatabase } from "@/db";
 import { draftSessions, postMatchReviews } from "@/db/schema";
+import { parsePositiveIntId } from "@/lib/http/responses";
 import { upsertOrReinforceFailurePattern } from "@/lib/player-profile/service";
 import type { FailurePatternDto } from "@/lib/player-profile/schema";
 import {
@@ -16,13 +17,6 @@ import {
  */
 export function getDefaultUploadDir(): string {
   return process.env.UPLOAD_DIR ?? join(process.cwd(), "data", "uploads");
-}
-
-function parsePositiveInt(raw: string | null): number | null {
-  if (!raw) return null;
-  const num = Number(raw);
-  if (!Number.isInteger(num) || num <= 0) return null;
-  return num;
 }
 
 function resolveImageExtension(file: File): string {
@@ -106,7 +100,7 @@ export async function handlePostPostMatchReview(
   }
 
   const rawSessionId = formData.get("draft_session_id");
-  const sessionId = parsePositiveInt(
+  const sessionId = parsePositiveIntId(
     typeof rawSessionId === "string" ? rawSessionId : null,
   );
   if (!sessionId) {
@@ -191,7 +185,7 @@ export async function handleGetPostMatchReviews(
     explicitSessionId ?? url.searchParams.get("draft_session_id");
 
   if (rawSessionId !== null) {
-    const sessionId = parsePositiveInt(rawSessionId);
+    const sessionId = parsePositiveIntId(rawSessionId);
     if (!sessionId) {
       return Response.json(
         { error: "Invalid draft_session_id" },
@@ -229,7 +223,7 @@ export async function handleGetPostMatchReview(
   rawId: string,
   db: AppDatabase,
 ): Promise<Response> {
-  const reviewId = parsePositiveInt(rawId);
+  const reviewId = parsePositiveIntId(rawId);
   if (!reviewId) {
     return Response.json({ error: "Invalid review id" }, { status: 400 });
   }
@@ -255,7 +249,7 @@ export async function handlePatchPostMatchReview(
   rawId: string,
   db: AppDatabase,
 ): Promise<Response> {
-  const reviewId = parsePositiveInt(rawId);
+  const reviewId = parsePositiveIntId(rawId);
   if (!reviewId) {
     return Response.json({ error: "Invalid review id" }, { status: 400 });
   }
@@ -314,7 +308,7 @@ export async function handlePatchPostMatchReview(
             rule: candidate.rule,
             scope_type: candidate.scope_type,
             scope_value: candidate.scope_value ?? null,
-            last_seen_review_id: String(reviewId),
+            last_seen_review_id: reviewId,
           },
         );
         committedPatterns.push(pattern);
