@@ -94,7 +94,7 @@ function classifyItemScore(rawScore: number): {
   return { tag: "Situational", tier_label: "Situational" };
 }
 
-export type BuildServiceErrorCode = "not_found" | "bad_request";
+export type BuildServiceErrorCode = "not_found" | "bad_request" | "upstream_error";
 
 export type BuildServiceResult<T> =
   | { ok: true; data: T }
@@ -416,11 +416,23 @@ export async function generateBuildRecommendation(
     );
   }
 
-  const result = await jevClient.systemOne({
-    model: "jev-latest",
-    state,
-    questions,
-  });
+  let result: Awaited<ReturnType<JevClientLike["systemOne"]>>;
+  try {
+    result = await jevClient.systemOne({
+      model: "jev-latest",
+      state,
+      questions,
+    });
+  } catch (err) {
+    return {
+      ok: false,
+      code: "upstream_error",
+      message:
+        err instanceof Error
+          ? `Jev build recommendation failed: ${err.message}`
+          : "Jev build recommendation failed",
+    };
+  }
 
   const answers = result.answers as Record<
     string,
@@ -643,7 +655,12 @@ export async function handlePostBuildRecommendation(
   );
 
   if (!result.ok) {
-    const status = result.code === "not_found" ? 404 : 400;
+    const status =
+      result.code === "not_found"
+        ? 404
+        : result.code === "upstream_error"
+          ? 502
+          : 400;
     return jsonResponse({ error: result.message }, status);
   }
 

@@ -367,13 +367,29 @@ export function DraftSessionBoard() {
             body: JSON.stringify({ target_slot_index: targetSlotIndex }),
           },
         );
-        const data = await postRes.json();
+        const rawText = await postRes.text();
+        let data: Record<string, unknown> = {};
+        if (rawText.trim().length > 0) {
+          try {
+            data = JSON.parse(rawText) as Record<string, unknown>;
+          } catch {
+            throw new Error(
+              `Build Recommendation failed (${postRes.status}): invalid server response`,
+            );
+          }
+        }
         if (!postRes.ok) {
-          throw new Error(data.error ?? "Failed to generate Build Recommendation");
+          throw new Error(
+            (typeof data.error === "string" && data.error) ||
+              `Failed to generate Build Recommendation (${postRes.status})`,
+          );
+        }
+        if (rawText.trim().length === 0) {
+          throw new Error("Build Recommendation returned an empty response");
         }
         setBuildRecs((prev) => ({
           ...prev,
-          [targetSlotIndex]: data as BuildRecommendationPayload,
+          [targetSlotIndex]: data as unknown as BuildRecommendationPayload,
         }));
       } catch (err) {
         setBuildError(

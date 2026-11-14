@@ -73,8 +73,8 @@ interface ChoiceAnswerShape {
 
 interface ScoreAnswerShape {
   score: number;
-  legend: string[];
-  probabilities: number[];
+  legend: string[] | Record<string, string>;
+  probabilities: number[] | Record<string, number>;
   confidence: number;
 }
 
@@ -82,14 +82,35 @@ function normalizeScore(answer: ScoreAnswerShape | undefined): {
   value: number;
   label: string;
 } {
-  if (!answer || !Array.isArray(answer.legend) || answer.legend.length <= 1) {
+  if (!answer || !answer.legend) {
     return { value: 0, label: "unknown" };
   }
-  const maxIndex = answer.legend.length - 1;
+
+  let length = 0;
+  let getLabel: (idx: number) => string | undefined;
+
+  if (Array.isArray(answer.legend)) {
+    const legendArr = answer.legend;
+    length = legendArr.length;
+    getLabel = (idx) => legendArr[idx];
+  } else if (typeof answer.legend === "object") {
+    const entries = answer.legend as Record<string, string>;
+    length = Object.keys(entries).length;
+    getLabel = (idx) => entries[String(idx)];
+  } else {
+    return { value: 0, label: "unknown" };
+  }
+
+  if (length <= 1) {
+    return { value: 0, label: "unknown" };
+  }
+
+  const maxIndex = length - 1;
   const clamped = Math.max(0, Math.min(maxIndex, answer.score));
+  const roundedIdx = Math.round(clamped);
   return {
     value: clamped / maxIndex,
-    label: answer.legend[clamped] ?? String(clamped),
+    label: getLabel(roundedIdx) ?? String(roundedIdx),
   };
 }
 
