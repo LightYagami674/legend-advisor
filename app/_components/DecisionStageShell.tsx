@@ -169,6 +169,19 @@ export function DecisionStageShell({
                           <span className="rounded bg-zinc-800 px-1.5 py-0.5 text-[10px] uppercase text-zinc-400">
                             {candidate.damage_type}
                           </span>
+                          {candidate.profileSafe && (
+                            <span
+                              className={`rounded border px-1.5 py-0.5 text-[10px] font-semibold ${
+                                candidate.profileSafe.safe
+                                  ? "border-emerald-500/40 bg-emerald-500/15 text-emerald-300"
+                                  : "border-amber-500/40 bg-amber-500/15 text-amber-300"
+                              }`}
+                            >
+                              {candidate.profileSafe.safe
+                                ? `Profile Safe (${Math.round(candidate.profileSafe.probability * 100)}%)`
+                                : `Profile Risk (${Math.round(candidate.profileSafe.probability * 100)}%)`}
+                            </span>
+                          )}
                         </div>
                         <p className="text-[11px] text-zinc-400">
                           {candidate.lanes.join(" / ")} · Win{" "}
@@ -416,6 +429,30 @@ export function DecisionStageShell({
                   ),
                 )}
               </div>
+
+              {/* Static Action Reminders (My Slot Only) */}
+              {isMySlot &&
+                buildRecommendation.actionReminders &&
+                buildRecommendation.actionReminders.length > 0 && (
+                  <div className="flex flex-col gap-1.5 rounded-lg border border-amber-400/30 bg-amber-400/10 px-3 py-2.5">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-amber-300">
+                      My Slot Action Reminders (Active Failure Patterns)
+                    </span>
+                    <ul className="flex flex-col gap-1 text-xs text-amber-100">
+                      {buildRecommendation.actionReminders.map((reminder) => (
+                        <li
+                          key={reminder.id}
+                          className="flex items-center justify-between gap-2"
+                        >
+                          <span>• {reminder.rule}</span>
+                          <span className="shrink-0 rounded bg-amber-500/20 px-1.5 py-0.5 font-mono text-[10px] text-amber-200">
+                            ×{reminder.occurrences}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
             </div>
           ) : (
             !buildLoading && (

@@ -15,6 +15,7 @@ import type {
   CandidatePickResponse,
 } from "@/lib/recommendations/types";
 import { DecisionStageShell } from "./DecisionStageShell";
+import { PlayerProfileDrawer } from "./PlayerProfileDrawer";
 
 interface SessionPayload {
   session: DraftSessionDto;
@@ -43,6 +44,7 @@ export function DraftSessionBoard() {
   const [buildRecs, setBuildRecs] = useState<Record<number, BuildRecommendationPayload>>({});
   const [buildLoading, setBuildLoading] = useState(false);
   const [buildError, setBuildError] = useState<string | null>(null);
+  const [profileDrawerOpen, setProfileDrawerOpen] = useState(false);
 
   const omnibarInputRef = useRef<HTMLInputElement>(null);
 
@@ -480,13 +482,22 @@ export function DraftSessionBoard() {
             <span className="text-[11px] text-amber-300">Saving…</span>
           )}
         </div>
-        <button
-          type="button"
-          onClick={handleCreateNewSession}
-          className="rounded-lg border border-zinc-700 bg-zinc-900 px-3 py-1.5 text-xs font-semibold text-zinc-200 transition hover:border-sky-400 hover:text-sky-300"
-        >
-          + New Draft Session
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setProfileDrawerOpen(true)}
+            className="rounded-lg border border-amber-400/40 bg-amber-400/10 px-3 py-1.5 text-xs font-semibold text-amber-200 transition hover:border-amber-400 hover:bg-amber-400/20"
+          >
+            ★ Player Profile
+          </button>
+          <button
+            type="button"
+            onClick={handleCreateNewSession}
+            className="rounded-lg border border-zinc-700 bg-zinc-900 px-3 py-1.5 text-xs font-semibold text-zinc-200 transition hover:border-sky-400 hover:text-sky-300"
+          >
+            + New Draft Session
+          </button>
+        </div>
       </header>
 
       {error && (
@@ -889,6 +900,12 @@ export function DraftSessionBoard() {
           })}
         </div>
       </section>
+
+      <PlayerProfileDrawer
+        open={profileDrawerOpen}
+        onClose={() => setProfileDrawerOpen(false)}
+        heroes={heroes}
+      />
     </div>
   );
 }

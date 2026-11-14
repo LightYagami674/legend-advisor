@@ -188,3 +188,51 @@ export const draftRecommendations = sqliteTable("draft_recommendations", {
   payload_json: text("payload_json").notNull(),
   created_at: text("created_at").notNull(),
 });
+
+export type ComfortTier = "main" | "comfort" | "learning" | "avoid";
+
+export type FailurePatternDimension = "pick" | "action" | "synergy" | "build";
+
+export type FailurePatternScopeType = "general" | "role" | "hero";
+
+export type FailurePatternStatus = "active" | "resolved";
+
+export const playerProfile = sqliteTable("player_profile", {
+  id: integer("id").primaryKey(),
+  preferred_roles_json: text("preferred_roles_json", { mode: "json" })
+    .$type<Lane[]>()
+    .notNull()
+    .default([]),
+  updated_at: text("updated_at").notNull(),
+});
+
+export const heroComfortPool = sqliteTable("hero_comfort_pool", {
+  hero_id: integer("hero_id")
+    .primaryKey()
+    .references(() => heroes.id, { onDelete: "cascade" }),
+  comfort_tier: text("comfort_tier").$type<ComfortTier>().notNull(),
+  notes: text("notes").notNull().default(""),
+  matches_played: integer("matches_played").notNull().default(0),
+  wins: integer("wins").notNull().default(0),
+  updated_at: text("updated_at").notNull(),
+});
+
+export const failurePatterns = sqliteTable(
+  "failure_patterns",
+  {
+    id: integer("id").primaryKey({ autoIncrement: true }),
+    dimension: text("dimension").$type<FailurePatternDimension>().notNull(),
+    pattern_key: text("pattern_key").notNull(),
+    rule: text("rule").notNull(),
+    scope_type: text("scope_type").$type<FailurePatternScopeType>().notNull(),
+    scope_value: text("scope_value"),
+    occurrences: integer("occurrences").notNull().default(1),
+    status: text("status").$type<FailurePatternStatus>().notNull().default("active"),
+    last_seen_review_id: text("last_seen_review_id"),
+    created_at: text("created_at").notNull(),
+    updated_at: text("updated_at").notNull(),
+  },
+  (table) => [
+    uniqueIndex("failure_patterns_pattern_key_idx").on(table.pattern_key),
+  ],
+);

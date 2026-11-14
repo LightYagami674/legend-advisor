@@ -109,6 +109,40 @@ const DRAFT_SESSION_DDL = `
   );
 `;
 
+const PLAYER_PROFILE_DDL = `
+  CREATE TABLE IF NOT EXISTS player_profile (
+    id INTEGER PRIMARY KEY,
+    preferred_roles_json TEXT NOT NULL DEFAULT '[]',
+    updated_at TEXT NOT NULL
+  );
+
+  CREATE TABLE IF NOT EXISTS hero_comfort_pool (
+    hero_id INTEGER PRIMARY KEY REFERENCES heroes(id) ON DELETE CASCADE,
+    comfort_tier TEXT NOT NULL,
+    notes TEXT NOT NULL DEFAULT '',
+    matches_played INTEGER NOT NULL DEFAULT 0,
+    wins INTEGER NOT NULL DEFAULT 0,
+    updated_at TEXT NOT NULL
+  );
+
+  CREATE TABLE IF NOT EXISTS failure_patterns (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    dimension TEXT NOT NULL,
+    pattern_key TEXT NOT NULL,
+    rule TEXT NOT NULL,
+    scope_type TEXT NOT NULL,
+    scope_value TEXT,
+    occurrences INTEGER NOT NULL DEFAULT 1,
+    status TEXT NOT NULL DEFAULT 'active',
+    last_seen_review_id TEXT,
+    created_at TEXT NOT NULL,
+    updated_at TEXT NOT NULL
+  );
+
+  CREATE UNIQUE INDEX IF NOT EXISTS failure_patterns_pattern_key_idx
+    ON failure_patterns(pattern_key);
+`;
+
 /**
  * Creates an isolated SQLite + Drizzle database instance, ensures all Patch KB
  * tables exist, and lazily seeds from the committed snapshot by default.
@@ -128,6 +162,7 @@ export function createDatabase(
   }
   sqlite.exec(PATCH_KB_DDL);
   sqlite.exec(DRAFT_SESSION_DDL);
+  sqlite.exec(PLAYER_PROFILE_DDL);
 
   const db = drizzle(sqlite, { schema });
 
