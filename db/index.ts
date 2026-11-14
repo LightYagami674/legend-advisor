@@ -98,6 +98,15 @@ const DRAFT_SESSION_DDL = `
 
   CREATE UNIQUE INDEX IF NOT EXISTS draft_slots_session_team_slot_idx
     ON draft_slots(session_id, team, slot_index);
+
+  CREATE TABLE IF NOT EXISTS draft_recommendations (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    session_id INTEGER NOT NULL REFERENCES draft_sessions(id) ON DELETE CASCADE,
+    target_slot_index INTEGER NOT NULL,
+    kind TEXT NOT NULL,
+    payload_json TEXT NOT NULL,
+    created_at TEXT NOT NULL
+  );
 `;
 
 /**
